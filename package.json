@@ -1,0 +1,35 @@
+{
+  "name": "react-dd-menu",
+  "version": "1.0.0",
+  "description": "A react dropdown menu.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel index.js > dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlaursen/react-dd-menu.git"
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "dropown",
+    "dropdown-menu",
+    "component"
+  ],
+  "author": "mlaursen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mlaursen/react-dd-menu/issues"
+  },
+  "homepage": "https://github.com/mlaursen/react-dd-menu#readme",
+  "dependencies": {
+    "react": "^0.13.3"
+  },
+  "peerDependencies": {
+    "react": ">=0.13.0"
+  },
+  "devDependencies": {
+    "babel": "^5.8.21"
+  }
+}
