@@ -1,0 +1,75 @@
+
+.dd-menu {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+
+  &.dd-menu-center .dd-menu-items {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  @include dd-position(left);
+  @include dd-position(right);
+  @include dd-sizes();
+
+  .dd-menu-items {
+    position: absolute;
+    z-index: $dd-menu-z-index;
+    margin-top: $dd-menu-margin-top;
+
+    > ul, > ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: $dd-text-color;
+      background-color: $dd-list-color;
+
+      box-shadow: $dd-menu-box-shadow;
+
+      > li {
+        
+        &:hover,
+        > *:focus {
+          color: $dd-list-hover-text-color;
+          background-color: $dd-list-hover-color;
+          outline: none;
+        }
+
+        > * {
+          display: block;
+          width: 100%;
+          padding: $dd-menu-item-padding;
+
+          font-family: $dd-font;
+          white-space: pre;
+          color: inherit;
+          text-decoration: none;
+        }
+
+        > button {
+          border: none;
+          background: transparent;
+        }
+      }
+    }
+  }
+
+  &.dd-menu-inverse {
+    .dd-menu-items {
+      > ul, > ol {
+        color: $dd-inverse-text-color;
+        background-color: $dd-inverse-list-color;
+
+        > li {
+
+          &:hover, > *:focus {
+            color: $dd-inverse-list-hover-text-color;
+            background-color: $dd-inverse-list-hover-color;
+          }
+        }
+      }
+    }
+  }
+
+}

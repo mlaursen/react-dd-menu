@@ -4,7 +4,7 @@
   "description": "A react dropdown menu.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "babel index.js > dist/index.js"
+    "build": "bin/build"
   },
   "repository": {
     "type": "git",
@@ -24,12 +24,14 @@
   },
   "homepage": "https://github.com/mlaursen/react-dd-menu#readme",
   "dependencies": {
-    "react": "^0.13.3"
+    "classnames": "^2.1.3"
   },
   "peerDependencies": {
     "react": ">=0.13.0"
   },
   "devDependencies": {
-    "babel": "^5.8.21"
+    "babel": "^5.8.21",
+    "node-sass": "^3.2.0",
+    "uglify": "^0.1.5"
   }
 }

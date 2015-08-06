@@ -1,0 +1,49 @@
+
+
+@mixin dd-position($dir) {
+  &.dd-menu-#{$dir} {
+    text-align: $dir;
+
+    .dd-menu-items {
+      #{$dir}: 0;
+
+      > * {
+        text-align: $dir;
+      }
+    }
+  }
+}
+
+@mixin dd-size($size, $width) {
+  &.dd-menu-#{$size} .dd-menu-items {
+    width: $width;
+  }
+}
+
+@mixin dd-sizes() {
+  @each $size in $dd-menu-sizes {
+    @include dd-size(nth($size, 1), nth($size, 2));
+  }
+}
+
+@mixin dd-transition($dir, $origin) {
+  .grow-from-#{$dir}-enter {
+    transform: scale(0);
+    transform-origin: unquote($origin);
+    transition: transform $dd-transition-time $dd-transition-in;
+
+    &.grow-from-#{$dir}-enter-active {
+      transform: scale(1);
+    }
+  }
+
+  .grow-from-#{$dir}-leave {
+    transform: scale(1);
+    transform-origin: unquote($origin);
+    transition: transform $dd-transition-time $dd-transition-out;
+
+    &.grow-from-#{$dir}-leave-active {
+      transform: scale(0);
+    }
+  }
+}

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+babel src/index.js > dist/index.js && uglify -s dist/index.js -o dist/index.min.js
+
+src=src/scss/react-dd-menu.scss
+dist=dist/react-dd-menu
+
+node-sass --output-style expanded $src $dist.css
+node-sass --output-style compressed $src $dist.min.css

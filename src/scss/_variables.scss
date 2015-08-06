@@ -1,0 +1,31 @@
+$dd-menu-z-index: 7 !default;
+$dd-menu-margin-top: 0.5em !default;
+$dd-menu-item-padding: 1em 1.5em;
+
+$dd-menu-sm-width: 150px !default;
+$dd-menu-md-width: 300px !default;
+$dd-menu-lg-width: 450px !default;
+$dd-menu-xl-width: 600px !default;
+
+$dd-menu-sizes: ('sm' $dd-menu-sm-width), ('md' $dd-menu-md-width), ('lg' $dd-menu-lg-width), ('xl' $dd-menu-xl-width) !default;
+
+
+$dd-font: Roboto, sans-serif !default;
+
+$dd-text-color: #000 !default;
+$dd-inverse-text-color: #fff !default;
+$dd-list-hover-text-color: #000 !default;
+$dd-inverse-list-hover-text-color: #fff !default;
+
+$dd-list-color: #fefefe !default;
+$dd-inverse-list-color: #2c3e50 !default; // midnight blue
+
+$dd-list-hover-color: #bdc3c7 !default; // silver
+$dd-inverse-list-hover-color: #34495e !default; // wet-asphalt
+
+$dd-menu-box-shadow: 0 0 4px rgba(0, 0, 0, .15), 0 2px 4px rgba(0, 0, 0, .29) !default;
+
+$dd-transition-time: 0.15s !default;
+$dd-transition-in: cubic-bezier(0.5, 1.8, 0.9, 0.8) !default;
+$dd-transition-out: ease-out !default;
+$dd-transitions: ('left' '0 0'), ('right' '100% 0'), ('center' '50% 0') !default;

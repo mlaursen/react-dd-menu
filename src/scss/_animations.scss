@@ -1,0 +1,3 @@
+@each $transition in $dd-transitions {
+  @include dd-transition(nth($transition, 1), nth($transition, 2));
+}

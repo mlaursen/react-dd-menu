@@ -18,7 +18,9 @@ var _reactAddons = require('react/addons');
 
 var _reactAddons2 = _interopRequireDefault(_reactAddons);
 
-'use strint';
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
 
 var CSSTransitionGroup = _reactAddons2['default'].addons.CSSTransitionGroup;
 var TAB = 9;
@@ -36,11 +38,23 @@ var DropdownMenu = (function (_Component) {
   _createClass(DropdownMenu, [{
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps, prevState) {
+      var menuItems = _reactAddons2['default'].findDOMNode(this.refs.menuItems);
       if (this.props.isOpen && !prevProps.isOpen) {
-        window.addEventListener('click', this.handleClickOutside.bind(this));
+        document.addEventListener('click', this.handleClickOutside.bind(this));
+        menuItems.addEventListener('click', this.props.close);
+        menuItems.addEventListener('onkeydown', this.close.bind(this));
       } else if (!this.props.isOpen && prevProps.isOpen) {
-        window.removeEventListener('click', this.handleClickOutside.bind(this));
+        document.removeEventListener('click', this.handleClickOutside.bind(this));
+        menuItems.removeEventListener('click', this.props.close);
+        menuItems.removeEventListener('onkeydown', this.close.bind(this));
       }
+    }
+  }, {
+    key: 'close',
+    value: function close(e) {
+      var key = e.which || e.keyCode;
+      key === SPACEBAR && this.props.close();
+      e.preventDefault();
     }
   }, {
     key: 'handleClickOutside',
@@ -65,22 +79,24 @@ var DropdownMenu = (function (_Component) {
       var items = _reactAddons2['default'].findDOMNode(this).querySelectorAll('button,a');
       var id = e.shiftKey ? 1 : items.length - 1;
 
-      if (e.target == items[id]) {
-        this.props.close(e);
-      }
+      e.target == items[id] && this.props.close(e);
     }
   }, {
     key: 'render',
     value: function render() {
       return _reactAddons2['default'].createElement(
         'div',
-        { className: 'dd-menu' + (this.props.className ? ' ' + this.props.className : '') },
+        { className: (0, _classnames2['default'])('dd-menu', this.props.className) },
         this.props.toggle,
         _reactAddons2['default'].createElement(
           CSSTransitionGroup,
           { transitionName: 'grow-from-' + this.props.direction, component: 'div',
-            className: 'dd-menu-items', onKeyDown: this.handleKeyDown.bind(this) },
-          this.props.isOpen && this.props.children
+            className: 'dd-menu-items', onKeyDown: this.handleKeyDown.bind(this), ref: 'menuItems' },
+          this.props.isOpen && _reactAddons2['default'].createElement(
+            'ul',
+            null,
+            this.props.children
+          )
         )
       );
     }
@@ -94,15 +110,13 @@ DropdownMenu.propTypes = {
   close: _reactAddons.PropTypes.func.isRequired,
   toggle: _reactAddons.PropTypes.node.isRequired,
   direction: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
-  className: _reactAddons.PropTypes.string,
-  component: _reactAddons.PropTypes.oneOf(['div', 'span', 'li'])
+  className: _reactAddons.PropTypes.string
 };
 
 DropdownMenu.defaultProps = {
   isOpen: false,
   direction: 'center',
-  className: '',
-  component: 'div'
+  className: ''
 };
 
 var DropdownMenuItem = (function (_Component2) {
@@ -119,7 +133,6 @@ var DropdownMenuItem = (function (_Component2) {
     value: function handleKeyDown(e) {
       var key = e.which || e.keyCode;
       if (key === SPACEBAR) {
-        e.preventDefault();
         this.props.action && this.props.action();
       }
     }
@@ -129,7 +142,7 @@ var DropdownMenuItem = (function (_Component2) {
       var children = _reactAddons2['default'].createElement(this.props.component, this.props.childrenProps, this.props.children);
       return _reactAddons2['default'].createElement(
         'li',
-        { className: this.props.className, onClick: this.props.action, onKeyDown: this.handleKeyDown.bind(this) },
+        { className: this.props.className, onKeyDown: this.handleKeyDown.bind(this) },
         children
       );
     }
