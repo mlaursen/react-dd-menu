@@ -26,6 +26,8 @@ var CSSTransitionGroup = _reactAddons2['default'].addons.CSSTransitionGroup;
 var TAB = 9;
 var SPACEBAR = 32;
 
+var _lastWindowClickEvent = null;
+
 var DropdownMenu = (function (_Component) {
   _inherits(DropdownMenu, _Component);
 
@@ -40,14 +42,23 @@ var DropdownMenu = (function (_Component) {
     value: function componentDidUpdate(prevProps, prevState) {
       var menuItems = _reactAddons2['default'].findDOMNode(this.refs.menuItems);
       if (this.props.isOpen && !prevProps.isOpen) {
-        document.addEventListener('click', this.handleClickOutside.bind(this));
+        _lastWindowClickEvent = this.handleClickOutside.bind(this);
+
+        document.addEventListener('click', _lastWindowClickEvent);
         menuItems.addEventListener('click', this.props.close);
         menuItems.addEventListener('onkeydown', this.close.bind(this));
       } else if (!this.props.isOpen && prevProps.isOpen) {
-        document.removeEventListener('click', this.handleClickOutside.bind(this));
+        document.removeEventListener('click', _lastWindowClickEvent);
         menuItems.removeEventListener('click', this.props.close);
         menuItems.removeEventListener('onkeydown', this.close.bind(this));
+
+        _lastWindowClickEvent = null;
       }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _lastWindowClickEvent && document.removeEventListener('click', _lastWindowClickEvent);
     }
   }, {
     key: 'close',
@@ -118,55 +129,6 @@ DropdownMenu.defaultProps = {
   direction: 'center',
   className: ''
 };
-
-var DropdownMenuItem = (function (_Component2) {
-  _inherits(DropdownMenuItem, _Component2);
-
-  function DropdownMenuItem(props) {
-    _classCallCheck(this, DropdownMenuItem);
-
-    _get(Object.getPrototypeOf(DropdownMenuItem.prototype), 'constructor', this).call(this, props);
-  }
-
-  _createClass(DropdownMenuItem, [{
-    key: 'handleKeyDown',
-    value: function handleKeyDown(e) {
-      var key = e.which || e.keyCode;
-      if (key === SPACEBAR) {
-        this.props.action && this.props.action();
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var children = _reactAddons2['default'].createElement(this.props.component, this.props.childrenProps, this.props.children);
-      return _reactAddons2['default'].createElement(
-        'li',
-        { className: this.props.className, onKeyDown: this.handleKeyDown.bind(this) },
-        children
-      );
-    }
-  }]);
-
-  return DropdownMenuItem;
-})(_reactAddons.Component);
-
-DropdownMenuItem.propTypes = {
-  action: _reactAddons.PropTypes.func,
-  childrenProps: _reactAddons.PropTypes.object,
-  tabIndex: _reactAddons.PropTypes.number,
-  component: _reactAddons.PropTypes.oneOf(['button', 'a']),
-  className: _reactAddons.PropTypes.string
-};
-
-DropdownMenuItem.defaultProps = {
-  tabIndex: 0,
-  component: 'button',
-  className: '',
-  childrenProps: {}
-};
-
-DropdownMenu.DropdownMenuItem = DropdownMenuItem;
 
 exports['default'] = DropdownMenu;
 module.exports = exports['default'];
