@@ -8,6 +8,8 @@ const CSSTransitionGroup = React.addons.CSSTransitionGroup;
 const TAB = 9;
 const SPACEBAR = 32;
 
+let _lastWindowClickEvent = null;
+
 class DropdownMenu extends Component {
   constructor(props) {
     super(props);
@@ -16,14 +18,22 @@ class DropdownMenu extends Component {
   componentDidUpdate(prevProps, prevState) {
     var menuItems = React.findDOMNode(this.refs.menuItems);
     if(this.props.isOpen && !prevProps.isOpen) {
-      document.addEventListener('click', this.handleClickOutside.bind(this));
+      _lastWindowClickEvent = this.handleClickOutside.bind(this);
+
+      document.addEventListener('click', _lastWindowClickEvent);
       menuItems.addEventListener('click', this.props.close);
       menuItems.addEventListener('onkeydown', this.close.bind(this));
     } else if(!this.props.isOpen && prevProps.isOpen) {
-      document.removeEventListener('click', this.handleClickOutside.bind(this));
+      document.removeEventListener('click', _lastWindowClickEvent);
       menuItems.removeEventListener('click', this.props.close);
       menuItems.removeEventListener('onkeydown', this.close.bind(this));
+
+      _lastWindowClickEvent = null;
     }
+  }
+
+  componentWillUnmount() {
+    _lastWindowClickEvent && document.removeEventListener('click', _lastWindowClickEvent);
   }
 
   close(e) {
