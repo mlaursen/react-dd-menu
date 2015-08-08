@@ -104,3 +104,8 @@ var Example = React.createClass({
 ```bash
 $ npm run build
 ```
+
+
+### Versions
+
+0.0.2 - Fixed removing the click event listener
