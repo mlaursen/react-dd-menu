@@ -65,12 +65,17 @@ class DropdownMenu extends Component {
 
 
   render() {
-    let { isOpen, toggle, className, inverse,
-      align, animAlign, textAlign, menuAlign,
-      children } = this.props;
+    let { isOpen, toggle, className, inverse, align, animAlign, textAlign, menuAlign, children, size } = this.props; 
 
-    let menuClassName = classnames('dd-menu', 'dd-menu-' + (menuAlign || align), { 'dd-menu-inverse': inverse }, className),
-        listClassName = 'dd-items-' + (textAlign || align);
+    let menuClassName = classnames(
+      'dd-menu',
+      'dd-menu-' + (menuAlign || align),
+      { 'dd-menu-inverse': inverse },
+      className,
+      size ? ('dd-menu-' + size) : null
+    )
+
+    let listClassName = 'dd-items-' + (textAlign || align);
     let transitionProps = {
       transitionName: 'grow-from-' + (animAlign || align),
       component: 'div',
@@ -100,6 +105,7 @@ DropdownMenu.propTypes = {
   textAlign: PropTypes.oneOf(['center', 'right', 'left']),
   menuAlign: PropTypes.oneOf(['center', 'right', 'left']),
   className: PropTypes.string,
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 }
 
 DropdownMenu.defaultProps = {
@@ -109,6 +115,7 @@ DropdownMenu.defaultProps = {
   textAlign: null,
   menuAlign: null,
   className: null,
+  size: null,
 };
 
 export default DropdownMenu;

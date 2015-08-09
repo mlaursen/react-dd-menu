@@ -20,11 +20,16 @@ $ npm install -S react-dd-menu
 * `toggle`    - any renderable item that will be used to toggle the menu open. So normally a button or any other content.
   * __Is Required__
 * `inverse`   - boolean if it is an inversed color menu
-* `align`     - the alignment for the animation, text, and menu if the specific props are not given.
-  * Defaults to `center`
+* `align`     - the alignment for the animation, text, and menu if the specific props are not given. Defaults to `center`
+  * One of `center`, `right`, `left`
 * `animAlign` - the alignment/direction that the menu will appear from
+  * One of `center`, `right`, `left`
 * `textAlign` - the alignment of each list item's text
+  * One of `center`, `right`, `left`
 * `menuAlign` - the alignment of the menu to the `toggle` element
+  * One of `center`, `right`, `left`
+* `size`      - the size of the menu. Defaults to auto size.
+  * One of `sm`, `md`, `lg`, `xl`
 * `className` - any additional css classes to add the the dropdown menu container. (`.dd-menu`)
 
 ### Styling
@@ -134,3 +139,4 @@ $ npm run build
 
 - 0.0.2 - Fixed removing the click event listener
 - 0.0.3 - Positioning fixes and convenience props for different dropdown menu configs
+- 0.0.4 - Fixed width for firefox and added convenience props for sizes

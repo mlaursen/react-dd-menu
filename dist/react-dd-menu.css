@@ -129,7 +129,8 @@
 
 .dd-menu .dd-menu-items > ul > li > *, .dd-menu .dd-menu-items > ol > li > * {
   display: block;
-  width: 100%;
+  width: auto;
+  min-width: 100%;
   padding: 1em 1.5em;
   font-family: Roboto, sans-serif;
   white-space: pre;

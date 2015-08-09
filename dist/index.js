@@ -105,9 +105,11 @@ var DropdownMenu = (function (_Component) {
       var textAlign = _props.textAlign;
       var menuAlign = _props.menuAlign;
       var children = _props.children;
+      var size = _props.size;
 
-      var menuClassName = (0, _classnames2['default'])('dd-menu', 'dd-menu-' + (menuAlign || align), { 'dd-menu-inverse': inverse }, className),
-          listClassName = 'dd-items-' + (textAlign || align);
+      var menuClassName = (0, _classnames2['default'])('dd-menu', 'dd-menu-' + (menuAlign || align), { 'dd-menu-inverse': inverse }, className, size ? 'dd-menu-' + size : null);
+
+      var listClassName = 'dd-items-' + (textAlign || align);
       var transitionProps = {
         transitionName: 'grow-from-' + (animAlign || align),
         component: 'div',
@@ -145,7 +147,8 @@ DropdownMenu.propTypes = {
   animAlign: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
   textAlign: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
   menuAlign: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
-  className: _reactAddons.PropTypes.string
+  className: _reactAddons.PropTypes.string,
+  size: _reactAddons.PropTypes.oneOf(['sm', 'md', 'lg', 'xl'])
 };
 
 DropdownMenu.defaultProps = {
@@ -154,7 +157,8 @@ DropdownMenu.defaultProps = {
   animAlign: null,
   textAlign: null,
   menuAlign: null,
-  className: null
+  className: null,
+  size: null
 };
 
 exports['default'] = DropdownMenu;
