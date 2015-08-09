@@ -2,7 +2,6 @@
 .dd-menu {
   display: inline-block;
   position: relative;
-  text-align: center;
 
   &.dd-menu-center .dd-menu-items {
     left: 50%;
@@ -26,6 +25,18 @@
       background-color: $dd-list-color;
 
       box-shadow: $dd-menu-box-shadow;
+
+      &.dd-items-right li > * {
+        text-align: right;
+      }
+
+      &.dd-items-left li > * {
+        text-align: left;
+      }
+
+      &.dd-items-center li > * {
+        text-align: center;
+      }
 
       > li {
         

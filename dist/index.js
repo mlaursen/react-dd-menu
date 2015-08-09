@@ -95,18 +95,38 @@ var DropdownMenu = (function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _props = this.props;
+      var isOpen = _props.isOpen;
+      var toggle = _props.toggle;
+      var className = _props.className;
+      var inverse = _props.inverse;
+      var align = _props.align;
+      var animAlign = _props.animAlign;
+      var textAlign = _props.textAlign;
+      var menuAlign = _props.menuAlign;
+      var children = _props.children;
+
+      var menuClassName = (0, _classnames2['default'])('dd-menu', 'dd-menu-' + (menuAlign || align), { 'dd-menu-inverse': inverse }, className),
+          listClassName = 'dd-items-' + (textAlign || align);
+      var transitionProps = {
+        transitionName: 'grow-from-' + (animAlign || align),
+        component: 'div',
+        className: 'dd-menu-items',
+        onKeyDown: this.handleKeyDown.bind(this),
+        ref: 'menuItems'
+      };
+
       return _reactAddons2['default'].createElement(
         'div',
-        { className: (0, _classnames2['default'])('dd-menu', this.props.className) },
-        this.props.toggle,
+        { className: menuClassName },
+        toggle,
         _reactAddons2['default'].createElement(
           CSSTransitionGroup,
-          { transitionName: 'grow-from-' + this.props.direction, component: 'div',
-            className: 'dd-menu-items', onKeyDown: this.handleKeyDown.bind(this), ref: 'menuItems' },
-          this.props.isOpen && _reactAddons2['default'].createElement(
+          transitionProps,
+          isOpen && _reactAddons2['default'].createElement(
             'ul',
-            null,
-            this.props.children
+            { className: listClassName },
+            children
           )
         )
       );
@@ -120,14 +140,21 @@ DropdownMenu.propTypes = {
   isOpen: _reactAddons.PropTypes.bool.isRequired,
   close: _reactAddons.PropTypes.func.isRequired,
   toggle: _reactAddons.PropTypes.node.isRequired,
-  direction: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
+  inverse: _reactAddons.PropTypes.bool,
+  align: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
+  animAlign: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
+  textAlign: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
+  menuAlign: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
   className: _reactAddons.PropTypes.string
 };
 
 DropdownMenu.defaultProps = {
-  isOpen: false,
-  direction: 'center',
-  className: ''
+  inverse: false,
+  align: 'center',
+  animAlign: null,
+  textAlign: null,
+  menuAlign: null,
+  className: null
 };
 
 exports['default'] = DropdownMenu;

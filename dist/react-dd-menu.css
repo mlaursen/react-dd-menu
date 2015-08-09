@@ -61,7 +61,6 @@
 .dd-menu {
   display: inline-block;
   position: relative;
-  text-align: center;
 }
 
 .dd-menu.dd-menu-center .dd-menu-items {
@@ -69,28 +68,12 @@
   transform: translateX(-50%);
 }
 
-.dd-menu.dd-menu-left {
-  text-align: left;
-}
-
 .dd-menu.dd-menu-left .dd-menu-items {
   left: 0;
 }
 
-.dd-menu.dd-menu-left .dd-menu-items li > * {
-  text-align: left;
-}
-
-.dd-menu.dd-menu-right {
-  text-align: right;
-}
-
 .dd-menu.dd-menu-right .dd-menu-items {
   right: 0;
-}
-
-.dd-menu.dd-menu-right .dd-menu-items li > * {
-  text-align: right;
 }
 
 .dd-menu.dd-menu-sm .dd-menu-items {
@@ -122,6 +105,18 @@
   color: #000;
   background-color: #fefefe;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.29);
+}
+
+.dd-menu .dd-menu-items > ul.dd-items-right li > *, .dd-menu .dd-menu-items > ol.dd-items-right li > * {
+  text-align: right;
+}
+
+.dd-menu .dd-menu-items > ul.dd-items-left li > *, .dd-menu .dd-menu-items > ol.dd-items-left li > * {
+  text-align: left;
+}
+
+.dd-menu .dd-menu-items > ul.dd-items-center li > *, .dd-menu .dd-menu-items > ol.dd-items-center li > * {
+  text-align: center;
 }
 
 .dd-menu .dd-menu-items > ul > li:hover,

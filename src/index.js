@@ -65,12 +65,25 @@ class DropdownMenu extends Component {
 
 
   render() {
+    let { isOpen, toggle, className, inverse,
+      align, animAlign, textAlign, menuAlign,
+      children } = this.props;
+
+    let menuClassName = classnames('dd-menu', 'dd-menu-' + (menuAlign || align), { 'dd-menu-inverse': inverse }, className),
+        listClassName = 'dd-items-' + (textAlign || align);
+    let transitionProps = {
+      transitionName: 'grow-from-' + (animAlign || align),
+      component: 'div',
+      className: 'dd-menu-items',
+      onKeyDown: this.handleKeyDown.bind(this),
+      ref: 'menuItems',
+    };
+
     return (
-      <div className={classnames('dd-menu', this.props.className)}>
-        {this.props.toggle}
-        <CSSTransitionGroup transitionName={'grow-from-' + this.props.direction} component="div"
-                          className="dd-menu-items" onKeyDown={this.handleKeyDown.bind(this)} ref="menuItems">
-          {this.props.isOpen && <ul>{this.props.children}</ul>}
+      <div className={menuClassName}>
+        {toggle}
+        <CSSTransitionGroup {...transitionProps}>
+          {isOpen && <ul className={listClassName}>{children}</ul>}
         </CSSTransitionGroup>
       </div>
     );
@@ -81,14 +94,21 @@ DropdownMenu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
   toggle: PropTypes.node.isRequired,
-  direction: PropTypes.oneOf(['center', 'right', 'left']),
+  inverse: PropTypes.bool,
+  align: PropTypes.oneOf(['center', 'right', 'left']),
+  animAlign: PropTypes.oneOf(['center', 'right', 'left']),
+  textAlign: PropTypes.oneOf(['center', 'right', 'left']),
+  menuAlign: PropTypes.oneOf(['center', 'right', 'left']),
   className: PropTypes.string,
 }
 
 DropdownMenu.defaultProps = {
-  isOpen: false,
-  direction: 'center',
-  className: '',
+  inverse: false,
+  align: 'center',
+  animAlign: null,
+  textAlign: null,
+  menuAlign: null,
+  className: null,
 };
 
 export default DropdownMenu;

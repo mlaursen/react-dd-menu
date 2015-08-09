@@ -1,16 +1,8 @@
 
 
 @mixin dd-position($dir) {
-  &.dd-menu-#{$dir} {
-    text-align: $dir;
-
-    .dd-menu-items {
-      #{$dir}: 0;
-
-      li > * {
-        text-align: $dir;
-      }
-    }
+  &.dd-menu-#{$dir} .dd-menu-items {
+    #{$dir}: 0;
   }
 }
 
