@@ -11,6 +11,17 @@ Example: http://codepen.io/mlaursen03/full/PqVjMm/
 $ npm install -S react-dd-menu
 ```
 
+#### Props
+
+* `isOpen` - Boolean for telling if the menu is open. This was passed in as a prop instead of having the component's own state so you can decide when to close the menu on your own.
+  * Defaults to `false`
+* `close`  - a function to call that turns the `isOpen` boolean to false
+* `toggle` - any renderable item that will be used to toggle the menu open. So normally a button or any other content.
+* `direction` - the direction that the menu will appear from. Valid values are `center`, `right`, and `left`. Check the `src/scss/_animations.scss` file for how these work. The direction is used for the appearing animation. `grow-from-${direction}`
+  * Defaults to `center`
+* className   - any additional css classes to add the the dropdown menu container. (`.dd-menu`)
+  * Defaults to `''`
+
 ### Styling
 In the `dist` folder, there is a `react-dd-menu.css` and a `react-dd-menu.min.css` with the default css stylings. If you have SASS, the source is located in `src/scss`.
 
