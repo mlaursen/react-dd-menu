@@ -1,0 +1,26 @@
+{
+  "name": "react-dd-menu",
+  "version": "0.0.4",
+  "homepage": "https://github.com/mlaursen/react-dd-menu",
+  "authors": [
+    "mlaursen <mlaursen03@gmail.com>"
+  ],
+  "description": "React Dropdown Menu",
+  "main": [
+    "src/index.js",
+    "src/scss/react-dd-menu.scss"
+  ],
+  "keywords": [
+    "react",
+    "component",
+    "dropdown"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "package.json",
+    "bin"
+  ]
+}
