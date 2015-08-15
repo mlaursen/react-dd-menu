@@ -1,0 +1,134 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+@import "../scss/react-dd-menu";
+
+$dull-black: #4A4A4A !default;
+$black-base: #000000 !default;
+$white-base: #ffffff !default;
+
+$peter-river: #3498db;
+$turquise: #1abc9c;
+$green-sea: #16a085;
+$wet-asphalt: #34495e;
+$concrete: #95a5a6;
+$clouds: #ecf0f1;
+$silver: #bdc3c7;
+$midnight-blue: #2c3e50;
+
+$roboto: 'Roboto', sans-serif;
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.example {
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  color: $white-base;
+  font-family: 'Roboto', sans-serif;
+  background-color: $peter-river;
+  padding: 1.5em;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  main {
+    width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  main {
+    width: 940px;
+  }
+}
+
+@media (min-width: 1200px) {
+  main {
+    width: 1140px;
+  }
+}
+
+main {
+  margin-left: auto;
+  margin-right: auto;
+  
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+  .dd-menu {
+    flex-basis: 330px;
+    margin: 2em 1.5em;
+  }
+}
+
+footer {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 2em;
+  
+  > a {
+    color: $dull-black;
+  }
+}
+
+.clear-btn {
+  border: none;
+  background-color: transparent;
+}
+
+h1 {
+  margin: 0;
+}
+
+.tab {
+
+  > button {
+    position: relative;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    color: $white-base;
+    padding: 1em 1.5em;
+    background-color: $turquise;
+    border: 0;
+    border-bottom: 2px solid $green-sea;
+    box-shadow: inset 0 -2px $green-sea;
+    
+    &:focus {
+      box-shadow: inset 0 -2px $green-sea, inset 0 0 3px $wet-asphalt;
+    }
+  }
+  
+  &:active,
+  &.active {
+    > button {
+      top: 1px;
+      outline: none;
+      box-shadow: none;
+    }
+  }
+}
+
