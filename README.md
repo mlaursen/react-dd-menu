@@ -1,9 +1,11 @@
 # react-dd-menu
 React Dropdown Menu
 
-Example: http://codepen.io/mlaursen03/full/PqVjMm/
+Live Example: http://codepen.io/mlaursen03/full/PqVjMm/
 
-> Example might not be up to date
+> Live Example might not be up to date
+
+An up-to-date example is available in the `examples` folder. You can run `gulp --examples` to start up the example.
 
 ### Installation
 
@@ -135,8 +137,36 @@ $ npm run build
 ```
 
 
+### Modifying
+If you are modifying the dropdown menu, the builds are based on gulp. To start the example app and watch any changes to js files, run
+
+```bash
+gulp --examples
+```
+
+To test this in a _production_ state (minified), run
+
+```bash
+gulp --examples --production
+```
+
+When adding new options or additions, make sure to update `src/js/Options.js` with a new example using your options.
+
+To clean the dist run
+
+```bash
+gulp clean
+```
+
+and to clean the examples, run
+
+```bash
+gulp clean --examples
+```
+
 ### Versions
 
 - 0.0.2 - Fixed removing the click event listener
 - 0.0.3 - Positioning fixes and convenience props for different dropdown menu configs
 - 0.0.4 - Fixed width for firefox and added convenience props for sizes
+- 0.0.5 - Fixed Button font size, added examples
