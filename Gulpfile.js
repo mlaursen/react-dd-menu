@@ -142,17 +142,29 @@ gulp.task('scripts-watch', ['scripts'], browserSync.reload);
 
 
   /* Distribute the application with all files into the dist folder */
-gulp.task('dist', ['scripts', 'libs-scripts', 'styles']);
+gulp.task('dist', ['scripts', 'libs-scripts', 'styles', 'statics']);
 
 
 gulp.task('statics', function() {
-  return gulp.src([SRC + '/index.html'])
+  if(!IS_EXAMPLES) {
+    return;
+  }
+
+  gulp.src([SRC + '/index.html'])
+    .pipe(gulp.dest(DIST));
+
+  if(!IS_PRODUCTION) {
+    return;
+  }
+
+  return gulp.src(SRC + '/index.html')
+    .pipe(replace(/(\.(js|css))/g, '.min$1'))
     .pipe(gulp.dest(DIST));
 });
 
 
   /* Start up browsersync and start watching files */
-gulp.task('serve', ['dist', 'statics'], function() {
+gulp.task('serve', ['dist'], function() {
   browserSync({
     server: {
       baseDir: DIST

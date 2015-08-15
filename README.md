@@ -152,6 +152,18 @@ gulp --examples --production
 
 When adding new options or additions, make sure to update `src/js/Options.js` with a new example using your options.
 
+To clean the dist run
+
+```bash
+gulp clean
+```
+
+and to clean the examples, run
+
+```bash
+gulp clean --examples
+```
+
 ### Versions
 
 - 0.0.2 - Fixed removing the click event listener
