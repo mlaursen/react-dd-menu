@@ -64,6 +64,34 @@ export default [
     text: 'Default with Some \'Ipsum\'',
     additionalItems: <li><a href="#">Lorem Ipsum Pretend This is Actually ipsum</a></li>
   },
+  {
+    inverse: false,
+    align: 'right',
+    text: 'Default with a few separators',
+    additionalItems: [
+      <li role="separator" />,
+      <li><a href="#">Woop Woop</a></li>,
+      <li className="separator" />,
+      <li><a href="#">Fred Flinstone</a></li>,
+      <li><a href="#">Guacamole</a></li>,
+      <li role="separator" className="separator" />,
+      <li><a href="#">Something</a></li>
+    ],
+  },
+  {
+    inverse: true,
+    align: 'right',
+    text: 'Inverse with a few separators',
+    additionalItems: [
+      <li role="separator" />,
+      <li><a href="#">Woop Woop</a></li>,
+      <li className="separator" />,
+      <li><a href="#">Fred Flinstone</a></li>,
+      <li><a href="#">Guacamole</a></li>,
+      <li role="separator" className="separator" />,
+      <li><a href="#">Something</a></li>
+    ],
+  },
 //{
 //  inverse: false,
 //  align: 'center',

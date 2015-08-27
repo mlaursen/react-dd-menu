@@ -125,8 +125,8 @@
 .dd-menu .dd-menu-items > ul.dd-items-center li > *, .dd-menu .dd-menu-items > ol.dd-items-center li > * {
   text-align: center;
 }
-.dd-menu .dd-menu-items > ul > li:hover,
-.dd-menu .dd-menu-items > ul > li > *:focus, .dd-menu .dd-menu-items > ol > li:hover,
+.dd-menu .dd-menu-items > ul > li:hover:not([role="separator"]):not(.separator),
+.dd-menu .dd-menu-items > ul > li > *:focus, .dd-menu .dd-menu-items > ol > li:hover:not([role="separator"]):not(.separator),
 .dd-menu .dd-menu-items > ol > li > *:focus {
   color: #000;
   background-color: #bdc3c7;
@@ -151,9 +151,21 @@
   color: #fff;
   background-color: #2c3e50;
 }
-.dd-menu.dd-menu-inverse .dd-menu-items > ul > li:hover, .dd-menu.dd-menu-inverse .dd-menu-items > ul > li > *:focus, .dd-menu.dd-menu-inverse .dd-menu-items > ol > li:hover, .dd-menu.dd-menu-inverse .dd-menu-items > ol > li > *:focus {
+.dd-menu.dd-menu-inverse .dd-menu-items > ul > li:hover:not([role="separator"]):not(.separator),
+.dd-menu.dd-menu-inverse .dd-menu-items > ul > li > *:focus, .dd-menu.dd-menu-inverse .dd-menu-items > ol > li:hover:not([role="separator"]):not(.separator),
+.dd-menu.dd-menu-inverse .dd-menu-items > ol > li > *:focus {
   color: #fff;
   background-color: #34495e;
+}
+.dd-menu.dd-menu-inverse [role="separator"], .dd-menu.dd-menu-inverse .separator {
+  background-color: #45595e;
+}
+.dd-menu [role="separator"], .dd-menu .separator {
+  content: '';
+  display: block;
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.15);
+  margin: 0.5em 0 0.5em 0;
 }
 
 

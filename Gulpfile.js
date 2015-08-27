@@ -19,7 +19,9 @@ const IS_PRODUCTION = argv.production != null;
 const IS_EXAMPLES   = argv.examples != null;
 
 const SRC = './src'
-const DIST = IS_EXAMPLES ? './examples' : './dist'
+const EXAMPLES = './examples'
+const DIST = './dist'
+const CURR_DIST = IS_EXAMPLES ? EXAMPLES : DIST
 const SCSS = IS_EXAMPLES ? '/scss_example' : '/scss'
 
 const MAIN = IS_EXAMPLES ? 'js/main.js' : 'index.js'
@@ -50,7 +52,7 @@ const EXTERNALS = [
 
   /* Clean the dist folder */
 gulp.task('clean', function() {
-  return del([DIST]);
+  return del([DIST, EXAMPLES]);
 });
 
 
@@ -63,7 +65,7 @@ gulp.task('styles', function() {
       }),
     ]))
     .pipe(gulpif(IS_PRODUCTION, rename({ suffix: '.min' })))
-    .pipe(gulp.dest(DIST))
+    .pipe(gulp.dest(CURR_DIST))
     .pipe(gulpif(!IS_PRODUCTION, browserSync.stream()));
 });
 gulp.task('styles-watch', ['styles']);
@@ -89,7 +91,7 @@ function bundle(b, fileName, type) {
     .pipe(buffer())
     .pipe(gulpif(IS_PRODUCTION, uglify()))
     .pipe(gulpif(IS_PRODUCTION, rename({ suffix: '.min' })))
-    .pipe(gulp.dest(DIST));
+    .pipe(gulp.dest(CURR_DIST));
 }
 
   /* Bundle the libs scripts to be used from the main app */
@@ -121,7 +123,7 @@ gulp.task('scripts', function() {
       .pipe(babel())
       .pipe(gulpif(IS_PRODUCTION, uglify()))
       .pipe(gulpif(IS_PRODUCTION, rename({ suffix: '.min' })))
-      .pipe(gulp.dest(DIST));
+      .pipe(gulp.dest(CURR_DIST));
   }
 
   var b = browserify(CONFIG.browserify);
@@ -151,7 +153,7 @@ gulp.task('statics', function() {
   }
 
   gulp.src([SRC + '/index.html'])
-    .pipe(gulp.dest(DIST));
+    .pipe(gulp.dest(CURR_DIST));
 
   if(!IS_PRODUCTION) {
     return;
@@ -159,7 +161,7 @@ gulp.task('statics', function() {
 
   return gulp.src(SRC + '/index.html')
     .pipe(replace(/(\.(js|css))/g, '.min$1'))
-    .pipe(gulp.dest(DIST));
+    .pipe(gulp.dest(CURR_DIST));
 });
 
 
@@ -167,7 +169,7 @@ gulp.task('statics', function() {
 gulp.task('serve', ['dist'], function() {
   browserSync({
     server: {
-      baseDir: DIST
+      baseDir: CURR_DIST
     }
   });
 
@@ -176,4 +178,4 @@ gulp.task('serve', ['dist'], function() {
 });
 
 
-gulp.task('default', ['serve']);
+gulp.task('default', ['dist']);

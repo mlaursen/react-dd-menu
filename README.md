@@ -44,7 +44,10 @@ If you don't want the default css or to edit the default, the layout is this:
 | -- toggle component
 | -- .dd-menu-items
 |    | -- ul
+|    |    | [role="separator"], .separator
 ```
+
+The separator can be any element with a classname of `.separator` or any element with a role of separator (or both). To get the best styling, it *should* probably be applied to an `li` element.
 
 ### Usage
 
@@ -136,32 +139,32 @@ var Example = React.createClass({
 $ npm run build
 ```
 
+or
+
+```bash
+$ ./bin/build
+```
+
 
 ### Modifying
 If you are modifying the dropdown menu, the builds are based on gulp. To start the example app and watch any changes to js files, run
 
 ```bash
-gulp --examples
+$ gulp serve --examples
 ```
 
 To test this in a _production_ state (minified), run
 
 ```bash
-gulp --examples --production
+$ gulp serve --examples --production
 ```
 
 When adding new options or additions, make sure to update `src/js/Options.js` with a new example using your options.
 
-To clean the dist run
+To clean the dist and examples folders run
 
 ```bash
-gulp clean
-```
-
-and to clean the examples, run
-
-```bash
-gulp clean --examples
+$ gulp clean
 ```
 
 ### Versions
