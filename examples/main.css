@@ -1,5 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto);
 @import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+/* Not really sure why, but the inverse version has a bigger gap */
 .grow-from-left-enter {
   -webkit-transform: scale(0);
           transform: scale(0);
@@ -168,8 +169,40 @@
 .dd-menu.dd-menu-left .dd-menu-items {
   left: 0;
 }
+.dd-menu.dd-menu-left .dd-menu-items [class^='nested-']:not(.nested-reverse) > span {
+  right: 100%;
+  padding-right: 0.5em;
+}
+.dd-menu.dd-menu-left .dd-menu-items .nested-reverse > span {
+  left: 100%;
+  padding-left: 0.5em;
+}
+.dd-menu.dd-menu-left.dd-menu-inverse .dd-menu-items [class^='nested-']:not(.nested-reverse) > span {
+  right: 100%;
+  padding-right: 0.3em;
+}
+.dd-menu.dd-menu-left.dd-menu-inverse .dd-menu-items .nested-reverse > span {
+  left: 100%;
+  padding-left: 0.3em;
+}
 .dd-menu.dd-menu-right .dd-menu-items {
   right: 0;
+}
+.dd-menu.dd-menu-right .dd-menu-items [class^='nested-']:not(.nested-reverse) > span {
+  left: 100%;
+  padding-left: 0.5em;
+}
+.dd-menu.dd-menu-right .dd-menu-items .nested-reverse > span {
+  right: 100%;
+  padding-right: 0.5em;
+}
+.dd-menu.dd-menu-right.dd-menu-inverse .dd-menu-items [class^='nested-']:not(.nested-reverse) > span {
+  left: 100%;
+  padding-left: 0.3em;
+}
+.dd-menu.dd-menu-right.dd-menu-inverse .dd-menu-items .nested-reverse > span {
+  right: 100%;
+  padding-right: 0.3em;
 }
 .dd-menu.dd-menu-sm .dd-menu-items {
   width: 150px;
@@ -192,7 +225,7 @@
   bottom: 100%;
   margin: 0 0 0.5em;
 }
-.dd-menu .dd-menu-items > ul, .dd-menu .dd-menu-items > ol {
+.dd-menu .dd-menu-items ul, .dd-menu .dd-menu-items ol {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -200,23 +233,23 @@
   background-color: #fefefe;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.29);
 }
-.dd-menu .dd-menu-items > ul.dd-items-right li > *, .dd-menu .dd-menu-items > ol.dd-items-right li > * {
+.dd-menu .dd-menu-items ul.dd-items-right li > *, .dd-menu .dd-menu-items ol.dd-items-right li > * {
   text-align: right;
 }
-.dd-menu .dd-menu-items > ul.dd-items-left li > *, .dd-menu .dd-menu-items > ol.dd-items-left li > * {
+.dd-menu .dd-menu-items ul.dd-items-left li > *, .dd-menu .dd-menu-items ol.dd-items-left li > * {
   text-align: left;
 }
-.dd-menu .dd-menu-items > ul.dd-items-center li > *, .dd-menu .dd-menu-items > ol.dd-items-center li > * {
+.dd-menu .dd-menu-items ul.dd-items-center li > *, .dd-menu .dd-menu-items ol.dd-items-center li > * {
   text-align: center;
 }
-.dd-menu .dd-menu-items > ul > li:hover:not([role="separator"]):not(.separator),
-.dd-menu .dd-menu-items > ul > li > *:focus, .dd-menu .dd-menu-items > ol > li:hover:not([role="separator"]):not(.separator),
-.dd-menu .dd-menu-items > ol > li > *:focus {
+.dd-menu .dd-menu-items ul li:hover:not([role="separator"]):not(.separator),
+.dd-menu .dd-menu-items ul li > *:focus, .dd-menu .dd-menu-items ol li:hover:not([role="separator"]):not(.separator),
+.dd-menu .dd-menu-items ol li > *:focus {
   color: #000;
   background-color: #bdc3c7;
   outline: none;
 }
-.dd-menu .dd-menu-items > ul > li > *, .dd-menu .dd-menu-items > ol > li > * {
+.dd-menu .dd-menu-items ul li > *:not(.dd-item-ignore), .dd-menu .dd-menu-items ol li > *:not(.dd-item-ignore) {
   display: block;
   width: auto;
   min-width: 100%;
@@ -227,17 +260,17 @@
   text-decoration: none;
   font-size: inherit;
 }
-.dd-menu .dd-menu-items > ul > li > button, .dd-menu .dd-menu-items > ol > li > button {
+.dd-menu .dd-menu-items ul li > button, .dd-menu .dd-menu-items ol li > button {
   border: none;
   background: transparent;
 }
-.dd-menu.dd-menu-inverse .dd-menu-items > ul, .dd-menu.dd-menu-inverse .dd-menu-items > ol {
+.dd-menu.dd-menu-inverse .dd-menu-items ul, .dd-menu.dd-menu-inverse .dd-menu-items ol {
   color: #fff;
   background-color: #2c3e50;
 }
-.dd-menu.dd-menu-inverse .dd-menu-items > ul > li:hover:not([role="separator"]):not(.separator),
-.dd-menu.dd-menu-inverse .dd-menu-items > ul > li > *:focus, .dd-menu.dd-menu-inverse .dd-menu-items > ol > li:hover:not([role="separator"]):not(.separator),
-.dd-menu.dd-menu-inverse .dd-menu-items > ol > li > *:focus {
+.dd-menu.dd-menu-inverse .dd-menu-items ul li:hover:not([role="separator"]):not(.separator),
+.dd-menu.dd-menu-inverse .dd-menu-items ul li > *:focus, .dd-menu.dd-menu-inverse .dd-menu-items ol li:hover:not([role="separator"]):not(.separator),
+.dd-menu.dd-menu-inverse .dd-menu-items ol li > *:focus {
   color: #fff;
   background-color: #34495e;
 }
@@ -250,6 +283,13 @@
   height: 2px;
   background-color: rgba(0, 0, 0, 0.15);
   margin: 0.5em 0 0.5em 0;
+}
+.dd-menu li.nested-dd-menu {
+  position: relative;
+}
+.dd-menu li.nested-dd-menu > span {
+  position: absolute;
+  top: 0;
 }
 
 * {
@@ -386,6 +426,10 @@ h1 {
   top: 1px;
   outline: none;
   box-shadow: none;
+}
+
+.nested-dd-menu a .fa + span, .nested-dd-menu a span + .fa {
+  padding-left: .5em;
 }
 
 

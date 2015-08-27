@@ -1,4 +1,5 @@
 import React from 'react'
+import { NestedDropdownMenu } from '../index'
 
 export default [
   {
@@ -109,6 +110,41 @@ export default [
     align: 'right',
     text: 'Upwards Right Align',
     upwards: true,
+  },
+  {
+    inverse: false,
+    align: 'left',
+    text: 'Default Left Nested Menu',
+    upwards: true,
+    nestedProps: {
+      animate: false,
+    }
+  },
+  {
+    inverse: true,
+    align: 'right',
+    text: 'Inverse Right Nested Menu Animated',
+    upwards: true,
+    nestedProps: {
+      animate: true,
+    }
+  },
+  {
+    inverse: true,
+    align: 'left',
+    text: 'Default Nested Menu Nested Inherit',
+    nestedProps: {
+      nested: 'inherit',
+    }
+  },
+  {
+    inverse: true,
+    align: 'right',
+    text: 'Default Nested Menu Animate Left',
+    nestedProps: {
+      animate: true,
+      direction: 'left',
+    }
   },
 //{
 //  inverse: false,

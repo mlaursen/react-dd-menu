@@ -124,4 +124,61 @@ DropdownMenu.defaultProps = {
   upwards: false,
 };
 
-export default DropdownMenu;
+export default DropdownMenu
+
+
+class NestedDropdownMenu extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { isOpen: false }
+  }
+
+  setOpen(isOpen) {
+    this.setState({ isOpen: isOpen })
+  }
+
+  render() {
+    let { toggle, children, nested, animate, direction } = this.props
+    let { isOpen } = this.state
+
+    let itemProps = {
+      className: classnames('nested-dd-menu', `nested-${nested}`),
+      onMouseOver: this.setOpen.bind(this, true),
+      onMouseLeave: this.setOpen.bind(this, false),
+      onFocus: this.setOpen.bind(this, true),
+      onBlur: this.setOpen.bind(this, false),
+    }
+
+    let transitionProps = {
+      className: 'dd-item-ignore',
+      transitionEnter: animate,
+      transitionLeave: animate,
+      transitionName: 'grow-from-' + direction,
+    }
+
+    return (
+      <li {...itemProps}>
+        {toggle}
+        <CSSTransitionGroup {...transitionProps}>
+          {isOpen ? <ul key="items">{children}</ul> : null}
+        </CSSTransitionGroup>
+      </li>
+    )
+  }
+}
+
+NestedDropdownMenu.propTypes = {
+  toggle: PropTypes.node.isRequired,
+  nested: PropTypes.oneOf(['inherit', 'reverse', 'left', 'right']),
+  animate: PropTypes.bool,
+  direction: PropTypes.oneOf(['left', 'right']),
+}
+
+NestedDropdownMenu.defaultProps = {
+  nested: 'reverse',
+  animate: false,
+  direction: 'right',
+}
+
+export { NestedDropdownMenu }
