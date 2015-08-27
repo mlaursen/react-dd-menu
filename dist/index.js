@@ -70,11 +70,15 @@ var DropdownMenu = (function (_Component) {
   }, {
     key: 'handleClickOutside',
     value: function handleClickOutside(e) {
-      var children = _reactAddons2['default'].findDOMNode(this).getElementsByTagName('*');
-      for (var x in children) {
-        if (e.target == children[x]) {
+      var target = e.target,
+          node = _reactAddons2['default'].findDOMNode(this);
+
+      while (target.parentNode) {
+        if (target === node) {
           return;
         }
+
+        target = target.parentNode;
       }
 
       this.props.close(e);
@@ -106,14 +110,15 @@ var DropdownMenu = (function (_Component) {
       var menuAlign = _props.menuAlign;
       var children = _props.children;
       var size = _props.size;
+      var upwards = _props.upwards;
 
       var menuClassName = (0, _classnames2['default'])('dd-menu', 'dd-menu-' + (menuAlign || align), { 'dd-menu-inverse': inverse }, className, size ? 'dd-menu-' + size : null);
 
       var listClassName = 'dd-items-' + (textAlign || align);
       var transitionProps = {
-        transitionName: 'grow-from-' + (animAlign || align),
+        transitionName: 'grow-from-' + (upwards ? 'up-' : '') + (animAlign || align),
         component: 'div',
-        className: 'dd-menu-items',
+        className: (0, _classnames2['default'])('dd-menu-items', { 'dd-items-upwards': upwards }),
         onKeyDown: this.handleKeyDown.bind(this),
         ref: 'menuItems'
       };
@@ -148,7 +153,8 @@ DropdownMenu.propTypes = {
   textAlign: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
   menuAlign: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
   className: _reactAddons.PropTypes.string,
-  size: _reactAddons.PropTypes.oneOf(['sm', 'md', 'lg', 'xl'])
+  size: _reactAddons.PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  upwards: _reactAddons.PropTypes.bool
 };
 
 DropdownMenu.defaultProps = {
@@ -158,7 +164,8 @@ DropdownMenu.defaultProps = {
   textAlign: null,
   menuAlign: null,
   className: null,
-  size: null
+  size: null,
+  upwards: false
 };
 
 exports['default'] = DropdownMenu;

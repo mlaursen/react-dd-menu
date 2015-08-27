@@ -69,13 +69,13 @@ export default [
     align: 'right',
     text: 'Default with a few separators',
     additionalItems: [
-      <li role="separator" />,
-      <li><a href="#">Woop Woop</a></li>,
-      <li className="separator" />,
-      <li><a href="#">Fred Flinstone</a></li>,
-      <li><a href="#">Guacamole</a></li>,
-      <li role="separator" className="separator" />,
-      <li><a href="#">Something</a></li>
+      <li key="sep1" role="separator" />,
+      <li key="woop"><a href="#">Woop Woop</a></li>,
+      <li key="sep2" className="separator" />,
+      <li key="fred"><a href="#">Fred Flinstone</a></li>,
+      <li key="guac"><a href="#">Guacamole</a></li>,
+      <li key="sep3" role="separator" className="separator" />,
+      <li key="some"><a href="#">Something</a></li>
     ],
   },
   {
@@ -83,14 +83,32 @@ export default [
     align: 'right',
     text: 'Inverse with a few separators',
     additionalItems: [
-      <li role="separator" />,
-      <li><a href="#">Woop Woop</a></li>,
-      <li className="separator" />,
-      <li><a href="#">Fred Flinstone</a></li>,
-      <li><a href="#">Guacamole</a></li>,
-      <li role="separator" className="separator" />,
-      <li><a href="#">Something</a></li>
+      <li key="sep1" role="separator" />,
+      <li key="woop"><a href="#">Woop Woop</a></li>,
+      <li key="sep2" className="separator" />,
+      <li key="fred"><a href="#">Fred Flinstone</a></li>,
+      <li key="guac"><a href="#">Guacamole</a></li>,
+      <li key="sep3" role="separator" className="separator" />,
+      <li key="some"><a href="#">Something</a></li>
     ],
+  },
+  {
+    inverse: false,
+    align: 'left',
+    text: 'Upwards Left Align',
+    upwards: true,
+  },
+  {
+    inverse: true,
+    align: 'center',
+    text: 'Inverse Upwards Center Align',
+    upwards: true,
+  },
+  {
+    inverse: false,
+    align: 'right',
+    text: 'Upwards Right Align',
+    upwards: true,
   },
 //{
 //  inverse: false,

@@ -76,6 +76,84 @@
           transform: scale(0);
 }
 
+.grow-from-up-left-enter {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: 0 100%;
+          transform-origin: 0 100%;
+  transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+}
+.grow-from-up-left-enter.grow-from-up-left-enter-active {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.grow-from-up-left-leave {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: 0 100%;
+          transform-origin: 0 100%;
+  transition: -webkit-transform 0.15s ease-out;
+  transition: transform 0.15s ease-out;
+}
+.grow-from-up-left-leave.grow-from-up-left-leave-active {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
+.grow-from-up-center-enter {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+  transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+}
+.grow-from-up-center-enter.grow-from-up-center-enter-active {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.grow-from-up-center-leave {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+  transition: -webkit-transform 0.15s ease-out;
+  transition: transform 0.15s ease-out;
+}
+.grow-from-up-center-leave.grow-from-up-center-leave-active {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
+.grow-from-up-right-enter {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: 100% 100%;
+          transform-origin: 100% 100%;
+  transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+}
+.grow-from-up-right-enter.grow-from-up-right-enter-active {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.grow-from-up-right-leave {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: 100% 100%;
+          transform-origin: 100% 100%;
+  transition: -webkit-transform 0.15s ease-out;
+  transition: transform 0.15s ease-out;
+}
+.grow-from-up-right-leave.grow-from-up-right-leave-active {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
 .dd-menu {
   display: inline-block;
   position: relative;
@@ -106,7 +184,11 @@
 .dd-menu .dd-menu-items {
   position: absolute;
   z-index: 7;
-  margin-top: 0.5em;
+  margin: 0.5em 0 0 0;
+}
+.dd-menu .dd-menu-items.dd-items-upwards {
+  bottom: 100%;
+  margin: 0 0 0.5em;
 }
 .dd-menu .dd-menu-items > ul, .dd-menu .dd-menu-items > ol {
   list-style: none;

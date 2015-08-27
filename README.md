@@ -33,6 +33,7 @@ $ npm install -S react-dd-menu
 * `size`      - the size of the menu. Defaults to auto size.
   * One of `sm`, `md`, `lg`, `xl`
 * `className` - any additional css classes to add the the dropdown menu container. (`.dd-menu`)
+* `upwards`   - boolean if the menu should go upwards. Defaults to `false`
 
 ### Styling
 In the `dist` folder, there is a `react-dd-menu.css` and a `react-dd-menu.min.css` with the default css stylings. If you have SASS, the source is located in `src/scss`.

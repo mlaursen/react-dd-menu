@@ -15,7 +15,12 @@
   .dd-menu-items {
     position: absolute;
     z-index: $dd-menu-z-index;
-    margin-top: $dd-menu-margin-top;
+    margin: $dd-menu-margin;
+
+    &.dd-items-upwards {
+      bottom: 100%;
+      margin: $dd-menu-upwards-margin;
+    }
 
     > ul, > ol {
       list-style: none;
