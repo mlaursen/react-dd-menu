@@ -43,9 +43,13 @@ class DropdownMenu extends Component {
   }
   
   handleClickOutside(e) {
-    let children = React.findDOMNode(this).getElementsByTagName('*');
-    for(var x in children) {
-      if(e.target == children[x]) { return; }
+    let target = e.target,
+      node = React.findDOMNode(this);
+
+    while(target.parentNode) {
+      if(target === node) { return }
+
+      target = target.parentNode
     }
 
     this.props.close(e);

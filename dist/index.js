@@ -70,11 +70,15 @@ var DropdownMenu = (function (_Component) {
   }, {
     key: 'handleClickOutside',
     value: function handleClickOutside(e) {
-      var children = _reactAddons2['default'].findDOMNode(this).getElementsByTagName('*');
-      for (var x in children) {
-        if (e.target == children[x]) {
+      var target = e.target,
+          node = _reactAddons2['default'].findDOMNode(this);
+
+      while (target.parentNode) {
+        if (target === node) {
           return;
         }
+
+        target = target.parentNode;
       }
 
       this.props.close(e);
