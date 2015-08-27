@@ -15,9 +15,14 @@
   .dd-menu-items {
     position: absolute;
     z-index: $dd-menu-z-index;
-    margin-top: $dd-menu-margin-top;
+    margin: $dd-menu-margin;
 
-    > ul, > ol {
+    &.dd-items-upwards {
+      bottom: 100%;
+      margin: $dd-menu-upwards-margin;
+    }
+
+    ul, ol {
       list-style: none;
       padding: 0;
       margin: 0;
@@ -38,16 +43,16 @@
         text-align: center;
       }
 
-      > li {
+      li {
         
-        &:hover,
+        &:hover:not([role="separator"]):not(.separator),
         > *:focus {
           color: $dd-list-hover-text-color;
           background-color: $dd-list-hover-color;
           outline: none;
         }
 
-        > * {
+        > *:not(.dd-item-ignore) {
           display: block;
           width: auto;
           min-width: 100%;
@@ -70,19 +75,47 @@
 
   &.dd-menu-inverse {
     .dd-menu-items {
-      > ul, > ol {
+      ul, ol {
         color: $dd-inverse-text-color;
         background-color: $dd-inverse-list-color;
 
-        > li {
+        li {
 
-          &:hover, > *:focus {
+          &:hover:not([role="separator"]):not(.separator),
+          > *:focus {
             color: $dd-inverse-list-hover-text-color;
             background-color: $dd-inverse-list-hover-color;
           }
         }
       }
     }
+
+    [role="separator"], .separator {
+      background-color: $dd-inverse-separator-color;
+    }
   }
 
+  [role="separator"], .separator {
+    content: '';
+    display: block;
+    height: $dd-separator-height;
+    background-color: $dd-separator-color;
+    margin: $dd-separator-margin-top $dd-separator-margin-right $dd-separator-margin-bottom $dd-separator-margin-left;
+  }
+
+  .dd-items-upwards {
+    li.nested-dd-menu > span {
+      bottom: 0;
+      top: initial;
+    }
+  }
+
+  li.nested-dd-menu {
+    position: relative;
+
+    > span {
+      position: absolute;
+      top: 0;
+    }
+  }
 }

@@ -70,11 +70,15 @@ var DropdownMenu = (function (_Component) {
   }, {
     key: 'handleClickOutside',
     value: function handleClickOutside(e) {
-      var children = _reactAddons2['default'].findDOMNode(this).getElementsByTagName('*');
-      for (var x in children) {
-        if (e.target == children[x]) {
+      var target = e.target,
+          node = _reactAddons2['default'].findDOMNode(this);
+
+      while (target.parentNode) {
+        if (target === node) {
           return;
         }
+
+        target = target.parentNode;
       }
 
       this.props.close(e);
@@ -106,14 +110,15 @@ var DropdownMenu = (function (_Component) {
       var menuAlign = _props.menuAlign;
       var children = _props.children;
       var size = _props.size;
+      var upwards = _props.upwards;
 
       var menuClassName = (0, _classnames2['default'])('dd-menu', 'dd-menu-' + (menuAlign || align), { 'dd-menu-inverse': inverse }, className, size ? 'dd-menu-' + size : null);
 
       var listClassName = 'dd-items-' + (textAlign || align);
       var transitionProps = {
-        transitionName: 'grow-from-' + (animAlign || align),
+        transitionName: 'grow-from-' + (upwards ? 'up-' : '') + (animAlign || align),
         component: 'div',
-        className: 'dd-menu-items',
+        className: (0, _classnames2['default'])('dd-menu-items', { 'dd-items-upwards': upwards }),
         onKeyDown: this.handleKeyDown.bind(this),
         ref: 'menuItems'
       };
@@ -148,7 +153,8 @@ DropdownMenu.propTypes = {
   textAlign: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
   menuAlign: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
   className: _reactAddons.PropTypes.string,
-  size: _reactAddons.PropTypes.oneOf(['sm', 'md', 'lg', 'xl'])
+  size: _reactAddons.PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  upwards: _reactAddons.PropTypes.bool
 };
 
 DropdownMenu.defaultProps = {
@@ -158,8 +164,89 @@ DropdownMenu.defaultProps = {
   textAlign: null,
   menuAlign: null,
   className: null,
-  size: null
+  size: null,
+  upwards: false
 };
 
 exports['default'] = DropdownMenu;
-module.exports = exports['default'];
+
+var NestedDropdownMenu = (function (_Component2) {
+  _inherits(NestedDropdownMenu, _Component2);
+
+  function NestedDropdownMenu(props) {
+    _classCallCheck(this, NestedDropdownMenu);
+
+    _get(Object.getPrototypeOf(NestedDropdownMenu.prototype), 'constructor', this).call(this, props);
+
+    this.state = { isOpen: false };
+  }
+
+  _createClass(NestedDropdownMenu, [{
+    key: 'setOpen',
+    value: function setOpen(isOpen) {
+      this.setState({ isOpen: isOpen });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props2 = this.props;
+      var toggle = _props2.toggle;
+      var children = _props2.children;
+      var nested = _props2.nested;
+      var animate = _props2.animate;
+      var direction = _props2.direction;
+      var upwards = _props2.upwards;
+      var isOpen = this.state.isOpen;
+
+      var itemProps = {
+        className: (0, _classnames2['default'])('nested-dd-menu', 'nested-' + nested),
+        onMouseOver: this.setOpen.bind(this, true),
+        onMouseLeave: this.setOpen.bind(this, false),
+        onFocus: this.setOpen.bind(this, true),
+        onBlur: this.setOpen.bind(this, false)
+      };
+
+      var prefix = upwards ? 'up-' : '';
+      var transitionProps = {
+        className: 'dd-item-ignore',
+        transitionEnter: animate,
+        transitionLeave: animate,
+        transitionName: 'grow-from-' + prefix + direction
+      };
+
+      return _reactAddons2['default'].createElement(
+        'li',
+        itemProps,
+        toggle,
+        _reactAddons2['default'].createElement(
+          CSSTransitionGroup,
+          transitionProps,
+          isOpen ? _reactAddons2['default'].createElement(
+            'ul',
+            { key: 'items' },
+            children
+          ) : null
+        )
+      );
+    }
+  }]);
+
+  return NestedDropdownMenu;
+})(_reactAddons.Component);
+
+NestedDropdownMenu.propTypes = {
+  toggle: _reactAddons.PropTypes.node.isRequired,
+  nested: _reactAddons.PropTypes.oneOf(['inherit', 'reverse', 'left', 'right']),
+  animate: _reactAddons.PropTypes.bool,
+  direction: _reactAddons.PropTypes.oneOf(['left', 'right']),
+  upwards: _reactAddons.PropTypes.bool
+};
+
+NestedDropdownMenu.defaultProps = {
+  nested: 'reverse',
+  animate: false,
+  direction: 'right',
+  upwards: false
+};
+
+exports.NestedDropdownMenu = NestedDropdownMenu;

@@ -132,3 +132,12 @@ h1 {
   }
 }
 
+.nested-dd-menu a {
+  .fa + span, span + .fa {
+    padding-left: .5em;
+  }
+}
+
+button, [role="button"] {
+  cursor: pointer;
+}

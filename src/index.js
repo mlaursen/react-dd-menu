@@ -43,9 +43,13 @@ class DropdownMenu extends Component {
   }
   
   handleClickOutside(e) {
-    let children = React.findDOMNode(this).getElementsByTagName('*');
-    for(var x in children) {
-      if(e.target == children[x]) { return; }
+    let target = e.target,
+      node = React.findDOMNode(this);
+
+    while(target.parentNode) {
+      if(target === node) { return }
+
+      target = target.parentNode
     }
 
     this.props.close(e);
@@ -65,7 +69,7 @@ class DropdownMenu extends Component {
 
 
   render() {
-    let { isOpen, toggle, className, inverse, align, animAlign, textAlign, menuAlign, children, size } = this.props; 
+    let { isOpen, toggle, className, inverse, align, animAlign, textAlign, menuAlign, children, size, upwards } = this.props; 
 
     let menuClassName = classnames(
       'dd-menu',
@@ -77,9 +81,9 @@ class DropdownMenu extends Component {
 
     let listClassName = 'dd-items-' + (textAlign || align);
     let transitionProps = {
-      transitionName: 'grow-from-' + (animAlign || align),
+      transitionName: 'grow-from-' + (upwards ? 'up-' : '') + (animAlign || align),
       component: 'div',
-      className: 'dd-menu-items',
+      className: classnames('dd-menu-items', { 'dd-items-upwards': upwards }),
       onKeyDown: this.handleKeyDown.bind(this),
       ref: 'menuItems',
     };
@@ -106,6 +110,7 @@ DropdownMenu.propTypes = {
   menuAlign: PropTypes.oneOf(['center', 'right', 'left']),
   className: PropTypes.string,
   size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  upwards: PropTypes.bool,
 }
 
 DropdownMenu.defaultProps = {
@@ -116,6 +121,67 @@ DropdownMenu.defaultProps = {
   menuAlign: null,
   className: null,
   size: null,
+  upwards: false,
 };
 
-export default DropdownMenu;
+export default DropdownMenu
+
+
+class NestedDropdownMenu extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { isOpen: false }
+  }
+
+  setOpen(isOpen) {
+    this.setState({ isOpen: isOpen })
+  }
+
+  render() {
+    let { toggle, children, nested, animate, direction, upwards } = this.props
+    let { isOpen } = this.state
+
+    let itemProps = {
+      className: classnames('nested-dd-menu', `nested-${nested}`),
+      onMouseOver: this.setOpen.bind(this, true),
+      onMouseLeave: this.setOpen.bind(this, false),
+      onFocus: this.setOpen.bind(this, true),
+      onBlur: this.setOpen.bind(this, false),
+    }
+
+    let prefix = upwards ? 'up-' : ''
+    let transitionProps = {
+      className: 'dd-item-ignore',
+      transitionEnter: animate,
+      transitionLeave: animate,
+      transitionName: `grow-from-${prefix}${direction}`,
+    }
+
+    return (
+      <li {...itemProps}>
+        {toggle}
+        <CSSTransitionGroup {...transitionProps}>
+          {isOpen ? <ul key="items">{children}</ul> : null}
+        </CSSTransitionGroup>
+      </li>
+    )
+  }
+}
+
+NestedDropdownMenu.propTypes = {
+  toggle: PropTypes.node.isRequired,
+  nested: PropTypes.oneOf(['inherit', 'reverse', 'left', 'right']),
+  animate: PropTypes.bool,
+  direction: PropTypes.oneOf(['left', 'right']),
+  upwards: PropTypes.bool,
+}
+
+NestedDropdownMenu.defaultProps = {
+  nested: 'reverse',
+  animate: false,
+  direction: 'right',
+  upwards: false,
+}
+
+export { NestedDropdownMenu }
