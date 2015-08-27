@@ -242,3 +242,4 @@ $ gulp clean
 - 0.0.3 - Positioning fixes and convenience props for different dropdown menu configs
 - 0.0.4 - Fixed width for firefox and added convenience props for sizes
 - 0.0.5 - Fixed Button font size, added examples
+- 1.0.0 - Added nested dropdown menus, a separator class, drop-up? menus.
