@@ -15,6 +15,8 @@ $ npm install -S react-dd-menu
 
 #### Props
 
+##### DropdownMenu
+
 * `isOpen`    - Boolean for telling if the menu is open. This was passed in as a prop instead of having the component's own state so you can decide when to close the menu on your own.
   * __Is Required__
 * `close`     - a function to call that turns the `isOpen` boolean to false
@@ -34,6 +36,21 @@ $ npm install -S react-dd-menu
   * One of `sm`, `md`, `lg`, `xl`
 * `className` - any additional css classes to add the the dropdown menu container. (`.dd-menu`)
 * `upwards`   - boolean if the menu should go upwards. Defaults to `false`
+
+##### NestedDropdownMenu
+
+* `toggle`  - an renderable item that will open the nested menu on hover. It gets wrapped in a `li` element, so it might be best to have a button or a link tag.
+  * __Is Required__
+* `nested`  - the nested menu's expansion direction. The default case *should* hopefully be the only used case.
+  * One of `inherit`, `reverse`, `left`, `right`. Defaults reverse.
+  * Inherit - If the main dropdown menu is aligned left, the nested menu will appear to the left as well.
+  * Reverse - If the main dropdown menu is aligned left, the nested menu will appear to the right.
+  * Left    - Force the menu to appear to the left of the menu.
+  * Right   - Force the menu to appear to the right of the menu.
+* `animate` - boolean if the nested menu should animate when appearing. Defaults to `false`
+* `direction` - The animation direction.
+  * One of `left`, `right`
+* `upwards`   - boolean if the nested menu should render upwards. Defaults to `false`
 
 ### Styling
 In the `dist` folder, there is a `react-dd-menu.css` and a `react-dd-menu.min.css` with the default css stylings. If you have SASS, the source is located in `src/scss`.
@@ -134,6 +151,57 @@ var Example = React.createClass({
 });
 ```
 
+#### Nested Menu Example
+```javascript
+'use strict';
+
+import React from 'react'
+import DropdownMenu, { NestedDropdownMenu } from 'react-dd-menu'
+
+class Example extends React.Component {
+  constructor() {
+    this.state = {
+      isMenuOpen: false
+    }
+  }
+
+  toggle() {
+    this.setState({ isMenuOpen: !this.state.isMenuOpen })
+  }
+
+  close() {
+    this.setState({ isMenuOpen: false })
+  }
+
+  click() {
+    console.log('You clicked an item');
+  }
+
+  render() {
+    let menuOptions = {
+      isOpen: this.state.isOpen,
+      close: this.close.bind(this),
+      toggle: <button type="button" onClick={this.toggle.bind(this)}Click me!</button>,
+      align: 'right',
+    }
+
+    let nestedProps = {
+      toggle: <a href="#">Hover me for Nested Menu!</a>,
+      animate: true,
+    }
+    return (
+      <DropdownMenu {...menuOptions}>
+        <li><a href="#">Example 1</a></li>
+        <li><button type="button" onClick={this.click.bind(this)}>Example 2</button></li>
+        <li role="separator" className="separator" />
+        <NestedDropdownMenu {...nestedProps}>
+          <li><a href="#">I am in a Nested Menu!</a></li>
+        </NestedDropdownMenu>
+      </DropdownMenu>
+    );
+  }
+}
+```
 
 ### Building
 ```bash

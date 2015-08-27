@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 
 import Options from './Options'
-import DropdownMenu from '../index'
+import DropdownMenu, { NestedDropdownMenu } from '../index'
 
 class Example extends Component {
   render() {
@@ -42,7 +42,7 @@ class Menu extends Component {
 
   render() {
     let { isOpen } = this.state
-    let { text, additionalItems, ...props } = this.props
+    let { text, additionalItems, nestedProps, ...props } = this.props
     let opts = {
       close: this.closeMenu.bind(this),
       isOpen: isOpen,
@@ -52,11 +52,43 @@ class Menu extends Component {
         </div>
       )
     }
+
+    let toggle = null
+    if(nestedProps) {
+      let nested = null
+      switch(nestedProps.nested) {
+        case 'left':
+        case 'right':
+          nested = nestedProps.nested;
+          break;
+        case 'inherit':
+          nested = props.align;
+          break;
+        default:
+          nested = props.align == 'left' ? 'right' : 'left';
+      }
+
+      let icon = <span className={`fa fa-chevron-${nested}`} />
+      toggle = (
+        <a href="#">
+          {nested === 'left' && icon}
+          Hover for Nested menu
+          {nested === 'right' && icon}
+        </a>
+      )
+    }
     return (
       <DropdownMenu {...props} {...opts}>
         <li><a href="#">Link Example</a></li>
         <li><button type="button" onClick={this.onClick}>Button Example</button></li>
         {additionalItems}
+        {nestedProps &&
+        <NestedDropdownMenu toggle={toggle} {...nestedProps}>
+          <li><a href="#">Woop Woop</a></li>
+          <li><a href="#">Thats the Sound of</a></li>
+          <li><a href="#">The Police</a></li>
+        </NestedDropdownMenu>
+        }
       </DropdownMenu>
     )
   }

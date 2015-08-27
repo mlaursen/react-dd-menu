@@ -1,8 +1,28 @@
+@mixin nested-position($dir, $padding) {
+  @if $dir != 'center' {
+    $swapped: if($dir == 'left', 'right', 'left');
 
+    [class^='nested-']:not(.nested-reverse) > span {
+      #{$swapped}: 100%;
+      padding-#{$swapped}: $padding;
+    }
+
+    .nested-reverse > span {
+      #{$dir}: 100%;
+      padding-#{$dir}: $padding;
+    }
+  }
+}
 
 @mixin dd-position($dir) {
   &.dd-menu-#{$dir} .dd-menu-items {
     #{$dir}: 0;
+
+    @include nested-position($dir, $nested-dd-padding);
+  }
+
+  &.dd-menu-#{$dir}.dd-menu-inverse .dd-menu-items {
+    @include nested-position($dir, $nested-dd-inverse-padding);
   }
 }
 

@@ -22,7 +22,7 @@
       margin: $dd-menu-upwards-margin;
     }
 
-    > ul, > ol {
+    ul, ol {
       list-style: none;
       padding: 0;
       margin: 0;
@@ -43,7 +43,7 @@
         text-align: center;
       }
 
-      > li {
+      li {
         
         &:hover:not([role="separator"]):not(.separator),
         > *:focus {
@@ -52,7 +52,7 @@
           outline: none;
         }
 
-        > * {
+        > *:not(.dd-item-ignore) {
           display: block;
           width: auto;
           min-width: 100%;
@@ -75,11 +75,11 @@
 
   &.dd-menu-inverse {
     .dd-menu-items {
-      > ul, > ol {
+      ul, ol {
         color: $dd-inverse-text-color;
         background-color: $dd-inverse-list-color;
 
-        > li {
+        li {
 
           &:hover:not([role="separator"]):not(.separator),
           > *:focus {
@@ -101,5 +101,21 @@
     height: $dd-separator-height;
     background-color: $dd-separator-color;
     margin: $dd-separator-margin-top $dd-separator-margin-right $dd-separator-margin-bottom $dd-separator-margin-left;
+  }
+
+  .dd-items-upwards {
+    li.nested-dd-menu > span {
+      bottom: 0;
+      top: initial;
+    }
+  }
+
+  li.nested-dd-menu {
+    position: relative;
+
+    > span {
+      position: absolute;
+      top: 0;
+    }
   }
 }
