@@ -1,6 +1,6 @@
 $dd-menu-z-index: 7 !default;
 $dd-menu-margin-top: 0.5em !default;
-$dd-menu-item-padding: 1em 1.5em;
+$dd-menu-item-padding: 1em 1.5em !default;
 
 $dd-menu-sm-width: 150px !default;
 $dd-menu-md-width: 300px !default;
@@ -29,3 +29,12 @@ $dd-transition-time: 0.15s !default;
 $dd-transition-in: cubic-bezier(0.5, 1.8, 0.9, 0.8) !default;
 $dd-transition-out: ease-out !default;
 $dd-transitions: ('left' '0 0'), ('right' '100% 0'), ('center' '50% 0') !default;
+
+$dd-separator-height: 2px !default;
+$dd-separator-color: rgba(0, 0, 0, .15) !default;
+$dd-inverse-separator-color: #45595e !default;
+$dd-separator-margin-top: .5em !default;
+$dd-separator-margin-right: 0 !default;
+$dd-separator-margin-bottom: .5em !default;
+$dd-separator-margin-left: 0 !default;
+

@@ -40,7 +40,7 @@
 
       > li {
         
-        &:hover,
+        &:hover:not([role="separator"]):not(.separator),
         > *:focus {
           color: $dd-list-hover-text-color;
           background-color: $dd-list-hover-color;
@@ -76,13 +76,25 @@
 
         > li {
 
-          &:hover, > *:focus {
+          &:hover:not([role="separator"]):not(.separator),
+          > *:focus {
             color: $dd-inverse-list-hover-text-color;
             background-color: $dd-inverse-list-hover-color;
           }
         }
       }
     }
+
+    [role="separator"], .separator {
+      background-color: $dd-inverse-separator-color;
+    }
   }
 
+  [role="separator"], .separator {
+    content: '';
+    display: block;
+    height: $dd-separator-height;
+    background-color: $dd-separator-color;
+    margin: $dd-separator-margin-top $dd-separator-margin-right $dd-separator-margin-bottom $dd-separator-margin-left;
+  }
 }

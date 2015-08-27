@@ -44,7 +44,10 @@ If you don't want the default css or to edit the default, the layout is this:
 | -- toggle component
 | -- .dd-menu-items
 |    | -- ul
+|    |    | [role="separator"], .separator
 ```
+
+The separator can be any element with a classname of `.separator` or any element with a role of separator (or both). To get the best styling, it *should* probably be applied to an `li` element.
 
 ### Usage
 
