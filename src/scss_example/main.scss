@@ -116,7 +116,6 @@ h1 {
     border: 0;
     border-bottom: 2px solid $green-sea;
     box-shadow: inset 0 -2px $green-sea;
-    cursor: pointer;
     
     &:focus {
       box-shadow: inset 0 -2px $green-sea, inset 0 0 3px $wet-asphalt;
@@ -137,4 +136,8 @@ h1 {
   .fa + span, span + .fa {
     padding-left: .5em;
   }
+}
+
+button, [role="button"] {
+  cursor: pointer;
 }

@@ -84,9 +84,9 @@ class Menu extends Component {
         {additionalItems}
         {nestedProps &&
         <NestedDropdownMenu toggle={toggle} {...nestedProps}>
-          <li><a href="#">Abcd</a></li>
-          <li><a href="#">Kjkfdas jfkdas</a></li>
-          <li><a href="#">Jfkdsaf</a></li>
+          <li><a href="#">Woop Woop</a></li>
+          <li><a href="#">Thats the Sound of</a></li>
+          <li><a href="#">The Police</a></li>
         </NestedDropdownMenu>
         }
       </DropdownMenu>

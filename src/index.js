@@ -139,7 +139,7 @@ class NestedDropdownMenu extends Component {
   }
 
   render() {
-    let { toggle, children, nested, animate, direction } = this.props
+    let { toggle, children, nested, animate, direction, upwards } = this.props
     let { isOpen } = this.state
 
     let itemProps = {
@@ -150,11 +150,12 @@ class NestedDropdownMenu extends Component {
       onBlur: this.setOpen.bind(this, false),
     }
 
+    let prefix = upwards ? 'up-' : ''
     let transitionProps = {
       className: 'dd-item-ignore',
       transitionEnter: animate,
       transitionLeave: animate,
-      transitionName: 'grow-from-' + direction,
+      transitionName: `grow-from-${prefix}${direction}`,
     }
 
     return (
@@ -173,12 +174,14 @@ NestedDropdownMenu.propTypes = {
   nested: PropTypes.oneOf(['inherit', 'reverse', 'left', 'right']),
   animate: PropTypes.bool,
   direction: PropTypes.oneOf(['left', 'right']),
+  upwards: PropTypes.bool,
 }
 
 NestedDropdownMenu.defaultProps = {
   nested: 'reverse',
   animate: false,
   direction: 'right',
+  upwards: false,
 }
 
 export { NestedDropdownMenu }

@@ -21,12 +21,42 @@ export default [
   {
     inverse: true,
     align: 'left',
-    text: 'Inverse With Align Left',
+    text: 'Inverse With Align Left Multi-Nested Menus',
+    additionalItems: (
+      <NestedDropdownMenu toggle={<a href="#">Multi-level Menu<span className="fa fa-chevron-right" /></a>}>
+        <li><a href="#">Wee wooo</a></li>
+        <li><a href="#">Wee wooo</a></li>
+        <li role="separator" className="separator" />
+        <NestedDropdownMenu toggle={<a href="#">Multi-level Menu<span className="fa fa-chevron-right" /></a>}>
+          <li><a href="#">Wee wooo 1</a></li>
+          <li><a href="#">Wee wooo 2</a></li>
+          <li><a href="#">Wee wooo 3</a></li>
+          <NestedDropdownMenu toggle={<a href="#">Multi-level Menu<span className="fa fa-chevron-right" /></a>}>
+            <li><a href="#">I Think You Got It</a></li>
+          </NestedDropdownMenu>
+        </NestedDropdownMenu>
+      </NestedDropdownMenu>
+    ),
   },
   {
     inverse: true,
     align: 'right',
-    text: 'Inverse With Align Right',
+    text: 'Inverse With Align Right Aniamted Multi-Nested Menus',
+    additionalItems: (
+      <NestedDropdownMenu animate={true} toggle={<a href="#"><span className="fa fa-chevron-left" />Multi-level Menu</a>}>
+        <li><a href="#">Wee wooo</a></li>
+        <li><a href="#">Wee wooo</a></li>
+        <li role="separator" className="separator" />
+        <NestedDropdownMenu animate={true} toggle={<a href="#"><span className="fa fa-chevron-left" />Multi-level Menu</a>}>
+          <li><a href="#">Wee wooo 1</a></li>
+          <li><a href="#">Wee wooo 2</a></li>
+          <li><a href="#">Wee wooo 3</a></li>
+          <NestedDropdownMenu animate={true} toggle={<a href="#"><span className="fa fa-chevron-left" />Multi-level Menu</a>}>
+            <li><a href="#">I Think You Got It</a></li>
+          </NestedDropdownMenu>
+        </NestedDropdownMenu>
+      </NestedDropdownMenu>
+    ),
   },
   {
     inverse: true,
@@ -127,12 +157,14 @@ export default [
     upwards: true,
     nestedProps: {
       animate: true,
+      upwards: true,
     }
   },
   {
     inverse: true,
     align: 'left',
     text: 'Default Nested Menu Nested Inherit',
+    upwards: true,
     nestedProps: {
       nested: 'inherit',
     }
@@ -141,9 +173,11 @@ export default [
     inverse: true,
     align: 'right',
     text: 'Default Nested Menu Animate Left',
+    upwards: true,
     nestedProps: {
       animate: true,
       direction: 'left',
+      upwards: true,
     }
   },
 //{

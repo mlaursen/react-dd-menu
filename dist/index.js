@@ -195,6 +195,7 @@ var NestedDropdownMenu = (function (_Component2) {
       var nested = _props2.nested;
       var animate = _props2.animate;
       var direction = _props2.direction;
+      var upwards = _props2.upwards;
       var isOpen = this.state.isOpen;
 
       var itemProps = {
@@ -205,11 +206,12 @@ var NestedDropdownMenu = (function (_Component2) {
         onBlur: this.setOpen.bind(this, false)
       };
 
+      var prefix = upwards ? 'up-' : '';
       var transitionProps = {
         className: 'dd-item-ignore',
         transitionEnter: animate,
         transitionLeave: animate,
-        transitionName: 'grow-from-' + direction
+        transitionName: 'grow-from-' + prefix + direction
       };
 
       return _reactAddons2['default'].createElement(
@@ -236,13 +238,15 @@ NestedDropdownMenu.propTypes = {
   toggle: _reactAddons.PropTypes.node.isRequired,
   nested: _reactAddons.PropTypes.oneOf(['inherit', 'reverse', 'left', 'right']),
   animate: _reactAddons.PropTypes.bool,
-  direction: _reactAddons.PropTypes.oneOf(['left', 'right'])
+  direction: _reactAddons.PropTypes.oneOf(['left', 'right']),
+  upwards: _reactAddons.PropTypes.bool
 };
 
 NestedDropdownMenu.defaultProps = {
   nested: 'reverse',
   animate: false,
-  direction: 'right'
+  direction: 'right',
+  upwards: false
 };
 
 exports.NestedDropdownMenu = NestedDropdownMenu;

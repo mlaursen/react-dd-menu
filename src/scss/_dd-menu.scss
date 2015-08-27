@@ -103,6 +103,12 @@
     margin: $dd-separator-margin-top $dd-separator-margin-right $dd-separator-margin-bottom $dd-separator-margin-left;
   }
 
+  .dd-items-upwards {
+    li.nested-dd-menu > span {
+      bottom: 0;
+      top: initial;
+    }
+  }
 
   li.nested-dd-menu {
     position: relative;
