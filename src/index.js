@@ -124,7 +124,7 @@ DropdownMenu.defaultProps = {
   upwards: false,
 };
 
-export default DropdownMenu
+module.exports = DropdownMenu
 
 
 class NestedDropdownMenu extends Component {
@@ -184,4 +184,4 @@ NestedDropdownMenu.defaultProps = {
   upwards: false,
 }
 
-export { NestedDropdownMenu }
+module.exports.NestedDropdownMenu = NestedDropdownMenu
