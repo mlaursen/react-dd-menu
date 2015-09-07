@@ -4,47 +4,47 @@ import React, { Component, PropTypes } from 'react/addons'
 import classnames from 'classnames'
 
 
-const CSSTransitionGroup = React.addons.CSSTransitionGroup;
-const TAB = 9;
-const SPACEBAR = 32;
+const CSSTransitionGroup = React.addons.CSSTransitionGroup
+const TAB = 9
+const SPACEBAR = 32
 
-let _lastWindowClickEvent = null;
+let _lastWindowClickEvent = null
 
 class DropdownMenu extends Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   componentDidUpdate(prevProps, prevState) {
-    var menuItems = React.findDOMNode(this.refs.menuItems);
+    var menuItems = React.findDOMNode(this.refs.menuItems)
     if(this.props.isOpen && !prevProps.isOpen) {
-      _lastWindowClickEvent = this.handleClickOutside.bind(this);
+      _lastWindowClickEvent = this.handleClickOutside.bind(this)
 
-      document.addEventListener('click', _lastWindowClickEvent);
-      menuItems.addEventListener('click', this.props.close);
-      menuItems.addEventListener('onkeydown', this.close.bind(this));
+      document.addEventListener('click', _lastWindowClickEvent)
+      menuItems.addEventListener('click', this.props.close)
+      menuItems.addEventListener('onkeydown', this.close.bind(this))
     } else if(!this.props.isOpen && prevProps.isOpen) {
-      document.removeEventListener('click', _lastWindowClickEvent);
-      menuItems.removeEventListener('click', this.props.close);
-      menuItems.removeEventListener('onkeydown', this.close.bind(this));
+      document.removeEventListener('click', _lastWindowClickEvent)
+      menuItems.removeEventListener('click', this.props.close)
+      menuItems.removeEventListener('onkeydown', this.close.bind(this))
 
-      _lastWindowClickEvent = null;
+      _lastWindowClickEvent = null
     }
   }
 
   componentWillUnmount() {
-    _lastWindowClickEvent && document.removeEventListener('click', _lastWindowClickEvent);
+    _lastWindowClickEvent && document.removeEventListener('click', _lastWindowClickEvent)
   }
 
   close(e) {
-    let key = e.which || e.keyCode;
-    key === SPACEBAR && this.props.close();
-    e.preventDefault();
+    let key = e.which || e.keyCode
+    key === SPACEBAR && this.props.close()
+    e.preventDefault()
   }
   
   handleClickOutside(e) {
     let target = e.target,
-      node = React.findDOMNode(this);
+      node = React.findDOMNode(this)
 
     while(target.parentNode) {
       if(target === node) { return }
@@ -52,41 +52,41 @@ class DropdownMenu extends Component {
       target = target.parentNode
     }
 
-    this.props.close(e);
+    this.props.close(e)
   }
 
   handleKeyDown(e) {
-    let key = e.which || e.keyCode;
+    let key = e.which || e.keyCode
     if(key !== TAB) {
-      return;
+      return
     }
 
-    let items = React.findDOMNode(this).querySelectorAll('button,a');
-    let id = e.shiftKey ? 1 : items.length - 1;
+    let items = React.findDOMNode(this).querySelectorAll('button,a')
+    let id = e.shiftKey ? 1 : items.length - 1
     
-    e.target == items[id] && this.props.close(e);
+    e.target == items[id] && this.props.close(e)
   }
 
 
   render() {
-    let { isOpen, toggle, className, inverse, align, animAlign, textAlign, menuAlign, children, size, upwards } = this.props; 
+    let { isOpen, toggle, className, inverse, align, animAlign, textAlign, menuAlign, children, size, upwards } = this.props 
 
     let menuClassName = classnames(
       'dd-menu',
-      'dd-menu-' + (menuAlign || align),
+      `dd-menu-${menuAlign || align}`,
       { 'dd-menu-inverse': inverse },
       className,
       size ? ('dd-menu-' + size) : null
     )
 
-    let listClassName = 'dd-items-' + (textAlign || align);
+    let listClassName = 'dd-items-' + (textAlign || align)
     let transitionProps = {
       transitionName: 'grow-from-' + (upwards ? 'up-' : '') + (animAlign || align),
       component: 'div',
       className: classnames('dd-menu-items', { 'dd-items-upwards': upwards }),
       onKeyDown: this.handleKeyDown.bind(this),
       ref: 'menuItems',
-    };
+    }
 
     return (
       <div className={menuClassName}>
@@ -95,7 +95,7 @@ class DropdownMenu extends Component {
           {isOpen && <ul className={listClassName}>{children}</ul>}
         </CSSTransitionGroup>
       </div>
-    );
+    )
   }
 }
 
@@ -122,7 +122,7 @@ DropdownMenu.defaultProps = {
   className: null,
   size: null,
   upwards: false,
-};
+}
 
 module.exports = DropdownMenu
 
@@ -132,10 +132,21 @@ class NestedDropdownMenu extends Component {
     super(props)
 
     this.state = { isOpen: false }
+    this._closeCallback = null
   }
 
-  setOpen(isOpen) {
-    this.setState({ isOpen: isOpen })
+  open() {
+    if(this._closeCallback) {
+      clearTimeout(this._closeCallback)
+      this._closeCallback = null
+    }
+    this.setState({ isOpen: true })
+  }
+
+  close() {
+    this._closeCallback = setTimeout(_ => {
+      this.setState({ isOpen: false })
+    }.bind(this), this.props.delay)
   }
 
   render() {
@@ -144,10 +155,10 @@ class NestedDropdownMenu extends Component {
 
     let itemProps = {
       className: classnames('nested-dd-menu', `nested-${nested}`),
-      onMouseOver: this.setOpen.bind(this, true),
-      onMouseLeave: this.setOpen.bind(this, false),
-      onFocus: this.setOpen.bind(this, true),
-      onBlur: this.setOpen.bind(this, false),
+      onMouseOver: this.open.bind(this),
+      onMouseLeave: this.close.bind(this),
+      onFocus: this.open.bind(this),
+      onBlur: this.close.bind(this),
     }
 
     let prefix = upwards ? 'up-' : ''
@@ -175,6 +186,7 @@ NestedDropdownMenu.propTypes = {
   animate: PropTypes.bool,
   direction: PropTypes.oneOf(['left', 'right']),
   upwards: PropTypes.bool,
+  delay: PropTypes.number,
 }
 
 NestedDropdownMenu.defaultProps = {
@@ -182,6 +194,7 @@ NestedDropdownMenu.defaultProps = {
   animate: false,
   direction: 'right',
   upwards: false,
+  delay: 500,
 }
 
 module.exports.NestedDropdownMenu = NestedDropdownMenu
