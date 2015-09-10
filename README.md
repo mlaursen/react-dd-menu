@@ -1,11 +1,5 @@
 # react-dd-menu
-React Dropdown Menu
-
-Live Example: http://codepen.io/mlaursen03/full/PqVjMm/
-
-> Live Example might not be up to date
-
-An up-to-date example is available in the `examples` folder. You can run `gulp --examples` to start up the example.
+Live Example: [React Dropdown Menu](http://mlaursen.github.io/react-dd-menu)
 
 ### Installation
 
@@ -51,6 +45,7 @@ $ npm install -S react-dd-menu
 * `direction` - The animation direction.
   * One of `left`, `right`
 * `upwards`   - boolean if the nested menu should render upwards. Defaults to `false`
+* `delay`   - A number in ms to allow the mouse to be off of the dropdown menu to close it. Defaults to `500ms`
 
 ### Styling
 In the `dist` folder, there is a `react-dd-menu.css` and a `react-dd-menu.min.css` with the default css stylings. If you have SASS, the source is located in `src/scss`.
@@ -244,3 +239,4 @@ $ gulp clean
 - 0.0.5 - Fixed Button font size, added examples
 - 1.0.0 - Added nested dropdown menus, a separator class, drop-up? menus.
 - 1.0.1 - Fixed exports for ES5 :(
+- 1.0.2 - Added delay to nested dropdown menu closing and added github page for examples.
