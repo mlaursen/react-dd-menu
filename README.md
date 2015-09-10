@@ -1,11 +1,5 @@
 # react-dd-menu
-React Dropdown Menu
-
-Live Example: http://codepen.io/mlaursen03/full/PqVjMm/
-
-> Live Example might not be up to date
-
-An up-to-date example is available in the `examples` folder. You can run `gulp serve --examples` to start up the example.
+Live Example: [React Dropdown Menu](http://mlaursen.github.io/react-dd-menu)
 
 ### Installation
 
@@ -245,3 +239,4 @@ $ gulp clean
 - 0.0.5 - Fixed Button font size, added examples
 - 1.0.0 - Added nested dropdown menus, a separator class, drop-up? menus.
 - 1.0.1 - Fixed exports for ES5 :(
+- 1.0.2 - Simplified examples and added github page for live example
