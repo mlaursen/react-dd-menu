@@ -20,8 +20,7 @@ const IS_EXAMPLES   = argv.examples != null;
 
 const SRC = './src'
 const EXAMPLES = './examples'
-const DIST = './dist'
-const CURR_DIST = IS_EXAMPLES ? EXAMPLES : DIST
+const CURR_DIST = IS_EXAMPLES ? './' : DIST
 const SCSS = IS_EXAMPLES ? '/scss_example' : '/scss'
 
 const MAIN = IS_EXAMPLES ? 'js/main.js' : 'index.js'
