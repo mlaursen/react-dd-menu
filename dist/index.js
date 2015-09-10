@@ -175,12 +175,26 @@ var NestedDropdownMenu = (function (_Component2) {
     _get(Object.getPrototypeOf(NestedDropdownMenu.prototype), 'constructor', this).call(this, props);
 
     this.state = { isOpen: false };
+    this._closeCallback = null;
   }
 
   _createClass(NestedDropdownMenu, [{
-    key: 'setOpen',
-    value: function setOpen(isOpen) {
-      this.setState({ isOpen: isOpen });
+    key: 'open',
+    value: function open() {
+      if (this._closeCallback) {
+        clearTimeout(this._closeCallback);
+        this._closeCallback = null;
+      }
+      this.setState({ isOpen: true });
+    }
+  }, {
+    key: 'close',
+    value: function close() {
+      var _this = this;
+
+      this._closeCallback = setTimeout((function (_) {
+        _this.setState({ isOpen: false });
+      }).bind(this), this.props.delay);
     }
   }, {
     key: 'render',
@@ -196,10 +210,10 @@ var NestedDropdownMenu = (function (_Component2) {
 
       var itemProps = {
         className: (0, _classnames2['default'])('nested-dd-menu', 'nested-' + nested),
-        onMouseOver: this.setOpen.bind(this, true),
-        onMouseLeave: this.setOpen.bind(this, false),
-        onFocus: this.setOpen.bind(this, true),
-        onBlur: this.setOpen.bind(this, false)
+        onMouseOver: this.open.bind(this),
+        onMouseLeave: this.close.bind(this),
+        onFocus: this.open.bind(this),
+        onBlur: this.close.bind(this)
       };
 
       var prefix = upwards ? 'up-' : '';
@@ -235,14 +249,16 @@ NestedDropdownMenu.propTypes = {
   nested: _reactAddons.PropTypes.oneOf(['inherit', 'reverse', 'left', 'right']),
   animate: _reactAddons.PropTypes.bool,
   direction: _reactAddons.PropTypes.oneOf(['left', 'right']),
-  upwards: _reactAddons.PropTypes.bool
+  upwards: _reactAddons.PropTypes.bool,
+  delay: _reactAddons.PropTypes.number
 };
 
 NestedDropdownMenu.defaultProps = {
   nested: 'reverse',
   animate: false,
   direction: 'right',
-  upwards: false
+  upwards: false,
+  delay: 500
 };
 
 module.exports.NestedDropdownMenu = NestedDropdownMenu;
