@@ -239,4 +239,4 @@ $ gulp clean
 - 0.0.5 - Fixed Button font size, added examples
 - 1.0.0 - Added nested dropdown menus, a separator class, drop-up? menus.
 - 1.0.1 - Fixed exports for ES5 :(
-- 1.0.2 - Simplified examples and added github page for live example
+- 1.0.2 - Added delay to nested dropdown menu closing and added github page for examples.
