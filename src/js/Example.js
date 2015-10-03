@@ -20,42 +20,42 @@ class Example extends Component {
           </a>
         </footer>
       </div>
-    )
+    );
   }
 }
 
-export default Example
+export default Example;
 
 class Menu extends Component {
   constructor(props) {
-    super(props)
-    this.state = { isOpen: false }
+    super(props);
+    this.state = { isOpen: false };
   }
 
-  toggleMenu() {
-    this.setState({ isOpen: !this.state.isOpen })
+  toggleMenu = () => {
+    this.setState({ isOpen: !this.state.isOpen });
   }
 
-  closeMenu() {
-    this.setState({ isOpen: false })
+  closeMenu = () => {
+    this.setState({ isOpen: false });
   }
 
   render() {
-    let { isOpen } = this.state
-    let { text, additionalItems, nestedProps, ...props } = this.props
-    let opts = {
-      close: this.closeMenu.bind(this),
+    const { isOpen } = this.state;
+    const { text, additionalItems, nestedProps, ...props } = this.props;
+    const opts = {
+      close: this.closeMenu,
       isOpen: isOpen,
       toggle: (
         <div className={classnames('tab', { 'active': isOpen })}>
-          <button type="button" onClick={this.toggleMenu.bind(this)}>{text}</button>
+          <button type="button" onClick={this.toggleMenu}>{text}</button>
         </div>
       )
-    }
+    };
 
-    let toggle = null
+    let toggle = null;
     if(nestedProps) {
-      let nested = null
+      let nested = null;
       switch(nestedProps.nested) {
         case 'left':
         case 'right':
@@ -68,14 +68,14 @@ class Menu extends Component {
           nested = props.align == 'left' ? 'right' : 'left';
       }
 
-      let icon = <span className={`fa fa-chevron-${nested}`} />
+      const icon = <span className={`fa fa-chevron-${nested}`} />
       toggle = (
         <a href="#">
           {nested === 'left' && icon}
           Hover for Nested menu
           {nested === 'right' && icon}
         </a>
-      )
+      );
     }
     return (
       <DropdownMenu {...props} {...opts}>
@@ -90,6 +90,6 @@ class Menu extends Component {
         </NestedDropdownMenu>
         }
       </DropdownMenu>
-    )
+    );
   }
 }

@@ -1,4 +1,5 @@
 # react-dd-menu
+
 Live Example: [React Dropdown Menu](http://mlaursen.github.io/react-dd-menu)
 
 ### Installation
@@ -30,6 +31,7 @@ $ npm install -S react-dd-menu
   * One of `sm`, `md`, `lg`, `xl`
 * `className` - any additional css classes to add the the dropdown menu container. (`.dd-menu`)
 * `upwards`   - boolean if the menu should go upwards. Defaults to `false`
+* `animate`   - boolean if the menu should animate on open and close. Defaults to `true`
 
 ##### NestedDropdownMenu
 
@@ -240,3 +242,4 @@ $ gulp clean
 - 1.0.0 - Added nested dropdown menus, a separator class, drop-up? menus.
 - 1.0.1 - Fixed exports for ES5 :(
 - 1.0.2 - Added delay to nested dropdown menu closing and added github page for examples.
+- 1.0.3 - Fixed problem with multiple menus and added ability to disable animation
