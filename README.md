@@ -30,6 +30,7 @@ $ npm install -S react-dd-menu
   * One of `sm`, `md`, `lg`, `xl`
 * `className` - any additional css classes to add the the dropdown menu container. (`.dd-menu`)
 * `upwards`   - boolean if the menu should go upwards. Defaults to `false`
+* `animate`   - boolean if the menu should animate on open and close. Defaults to `true`
 
 ##### NestedDropdownMenu
 
