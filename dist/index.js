@@ -103,19 +103,19 @@ var DropdownMenu = (function (_Component) {
     key: 'render',
     value: function render() {
       var _props = this.props;
-      var isOpen = _props.isOpen;
-      var toggle = _props.toggle;
-      var className = _props.className;
-      var inverse = _props.inverse;
-      var align = _props.align;
-      var animAlign = _props.animAlign;
-      var textAlign = _props.textAlign;
       var menuAlign = _props.menuAlign;
-      var children = _props.children;
+      var align = _props.align;
+      var inverse = _props.inverse;
       var size = _props.size;
-      var upwards = _props.upwards;
+      var className = _props.className;
 
       var menuClassName = (0, _classnames2['default'])('dd-menu', 'dd-menu-' + (menuAlign || align), { 'dd-menu-inverse': inverse }, className, size ? 'dd-menu-' + size : null);
+
+      var _props2 = this.props;
+      var textAlign = _props2.textAlign;
+      var upwards = _props2.upwards;
+      var animAlign = _props2.animAlign;
+      var animate = _props2.animate;
 
       var listClassName = 'dd-items-' + (textAlign || align);
       var transitionProps = {
@@ -123,20 +123,22 @@ var DropdownMenu = (function (_Component) {
         component: 'div',
         className: (0, _classnames2['default'])('dd-menu-items', { 'dd-items-upwards': upwards }),
         onKeyDown: this.handleKeyDown,
-        ref: 'menuItems'
+        ref: 'menuItems',
+        transitionEnter: animate,
+        transitionLeave: animate
       };
 
       return _reactAddons2['default'].createElement(
         'div',
         { className: menuClassName },
-        toggle,
+        this.props.toggle,
         _reactAddons2['default'].createElement(
           CSSTransitionGroup,
           transitionProps,
-          isOpen && _reactAddons2['default'].createElement(
+          this.props.isOpen && _reactAddons2['default'].createElement(
             'ul',
             { className: listClassName },
-            children
+            this.props.children
           )
         )
       );
@@ -154,7 +156,8 @@ var DropdownMenu = (function (_Component) {
       menuAlign: _reactAddons.PropTypes.oneOf(ALIGNMENTS),
       className: _reactAddons.PropTypes.string,
       size: _reactAddons.PropTypes.oneOf(MENU_SIZES),
-      upwards: _reactAddons.PropTypes.bool
+      upwards: _reactAddons.PropTypes.bool,
+      animate: _reactAddons.PropTypes.bool
     },
     enumerable: true
   }, {
@@ -167,7 +170,8 @@ var DropdownMenu = (function (_Component) {
       menuAlign: null,
       className: null,
       size: null,
-      upwards: false
+      upwards: false,
+      animate: true
     },
     enumerable: true
   }]);
@@ -208,13 +212,13 @@ var NestedDropdownMenu = (function (_Component2) {
   _createClass(NestedDropdownMenu, [{
     key: 'render',
     value: function render() {
-      var _props2 = this.props;
-      var toggle = _props2.toggle;
-      var children = _props2.children;
-      var nested = _props2.nested;
-      var animate = _props2.animate;
-      var direction = _props2.direction;
-      var upwards = _props2.upwards;
+      var _props3 = this.props;
+      var toggle = _props3.toggle;
+      var children = _props3.children;
+      var nested = _props3.nested;
+      var animate = _props3.animate;
+      var direction = _props3.direction;
+      var upwards = _props3.upwards;
       var isOpen = this.state.isOpen;
 
       var itemProps = {

@@ -29,6 +29,7 @@ class DropdownMenu extends Component {
     className: PropTypes.string,
     size: PropTypes.oneOf(MENU_SIZES),
     upwards: PropTypes.bool,
+    animate: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -40,6 +41,7 @@ class DropdownMenu extends Component {
     className: null,
     size: null,
     upwards: false,
+    animate: true,
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -104,7 +106,7 @@ class DropdownMenu extends Component {
 
 
   render() {
-    const { isOpen, toggle, className, inverse, align, animAlign, textAlign, menuAlign, children, size, upwards } = this.props ;
+    const { menuAlign, align, inverse, size, className } = this.props;
 
     const menuClassName = classnames(
       'dd-menu',
@@ -114,6 +116,8 @@ class DropdownMenu extends Component {
       size ? ('dd-menu-' + size) : null
     );
 
+    const { textAlign, upwards, animAlign, animate } = this.props;
+
     const listClassName = 'dd-items-' + (textAlign || align);
     const transitionProps = {
       transitionName: 'grow-from-' + (upwards ? 'up-' : '') + (animAlign || align),
@@ -121,13 +125,15 @@ class DropdownMenu extends Component {
       className: classnames('dd-menu-items', { 'dd-items-upwards': upwards }),
       onKeyDown: this.handleKeyDown,
       ref: 'menuItems',
+      transitionEnter: animate,
+      transitionLeave: animate,
     };
 
     return (
       <div className={menuClassName}>
-        {toggle}
+        {this.props.toggle}
         <CSSTransitionGroup {...transitionProps}>
-          {isOpen && <ul className={listClassName}>{children}</ul>}
+          {this.props.isOpen && <ul className={listClassName}>{this.props.children}</ul>}
         </CSSTransitionGroup>
       </div>
     );
