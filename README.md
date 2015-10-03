@@ -242,3 +242,4 @@ $ gulp clean
 - 1.0.0 - Added nested dropdown menus, a separator class, drop-up? menus.
 - 1.0.1 - Fixed exports for ES5 :(
 - 1.0.2 - Added delay to nested dropdown menu closing and added github page for examples.
+- 1.0.3 - Fixed problem with multiple menus and added ability to disable animation
