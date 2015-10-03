@@ -4,89 +4,124 @@ import React, { Component, PropTypes } from 'react/addons'
 import classnames from 'classnames'
 
 
-const CSSTransitionGroup = React.addons.CSSTransitionGroup
-const TAB = 9
-const SPACEBAR = 32
-
-let _lastWindowClickEvent = null
+const CSSTransitionGroup = React.addons.CSSTransitionGroup;
+const TAB = 9;
+const SPACEBAR = 32;
+const ALIGNMENTS = ['center', 'right', 'left'];
+const MENU_SIZES = ['sm', 'md', 'lg', 'xl'];
 
 class DropdownMenu extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+
+    this._lastWindowClickEvent = null;
+  }
+
+  static propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    close: PropTypes.func.isRequired,
+    toggle: PropTypes.node.isRequired,
+    inverse: PropTypes.bool,
+    align: PropTypes.oneOf(ALIGNMENTS),
+    animAlign: PropTypes.oneOf(ALIGNMENTS),
+    textAlign: PropTypes.oneOf(ALIGNMENTS),
+    menuAlign: PropTypes.oneOf(ALIGNMENTS),
+    className: PropTypes.string,
+    size: PropTypes.oneOf(MENU_SIZES),
+    upwards: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    inverse: false,
+    align: 'center',
+    animAlign: null,
+    textAlign: null,
+    menuAlign: null,
+    className: null,
+    size: null,
+    upwards: false,
   }
 
   componentDidUpdate(prevProps, prevState) {
-    var menuItems = React.findDOMNode(this.refs.menuItems)
+    const menuItems = React.findDOMNode(this.refs.menuItems);
     if(this.props.isOpen && !prevProps.isOpen) {
-      _lastWindowClickEvent = this.handleClickOutside.bind(this)
+      this._lastWindowClickEvent = this.handleClickOutside;
 
-      document.addEventListener('click', _lastWindowClickEvent)
-      menuItems.addEventListener('click', this.props.close)
-      menuItems.addEventListener('onkeydown', this.close.bind(this))
+      document.addEventListener('click', this._lastWindowClickEvent);
+      menuItems.addEventListener('click', this.props.close);
+      menuItems.addEventListener('onkeydown', this.close);
     } else if(!this.props.isOpen && prevProps.isOpen) {
-      document.removeEventListener('click', _lastWindowClickEvent)
-      menuItems.removeEventListener('click', this.props.close)
-      menuItems.removeEventListener('onkeydown', this.close.bind(this))
+      document.removeEventListener('click', this._lastWindowClickEvent);
+      menuItems.removeEventListener('click', this.props.close);
+      menuItems.removeEventListener('onkeydown', this.close);
 
-      _lastWindowClickEvent = null
+      this._lastWindowClickEvent = null;
     }
   }
 
   componentWillUnmount() {
-    _lastWindowClickEvent && document.removeEventListener('click', _lastWindowClickEvent)
+    if(this._lastWindowClickEvent) {
+      document.removeEventListener('click', this._lastWindowClickEvent);
+    }
   }
 
-  close(e) {
-    let key = e.which || e.keyCode
-    key === SPACEBAR && this.props.close()
-    e.preventDefault()
+  close = (e) => {
+    const key = e.which || e.keyCode;
+    if(key === SPACEBAR) {
+      this.props.close();
+      e.preventDefault();
+    }
   }
   
-  handleClickOutside(e) {
-    let target = e.target,
-      node = React.findDOMNode(this)
+  handleClickOutside = (e) => {
+    const node = React.findDOMNode(this);
+    let target = e.target;
 
     while(target.parentNode) {
-      if(target === node) { return }
+      if(target === node) {
+        return;
+      }
 
-      target = target.parentNode
+      target = target.parentNode;
     }
 
-    this.props.close(e)
+    this.props.close(e);
   }
 
-  handleKeyDown(e) {
-    let key = e.which || e.keyCode
+  handleKeyDown = (e) => {
+    const key = e.which || e.keyCode;
     if(key !== TAB) {
-      return
+      return;
     }
 
-    let items = React.findDOMNode(this).querySelectorAll('button,a')
-    let id = e.shiftKey ? 1 : items.length - 1
+    const items = React.findDOMNode(this).querySelectorAll('button,a');
+    const id = e.shiftKey ? 1 : items.length - 1;
     
-    e.target == items[id] && this.props.close(e)
+    if(e.target == items[id]) {
+      this.props.close(e);
+    }
   }
 
 
   render() {
-    let { isOpen, toggle, className, inverse, align, animAlign, textAlign, menuAlign, children, size, upwards } = this.props 
+    const { isOpen, toggle, className, inverse, align, animAlign, textAlign, menuAlign, children, size, upwards } = this.props ;
 
-    let menuClassName = classnames(
+    const menuClassName = classnames(
       'dd-menu',
       `dd-menu-${menuAlign || align}`,
       { 'dd-menu-inverse': inverse },
       className,
       size ? ('dd-menu-' + size) : null
-    )
+    );
 
-    let listClassName = 'dd-items-' + (textAlign || align)
-    let transitionProps = {
+    const listClassName = 'dd-items-' + (textAlign || align);
+    const transitionProps = {
       transitionName: 'grow-from-' + (upwards ? 'up-' : '') + (animAlign || align),
       component: 'div',
       className: classnames('dd-menu-items', { 'dd-items-upwards': upwards }),
-      onKeyDown: this.handleKeyDown.bind(this),
+      onKeyDown: this.handleKeyDown,
       ref: 'menuItems',
-    }
+    };
 
     return (
       <div className={menuClassName}>
@@ -95,79 +130,71 @@ class DropdownMenu extends Component {
           {isOpen && <ul className={listClassName}>{children}</ul>}
         </CSSTransitionGroup>
       </div>
-    )
+    );
   }
 }
 
-DropdownMenu.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  close: PropTypes.func.isRequired,
-  toggle: PropTypes.node.isRequired,
-  inverse: PropTypes.bool,
-  align: PropTypes.oneOf(['center', 'right', 'left']),
-  animAlign: PropTypes.oneOf(['center', 'right', 'left']),
-  textAlign: PropTypes.oneOf(['center', 'right', 'left']),
-  menuAlign: PropTypes.oneOf(['center', 'right', 'left']),
-  className: PropTypes.string,
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
-  upwards: PropTypes.bool,
-}
-
-DropdownMenu.defaultProps = {
-  inverse: false,
-  align: 'center',
-  animAlign: null,
-  textAlign: null,
-  menuAlign: null,
-  className: null,
-  size: null,
-  upwards: false,
-}
-
-module.exports = DropdownMenu
+module.exports = DropdownMenu;
 
 
 class NestedDropdownMenu extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.state = { isOpen: false }
-    this._closeCallback = null
+    this.state = { isOpen: false };
+    this._closeCallback = null;
   }
 
-  open() {
+  static propTypes = {
+    toggle: PropTypes.node.isRequired,
+    nested: PropTypes.oneOf(['inherit', 'reverse', 'left', 'right']),
+    animate: PropTypes.bool,
+    direction: PropTypes.oneOf(['left', 'right']),
+    upwards: PropTypes.bool,
+    delay: PropTypes.number,
+  }
+
+  static defaultProps = {
+    nested: 'reverse',
+    animate: false,
+    direction: 'right',
+    upwards: false,
+    delay: 500,
+  }
+
+  open = () => {
     if(this._closeCallback) {
-      clearTimeout(this._closeCallback)
-      this._closeCallback = null
+      clearTimeout(this._closeCallback);
+      this._closeCallback = null;
     }
-    this.setState({ isOpen: true })
+    this.setState({ isOpen: true });
   }
 
-  close() {
+  close = () => {
     this._closeCallback = setTimeout(_ => {
-      this.setState({ isOpen: false })
-    }.bind(this), this.props.delay)
+      this.setState({ isOpen: false });
+    }.bind(this), this.props.delay);
   }
 
   render() {
-    let { toggle, children, nested, animate, direction, upwards } = this.props
-    let { isOpen } = this.state
+    const { toggle, children, nested, animate, direction, upwards } = this.props;
+    const { isOpen } = this.state;
 
-    let itemProps = {
+    const itemProps = {
       className: classnames('nested-dd-menu', `nested-${nested}`),
-      onMouseOver: this.open.bind(this),
-      onMouseLeave: this.close.bind(this),
-      onFocus: this.open.bind(this),
-      onBlur: this.close.bind(this),
-    }
+      onMouseOver: this.open,
+      onMouseLeave: this.close,
+      onFocus: this.open,
+      onBlur: this.close,
+    };
 
-    let prefix = upwards ? 'up-' : ''
-    let transitionProps = {
+    const prefix = upwards ? 'up-' : '';
+    const transitionProps = {
       className: 'dd-item-ignore',
       transitionEnter: animate,
       transitionLeave: animate,
       transitionName: `grow-from-${prefix}${direction}`,
-    }
+    };
 
     return (
       <li {...itemProps}>
@@ -176,25 +203,8 @@ class NestedDropdownMenu extends Component {
           {isOpen ? <ul key="items">{children}</ul> : null}
         </CSSTransitionGroup>
       </li>
-    )
+    );
   }
 }
 
-NestedDropdownMenu.propTypes = {
-  toggle: PropTypes.node.isRequired,
-  nested: PropTypes.oneOf(['inherit', 'reverse', 'left', 'right']),
-  animate: PropTypes.bool,
-  direction: PropTypes.oneOf(['left', 'right']),
-  upwards: PropTypes.bool,
-  delay: PropTypes.number,
-}
-
-NestedDropdownMenu.defaultProps = {
-  nested: 'reverse',
-  animate: false,
-  direction: 'right',
-  upwards: false,
-  delay: 500,
-}
-
-module.exports.NestedDropdownMenu = NestedDropdownMenu
+module.exports.NestedDropdownMenu = NestedDropdownMenu;

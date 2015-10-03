@@ -21,53 +21,30 @@ var _classnames2 = _interopRequireDefault(_classnames);
 var CSSTransitionGroup = _reactAddons2['default'].addons.CSSTransitionGroup;
 var TAB = 9;
 var SPACEBAR = 32;
-
-var _lastWindowClickEvent = null;
+var ALIGNMENTS = ['center', 'right', 'left'];
+var MENU_SIZES = ['sm', 'md', 'lg', 'xl'];
 
 var DropdownMenu = (function (_Component) {
   _inherits(DropdownMenu, _Component);
 
   function DropdownMenu(props) {
+    var _this = this;
+
     _classCallCheck(this, DropdownMenu);
 
     _get(Object.getPrototypeOf(DropdownMenu.prototype), 'constructor', this).call(this, props);
-  }
 
-  _createClass(DropdownMenu, [{
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps, prevState) {
-      var menuItems = _reactAddons2['default'].findDOMNode(this.refs.menuItems);
-      if (this.props.isOpen && !prevProps.isOpen) {
-        _lastWindowClickEvent = this.handleClickOutside.bind(this);
-
-        document.addEventListener('click', _lastWindowClickEvent);
-        menuItems.addEventListener('click', this.props.close);
-        menuItems.addEventListener('onkeydown', this.close.bind(this));
-      } else if (!this.props.isOpen && prevProps.isOpen) {
-        document.removeEventListener('click', _lastWindowClickEvent);
-        menuItems.removeEventListener('click', this.props.close);
-        menuItems.removeEventListener('onkeydown', this.close.bind(this));
-
-        _lastWindowClickEvent = null;
-      }
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      _lastWindowClickEvent && document.removeEventListener('click', _lastWindowClickEvent);
-    }
-  }, {
-    key: 'close',
-    value: function close(e) {
+    this.close = function (e) {
       var key = e.which || e.keyCode;
-      key === SPACEBAR && this.props.close();
-      e.preventDefault();
-    }
-  }, {
-    key: 'handleClickOutside',
-    value: function handleClickOutside(e) {
-      var target = e.target,
-          node = _reactAddons2['default'].findDOMNode(this);
+      if (key === SPACEBAR) {
+        _this.props.close();
+        e.preventDefault();
+      }
+    };
+
+    this.handleClickOutside = function (e) {
+      var node = _reactAddons2['default'].findDOMNode(_this);
+      var target = e.target;
 
       while (target.parentNode) {
         if (target === node) {
@@ -77,20 +54,50 @@ var DropdownMenu = (function (_Component) {
         target = target.parentNode;
       }
 
-      this.props.close(e);
-    }
-  }, {
-    key: 'handleKeyDown',
-    value: function handleKeyDown(e) {
+      _this.props.close(e);
+    };
+
+    this.handleKeyDown = function (e) {
       var key = e.which || e.keyCode;
       if (key !== TAB) {
         return;
       }
 
-      var items = _reactAddons2['default'].findDOMNode(this).querySelectorAll('button,a');
+      var items = _reactAddons2['default'].findDOMNode(_this).querySelectorAll('button,a');
       var id = e.shiftKey ? 1 : items.length - 1;
 
-      e.target == items[id] && this.props.close(e);
+      if (e.target == items[id]) {
+        _this.props.close(e);
+      }
+    };
+
+    this._lastWindowClickEvent = null;
+  }
+
+  _createClass(DropdownMenu, [{
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      var menuItems = _reactAddons2['default'].findDOMNode(this.refs.menuItems);
+      if (this.props.isOpen && !prevProps.isOpen) {
+        this._lastWindowClickEvent = this.handleClickOutside;
+
+        document.addEventListener('click', this._lastWindowClickEvent);
+        menuItems.addEventListener('click', this.props.close);
+        menuItems.addEventListener('onkeydown', this.close);
+      } else if (!this.props.isOpen && prevProps.isOpen) {
+        document.removeEventListener('click', this._lastWindowClickEvent);
+        menuItems.removeEventListener('click', this.props.close);
+        menuItems.removeEventListener('onkeydown', this.close);
+
+        this._lastWindowClickEvent = null;
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      if (this._lastWindowClickEvent) {
+        document.removeEventListener('click', this._lastWindowClickEvent);
+      }
     }
   }, {
     key: 'render',
@@ -115,7 +122,7 @@ var DropdownMenu = (function (_Component) {
         transitionName: 'grow-from-' + (upwards ? 'up-' : '') + (animAlign || align),
         component: 'div',
         className: (0, _classnames2['default'])('dd-menu-items', { 'dd-items-upwards': upwards }),
-        onKeyDown: this.handleKeyDown.bind(this),
+        onKeyDown: this.handleKeyDown,
         ref: 'menuItems'
       };
 
@@ -134,35 +141,39 @@ var DropdownMenu = (function (_Component) {
         )
       );
     }
+  }], [{
+    key: 'propTypes',
+    value: {
+      isOpen: _reactAddons.PropTypes.bool.isRequired,
+      close: _reactAddons.PropTypes.func.isRequired,
+      toggle: _reactAddons.PropTypes.node.isRequired,
+      inverse: _reactAddons.PropTypes.bool,
+      align: _reactAddons.PropTypes.oneOf(ALIGNMENTS),
+      animAlign: _reactAddons.PropTypes.oneOf(ALIGNMENTS),
+      textAlign: _reactAddons.PropTypes.oneOf(ALIGNMENTS),
+      menuAlign: _reactAddons.PropTypes.oneOf(ALIGNMENTS),
+      className: _reactAddons.PropTypes.string,
+      size: _reactAddons.PropTypes.oneOf(MENU_SIZES),
+      upwards: _reactAddons.PropTypes.bool
+    },
+    enumerable: true
+  }, {
+    key: 'defaultProps',
+    value: {
+      inverse: false,
+      align: 'center',
+      animAlign: null,
+      textAlign: null,
+      menuAlign: null,
+      className: null,
+      size: null,
+      upwards: false
+    },
+    enumerable: true
   }]);
 
   return DropdownMenu;
 })(_reactAddons.Component);
-
-DropdownMenu.propTypes = {
-  isOpen: _reactAddons.PropTypes.bool.isRequired,
-  close: _reactAddons.PropTypes.func.isRequired,
-  toggle: _reactAddons.PropTypes.node.isRequired,
-  inverse: _reactAddons.PropTypes.bool,
-  align: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
-  animAlign: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
-  textAlign: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
-  menuAlign: _reactAddons.PropTypes.oneOf(['center', 'right', 'left']),
-  className: _reactAddons.PropTypes.string,
-  size: _reactAddons.PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
-  upwards: _reactAddons.PropTypes.bool
-};
-
-DropdownMenu.defaultProps = {
-  inverse: false,
-  align: 'center',
-  animAlign: null,
-  textAlign: null,
-  menuAlign: null,
-  className: null,
-  size: null,
-  upwards: false
-};
 
 module.exports = DropdownMenu;
 
@@ -170,33 +181,31 @@ var NestedDropdownMenu = (function (_Component2) {
   _inherits(NestedDropdownMenu, _Component2);
 
   function NestedDropdownMenu(props) {
+    var _this2 = this;
+
     _classCallCheck(this, NestedDropdownMenu);
 
     _get(Object.getPrototypeOf(NestedDropdownMenu.prototype), 'constructor', this).call(this, props);
+
+    this.open = function () {
+      if (_this2._closeCallback) {
+        clearTimeout(_this2._closeCallback);
+        _this2._closeCallback = null;
+      }
+      _this2.setState({ isOpen: true });
+    };
+
+    this.close = function () {
+      _this2._closeCallback = setTimeout((function (_) {
+        _this2.setState({ isOpen: false });
+      }).bind(_this2), _this2.props.delay);
+    };
 
     this.state = { isOpen: false };
     this._closeCallback = null;
   }
 
   _createClass(NestedDropdownMenu, [{
-    key: 'open',
-    value: function open() {
-      if (this._closeCallback) {
-        clearTimeout(this._closeCallback);
-        this._closeCallback = null;
-      }
-      this.setState({ isOpen: true });
-    }
-  }, {
-    key: 'close',
-    value: function close() {
-      var _this = this;
-
-      this._closeCallback = setTimeout((function (_) {
-        _this.setState({ isOpen: false });
-      }).bind(this), this.props.delay);
-    }
-  }, {
     key: 'render',
     value: function render() {
       var _props2 = this.props;
@@ -210,10 +219,10 @@ var NestedDropdownMenu = (function (_Component2) {
 
       var itemProps = {
         className: (0, _classnames2['default'])('nested-dd-menu', 'nested-' + nested),
-        onMouseOver: this.open.bind(this),
-        onMouseLeave: this.close.bind(this),
-        onFocus: this.open.bind(this),
-        onBlur: this.close.bind(this)
+        onMouseOver: this.open,
+        onMouseLeave: this.close,
+        onFocus: this.open,
+        onBlur: this.close
       };
 
       var prefix = upwards ? 'up-' : '';
@@ -239,26 +248,30 @@ var NestedDropdownMenu = (function (_Component2) {
         )
       );
     }
+  }], [{
+    key: 'propTypes',
+    value: {
+      toggle: _reactAddons.PropTypes.node.isRequired,
+      nested: _reactAddons.PropTypes.oneOf(['inherit', 'reverse', 'left', 'right']),
+      animate: _reactAddons.PropTypes.bool,
+      direction: _reactAddons.PropTypes.oneOf(['left', 'right']),
+      upwards: _reactAddons.PropTypes.bool,
+      delay: _reactAddons.PropTypes.number
+    },
+    enumerable: true
+  }, {
+    key: 'defaultProps',
+    value: {
+      nested: 'reverse',
+      animate: false,
+      direction: 'right',
+      upwards: false,
+      delay: 500
+    },
+    enumerable: true
   }]);
 
   return NestedDropdownMenu;
 })(_reactAddons.Component);
-
-NestedDropdownMenu.propTypes = {
-  toggle: _reactAddons.PropTypes.node.isRequired,
-  nested: _reactAddons.PropTypes.oneOf(['inherit', 'reverse', 'left', 'right']),
-  animate: _reactAddons.PropTypes.bool,
-  direction: _reactAddons.PropTypes.oneOf(['left', 'right']),
-  upwards: _reactAddons.PropTypes.bool,
-  delay: _reactAddons.PropTypes.number
-};
-
-NestedDropdownMenu.defaultProps = {
-  nested: 'reverse',
-  animate: false,
-  direction: 'right',
-  upwards: false,
-  delay: 500
-};
 
 module.exports.NestedDropdownMenu = NestedDropdownMenu;
