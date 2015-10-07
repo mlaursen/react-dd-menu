@@ -89,7 +89,7 @@ var DropdownMenu = (function (_Component) {
         menuItems.addEventListener('onkeydown', this.close);
       } else if (!this.props.isOpen && prevProps.isOpen) {
         document.removeEventListener('click', this._lastWindowClickEvent);
-        if (this.props.closeOnOutsideClick) {
+        if (this.props.closeOnInsideClick) {
           menuItems.removeEventListener('click', this.props.close);
         }
         menuItems.removeEventListener('onkeydown', this.close);
