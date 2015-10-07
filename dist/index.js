@@ -43,18 +43,20 @@ var DropdownMenu = (function (_Component) {
     };
 
     this.handleClickOutside = function (e) {
-      var node = _reactAddons2['default'].findDOMNode(_this);
-      var target = e.target;
+      if (_this.props.closeOnOutsideClick) {
+        var node = _reactAddons2['default'].findDOMNode(_this);
+        var target = e.target;
 
-      while (target.parentNode) {
-        if (target === node) {
-          return;
+        while (target.parentNode) {
+          if (target === node) {
+            return;
+          }
+
+          target = target.parentNode;
         }
 
-        target = target.parentNode;
+        _this.props.close(e);
       }
-
-      _this.props.close(e);
     };
 
     this.handleKeyDown = function (e) {
@@ -80,13 +82,16 @@ var DropdownMenu = (function (_Component) {
       var menuItems = _reactAddons2['default'].findDOMNode(this.refs.menuItems);
       if (this.props.isOpen && !prevProps.isOpen) {
         this._lastWindowClickEvent = this.handleClickOutside;
-
         document.addEventListener('click', this._lastWindowClickEvent);
-        menuItems.addEventListener('click', this.props.close);
+        if (this.props.closeOnInsideClick) {
+          menuItems.addEventListener('click', this.props.close);
+        }
         menuItems.addEventListener('onkeydown', this.close);
       } else if (!this.props.isOpen && prevProps.isOpen) {
         document.removeEventListener('click', this._lastWindowClickEvent);
-        menuItems.removeEventListener('click', this.props.close);
+        if (this.props.closeOnOutsideClick) {
+          menuItems.removeEventListener('click', this.props.close);
+        }
         menuItems.removeEventListener('onkeydown', this.close);
 
         this._lastWindowClickEvent = null;
@@ -157,7 +162,9 @@ var DropdownMenu = (function (_Component) {
       className: _reactAddons.PropTypes.string,
       size: _reactAddons.PropTypes.oneOf(MENU_SIZES),
       upwards: _reactAddons.PropTypes.bool,
-      animate: _reactAddons.PropTypes.bool
+      animate: _reactAddons.PropTypes.bool,
+      closeOnInsideClick: _reactAddons.PropTypes.bool,
+      closeOnOutsideClick: _reactAddons.PropTypes.bool
     },
     enumerable: true
   }, {
@@ -171,7 +178,9 @@ var DropdownMenu = (function (_Component) {
       className: null,
       size: null,
       upwards: false,
-      animate: true
+      animate: true,
+      closeOnInsideClick: true,
+      closeOnOutsideClick: true
     },
     enumerable: true
   }]);
