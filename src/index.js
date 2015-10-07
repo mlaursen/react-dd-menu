@@ -30,6 +30,8 @@ class DropdownMenu extends Component {
     size: PropTypes.oneOf(MENU_SIZES),
     upwards: PropTypes.bool,
     animate: PropTypes.bool,
+    closeOnInsideClick: PropTypes.bool,
+    closeOnOutsideClick: PropTypes.bool
   }
 
   static defaultProps = {
@@ -42,19 +44,24 @@ class DropdownMenu extends Component {
     size: null,
     upwards: false,
     animate: true,
+    closeOnInsideClick: true,
+    closeOnOutsideClick: true
   }
 
   componentDidUpdate(prevProps, prevState) {
     const menuItems = React.findDOMNode(this.refs.menuItems);
     if(this.props.isOpen && !prevProps.isOpen) {
       this._lastWindowClickEvent = this.handleClickOutside;
-
       document.addEventListener('click', this._lastWindowClickEvent);
-      menuItems.addEventListener('click', this.props.close);
+      if (this.props.closeOnInsideClick) {
+        menuItems.addEventListener('click', this.props.close);
+      }
       menuItems.addEventListener('onkeydown', this.close);
     } else if(!this.props.isOpen && prevProps.isOpen) {
       document.removeEventListener('click', this._lastWindowClickEvent);
-      menuItems.removeEventListener('click', this.props.close);
+      if (this.props.closeOnOutsideClick) {
+        menuItems.removeEventListener('click', this.props.close);
+      }
       menuItems.removeEventListener('onkeydown', this.close);
 
       this._lastWindowClickEvent = null;
@@ -76,18 +83,20 @@ class DropdownMenu extends Component {
   }
   
   handleClickOutside = (e) => {
-    const node = React.findDOMNode(this);
-    let target = e.target;
-
-    while(target.parentNode) {
-      if(target === node) {
-        return;
+    if (this.props.closeOnOutsideClick) {
+      const node = React.findDOMNode(this);
+      let target = e.target;
+  
+      while(target.parentNode) {
+        if(target === node) {
+          return;
+        }
+  
+        target = target.parentNode;
       }
-
-      target = target.parentNode;
+      
+      this.props.close(e);
     }
-
-    this.props.close(e);
   }
 
   handleKeyDown = (e) => {
