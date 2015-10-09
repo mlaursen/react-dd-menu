@@ -1,3 +1,1 @@
-gulp clean
-gulp dist
-gulp dist --production
+gulp dist --production --examples
