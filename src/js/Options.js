@@ -8,7 +8,8 @@ export default [
   {
     align: 'left',
     inverse: true,
-    text: 'Align Left Inversed',
+    text: 'Align Left Inversed No animation',
+    animate: false,
   },
   {
     inverse: true,
@@ -91,8 +92,9 @@ export default [
   {
     inverse: false,
     align: 'left',
-    text: 'Default Left Nested Menu Upwards',
+    text: 'Default Left Nested Menu Upwards No Animation',
     upwards: true,
+    animate: false,
     nestedProps: {
       animate: false,
     }
@@ -107,15 +109,4 @@ export default [
       upwards: true,
     }
   },
-//{
-//  inverse: false,
-//  align: 'center',
-//  animAlign: null,
-//  textAlign: null,
-//  menuAlign: null,
-//  size: null,
-//  className: null,
-//  text: 'Default with Some \'Ipsum\'',
-//  additionalItems: <li><a href="#">Lorem Ipsum Pretend This is Actually ipsum</a></li>
-//},
 ]
