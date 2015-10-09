@@ -1,10 +1,10 @@
-'use strict'
+import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
+import CSSTransitionGroup from 'react-addons-css-transition-group';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import classnames from 'classnames';
 
-import React, { Component, PropTypes } from 'react/addons'
-import classnames from 'classnames'
 
-
-const CSSTransitionGroup = React.addons.CSSTransitionGroup;
 const TAB = 9;
 const SPACEBAR = 32;
 const ALIGNMENTS = ['center', 'right', 'left'];
@@ -14,7 +14,7 @@ class DropdownMenu extends Component {
   constructor(props) {
     super(props);
 
-    this._lastWindowClickEvent = null;
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
   static propTypes = {
@@ -30,6 +30,8 @@ class DropdownMenu extends Component {
     size: PropTypes.oneOf(MENU_SIZES),
     upwards: PropTypes.bool,
     animate: PropTypes.bool,
+    enterTimeout: PropTypes.number,
+    leaveTimeout: PropTypes.number,
   }
 
   static defaultProps = {
@@ -42,10 +44,19 @@ class DropdownMenu extends Component {
     size: null,
     upwards: false,
     animate: true,
+    enterTimeout: 150,
+    leaveTimeout: 150,
   }
 
+  static MENU_SIZES = MENU_SIZES
+  static ALIGNMENTS = ALIGNMENTS
+
   componentDidUpdate(prevProps, prevState) {
-    const menuItems = React.findDOMNode(this.refs.menuItems);
+    if(this.props.isOpen === prevProps.isOpen) {
+      return;
+    }
+
+    const menuItems = ReactDOM.findDOMNode(this).querySelector('.dd-menu > .dd-menu-items');
     if(this.props.isOpen && !prevProps.isOpen) {
       this._lastWindowClickEvent = this.handleClickOutside;
 
@@ -67,6 +78,8 @@ class DropdownMenu extends Component {
     }
   }
 
+  _lastWindowClickEvent = null
+
   close = (e) => {
     const key = e.which || e.keyCode;
     if(key === SPACEBAR) {
@@ -76,7 +89,7 @@ class DropdownMenu extends Component {
   }
   
   handleClickOutside = (e) => {
-    const node = React.findDOMNode(this);
+    const node = ReactDOM.findDOMNode(this);
     let target = e.target;
 
     while(target.parentNode) {
@@ -96,7 +109,7 @@ class DropdownMenu extends Component {
       return;
     }
 
-    const items = React.findDOMNode(this).querySelectorAll('button,a');
+    const items = ReactDOM.findDOMNode(this).querySelectorAll('button,a');
     const id = e.shiftKey ? 1 : items.length - 1;
     
     if(e.target == items[id]) {
@@ -116,7 +129,7 @@ class DropdownMenu extends Component {
       size ? ('dd-menu-' + size) : null
     );
 
-    const { textAlign, upwards, animAlign, animate } = this.props;
+    const { textAlign, upwards, animAlign, animate, enterTimeout, leaveTimeout } = this.props;
 
     const listClassName = 'dd-items-' + (textAlign || align);
     const transitionProps = {
@@ -124,16 +137,19 @@ class DropdownMenu extends Component {
       component: 'div',
       className: classnames('dd-menu-items', { 'dd-items-upwards': upwards }),
       onKeyDown: this.handleKeyDown,
-      ref: 'menuItems',
       transitionEnter: animate,
       transitionLeave: animate,
+      transitionEnterTimeout: enterTimeout,
+      transitionLeaveTimeout: leaveTimeout,
     };
 
     return (
       <div className={menuClassName}>
         {this.props.toggle}
         <CSSTransitionGroup {...transitionProps}>
-          {this.props.isOpen && <ul className={listClassName}>{this.props.children}</ul>}
+          {this.props.isOpen &&
+          <ul key="items" className={listClassName}>{this.props.children}</ul>
+          }
         </CSSTransitionGroup>
       </div>
     );
@@ -147,8 +163,8 @@ class NestedDropdownMenu extends Component {
   constructor(props) {
     super(props);
 
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.state = { isOpen: false };
-    this._closeCallback = null;
   }
 
   static propTypes = {
@@ -158,6 +174,8 @@ class NestedDropdownMenu extends Component {
     direction: PropTypes.oneOf(['left', 'right']),
     upwards: PropTypes.bool,
     delay: PropTypes.number,
+    enterTimeout: PropTypes.number,
+    leaveTimeout: PropTypes.number,
   }
 
   static defaultProps = {
@@ -166,7 +184,11 @@ class NestedDropdownMenu extends Component {
     direction: 'right',
     upwards: false,
     delay: 500,
+    enterTimeout: 150,
+    leaveTimeout: 150,
   }
+
+  _closeCallback = null
 
   open = () => {
     if(this._closeCallback) {
@@ -182,8 +204,12 @@ class NestedDropdownMenu extends Component {
     }.bind(this), this.props.delay);
   }
 
+  componentWillUnmount() {
+    this._closeCallback && clearTimeout(this._closeCallback);
+  }
+
   render() {
-    const { toggle, children, nested, animate, direction, upwards } = this.props;
+    const { toggle, children, nested, animate, direction, upwards, enterTimeout, leaveTimeout } = this.props;
     const { isOpen } = this.state;
 
     const itemProps = {
@@ -200,6 +226,8 @@ class NestedDropdownMenu extends Component {
       transitionEnter: animate,
       transitionLeave: animate,
       transitionName: `grow-from-${prefix}${direction}`,
+      transitionEnterTimeout: enterTimeout,
+      transitionLeaveTimeout: leaveTimeout,
     };
 
     return (

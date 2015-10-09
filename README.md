@@ -1,4 +1,5 @@
 # react-dd-menu
+A React dropdown menu
 
 Live Example: [React Dropdown Menu](http://mlaursen.github.io/react-dd-menu)
 
@@ -32,6 +33,8 @@ $ npm install -S react-dd-menu
 * `className` - any additional css classes to add the the dropdown menu container. (`.dd-menu`)
 * `upwards`   - boolean if the menu should go upwards. Defaults to `false`
 * `animate`   - boolean if the menu should animate on open and close. Defaults to `true`
+* `enterTimeout` - the amount of time in ms to end the CSSTransitionGroup. Defaults to `150`
+* `leaveTimeout` - the amount of time in ms to end the CSSTransitionGroup. Defaults to `150`
 
 ##### NestedDropdownMenu
 
@@ -48,6 +51,8 @@ $ npm install -S react-dd-menu
   * One of `left`, `right`
 * `upwards`   - boolean if the nested menu should render upwards. Defaults to `false`
 * `delay`   - A number in ms to allow the mouse to be off of the dropdown menu to close it. Defaults to `500ms`
+* `enterTimeout` - the amount of time in ms to end the CSSTransitionGroup. Defaults to `150`
+* `leaveTimeout` - the amount of time in ms to end the CSSTransitionGroup. Defaults to `150`
 
 ### Styling
 In the `dist` folder, there is a `react-dd-menu.css` and a `react-dd-menu.min.css` with the default css stylings. If you have SASS, the source is located in `src/scss`.
@@ -178,7 +183,7 @@ class Example extends React.Component {
     let menuOptions = {
       isOpen: this.state.isOpen,
       close: this.close.bind(this),
-      toggle: <button type="button" onClick={this.toggle.bind(this)}Click me!</button>,
+      toggle: <button type="button" onClick={this.toggle.bind(this)}>Click me!</button>,
       align: 'right',
     }
 
@@ -243,3 +248,4 @@ $ gulp clean
 - 1.0.1 - Fixed exports for ES5 :(
 - 1.0.2 - Added delay to nested dropdown menu closing and added github page for examples.
 - 1.0.3 - Fixed problem with multiple menus and added ability to disable animation
+- 1.0.4 - Upgraded to React 0.14.0
