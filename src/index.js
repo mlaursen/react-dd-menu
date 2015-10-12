@@ -59,7 +59,7 @@ class DropdownMenu extends Component {
       menuItems.addEventListener('onkeydown', this.close);
     } else if(!this.props.isOpen && prevProps.isOpen) {
       document.removeEventListener('click', this._lastWindowClickEvent);
-      if (this.props.closeOnInsideClick) {
+      if (prevProps.closeOnInsideClick) {
         menuItems.removeEventListener('click', this.props.close);
       }
       menuItems.removeEventListener('onkeydown', this.close);
