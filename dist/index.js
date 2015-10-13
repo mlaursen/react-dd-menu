@@ -10,25 +10,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _react = require('react');
+var _reactAddons = require('react/addons');
 
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _reactAddonsCssTransitionGroup = require('react-addons-css-transition-group');
-
-var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
-
-var _reactAddonsPureRenderMixin = require('react-addons-pure-render-mixin');
-
-var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
+var _reactAddons2 = _interopRequireDefault(_reactAddons);
 
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
+
+var CSSTransitionGroup = _reactAddons2['default'].addons.CSSTransitionGroup;
+var PureRenderMixin = _reactAddons2['default'].addons.PureRenderMixin;
 
 var TAB = 9;
 var SPACEBAR = 32;
@@ -56,7 +47,7 @@ var DropdownMenu = (function (_Component) {
     };
 
     this.handleClickOutside = function (e) {
-      var node = _reactDom2['default'].findDOMNode(_this);
+      var node = _reactAddons2['default'].findDOMNode(_this);
       var target = e.target;
 
       while (target.parentNode) {
@@ -76,7 +67,7 @@ var DropdownMenu = (function (_Component) {
         return;
       }
 
-      var items = _reactDom2['default'].findDOMNode(_this).querySelectorAll('button,a');
+      var items = _reactAddons2['default'].findDOMNode(_this).querySelectorAll('button,a');
       var id = e.shiftKey ? 1 : items.length - 1;
 
       if (e.target == items[id]) {
@@ -84,7 +75,7 @@ var DropdownMenu = (function (_Component) {
       }
     };
 
-    this.shouldComponentUpdate = _reactAddonsPureRenderMixin2['default'].shouldComponentUpdate.bind(this);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
   _createClass(DropdownMenu, [{
@@ -94,7 +85,7 @@ var DropdownMenu = (function (_Component) {
         return;
       }
 
-      var menuItems = _reactDom2['default'].findDOMNode(this).querySelector('.dd-menu > .dd-menu-items');
+      var menuItems = _reactAddons2['default'].findDOMNode(this).querySelector('.dd-menu > .dd-menu-items');
       if (this.props.isOpen && !prevProps.isOpen) {
         this._lastWindowClickEvent = this.handleClickOutside;
 
@@ -148,14 +139,14 @@ var DropdownMenu = (function (_Component) {
         transitionLeaveTimeout: leaveTimeout
       };
 
-      return _react2['default'].createElement(
+      return _reactAddons2['default'].createElement(
         'div',
         { className: menuClassName },
         this.props.toggle,
-        _react2['default'].createElement(
-          _reactAddonsCssTransitionGroup2['default'],
+        _reactAddons2['default'].createElement(
+          CSSTransitionGroup,
           transitionProps,
-          this.props.isOpen && _react2['default'].createElement(
+          this.props.isOpen && _reactAddons2['default'].createElement(
             'ul',
             { key: 'items', className: listClassName },
             this.props.children
@@ -166,20 +157,20 @@ var DropdownMenu = (function (_Component) {
   }], [{
     key: 'propTypes',
     value: {
-      isOpen: _react.PropTypes.bool.isRequired,
-      close: _react.PropTypes.func.isRequired,
-      toggle: _react.PropTypes.node.isRequired,
-      inverse: _react.PropTypes.bool,
-      align: _react.PropTypes.oneOf(ALIGNMENTS),
-      animAlign: _react.PropTypes.oneOf(ALIGNMENTS),
-      textAlign: _react.PropTypes.oneOf(ALIGNMENTS),
-      menuAlign: _react.PropTypes.oneOf(ALIGNMENTS),
-      className: _react.PropTypes.string,
-      size: _react.PropTypes.oneOf(MENU_SIZES),
-      upwards: _react.PropTypes.bool,
-      animate: _react.PropTypes.bool,
-      enterTimeout: _react.PropTypes.number,
-      leaveTimeout: _react.PropTypes.number
+      isOpen: _reactAddons.PropTypes.bool.isRequired,
+      close: _reactAddons.PropTypes.func.isRequired,
+      toggle: _reactAddons.PropTypes.node.isRequired,
+      inverse: _reactAddons.PropTypes.bool,
+      align: _reactAddons.PropTypes.oneOf(ALIGNMENTS),
+      animAlign: _reactAddons.PropTypes.oneOf(ALIGNMENTS),
+      textAlign: _reactAddons.PropTypes.oneOf(ALIGNMENTS),
+      menuAlign: _reactAddons.PropTypes.oneOf(ALIGNMENTS),
+      className: _reactAddons.PropTypes.string,
+      size: _reactAddons.PropTypes.oneOf(MENU_SIZES),
+      upwards: _reactAddons.PropTypes.bool,
+      animate: _reactAddons.PropTypes.bool,
+      enterTimeout: _reactAddons.PropTypes.number,
+      leaveTimeout: _reactAddons.PropTypes.number
     },
     enumerable: true
   }, {
@@ -209,7 +200,7 @@ var DropdownMenu = (function (_Component) {
   }]);
 
   return DropdownMenu;
-})(_react.Component);
+})(_reactAddons.Component);
 
 module.exports = DropdownMenu;
 
@@ -239,7 +230,7 @@ var NestedDropdownMenu = (function (_Component2) {
       }).bind(_this2), _this2.props.delay);
     };
 
-    this.shouldComponentUpdate = _reactAddonsPureRenderMixin2['default'].shouldComponentUpdate.bind(this);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.state = { isOpen: false };
   }
 
@@ -280,14 +271,14 @@ var NestedDropdownMenu = (function (_Component2) {
         transitionLeaveTimeout: leaveTimeout
       };
 
-      return _react2['default'].createElement(
+      return _reactAddons2['default'].createElement(
         'li',
         itemProps,
         toggle,
-        _react2['default'].createElement(
-          _reactAddonsCssTransitionGroup2['default'],
+        _reactAddons2['default'].createElement(
+          CSSTransitionGroup,
           transitionProps,
-          isOpen ? _react2['default'].createElement(
+          isOpen ? _reactAddons2['default'].createElement(
             'ul',
             { key: 'items' },
             children
@@ -298,14 +289,14 @@ var NestedDropdownMenu = (function (_Component2) {
   }], [{
     key: 'propTypes',
     value: {
-      toggle: _react.PropTypes.node.isRequired,
-      nested: _react.PropTypes.oneOf(['inherit', 'reverse', 'left', 'right']),
-      animate: _react.PropTypes.bool,
-      direction: _react.PropTypes.oneOf(['left', 'right']),
-      upwards: _react.PropTypes.bool,
-      delay: _react.PropTypes.number,
-      enterTimeout: _react.PropTypes.number,
-      leaveTimeout: _react.PropTypes.number
+      toggle: _reactAddons.PropTypes.node.isRequired,
+      nested: _reactAddons.PropTypes.oneOf(['inherit', 'reverse', 'left', 'right']),
+      animate: _reactAddons.PropTypes.bool,
+      direction: _reactAddons.PropTypes.oneOf(['left', 'right']),
+      upwards: _reactAddons.PropTypes.bool,
+      delay: _reactAddons.PropTypes.number,
+      enterTimeout: _reactAddons.PropTypes.number,
+      leaveTimeout: _reactAddons.PropTypes.number
     },
     enumerable: true
   }, {
@@ -323,6 +314,6 @@ var NestedDropdownMenu = (function (_Component2) {
   }]);
 
   return NestedDropdownMenu;
-})(_react.Component);
+})(_reactAddons.Component);
 
 module.exports.NestedDropdownMenu = NestedDropdownMenu;

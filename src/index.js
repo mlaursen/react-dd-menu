@@ -1,9 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-import CSSTransitionGroup from 'react-addons-css-transition-group';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import React, { Component, PropTypes } from 'react/addons';
 import classnames from 'classnames';
 
+const CSSTransitionGroup = React.addons.CSSTransitionGroup;
+const PureRenderMixin    = React.addons.PureRenderMixin;
 
 const TAB = 9;
 const SPACEBAR = 32;
@@ -56,7 +55,7 @@ class DropdownMenu extends Component {
       return;
     }
 
-    const menuItems = ReactDOM.findDOMNode(this).querySelector('.dd-menu > .dd-menu-items');
+    const menuItems = React.findDOMNode(this).querySelector('.dd-menu > .dd-menu-items');
     if(this.props.isOpen && !prevProps.isOpen) {
       this._lastWindowClickEvent = this.handleClickOutside;
 
@@ -89,7 +88,7 @@ class DropdownMenu extends Component {
   }
   
   handleClickOutside = (e) => {
-    const node = ReactDOM.findDOMNode(this);
+    const node = React.findDOMNode(this);
     let target = e.target;
 
     while(target.parentNode) {
@@ -109,7 +108,7 @@ class DropdownMenu extends Component {
       return;
     }
 
-    const items = ReactDOM.findDOMNode(this).querySelectorAll('button,a');
+    const items = React.findDOMNode(this).querySelectorAll('button,a');
     const id = e.shiftKey ? 1 : items.length - 1;
     
     if(e.target == items[id]) {
