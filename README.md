@@ -3,6 +3,8 @@ A React dropdown menu
 
 Live Example: [React Dropdown Menu](http://mlaursen.github.io/react-dd-menu)
 
+> React 0.13.x will be supported on verions **1.x.x-r13**
+
 ### Installation
 
 ```bash
