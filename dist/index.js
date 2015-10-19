@@ -47,20 +47,22 @@ var DropdownMenu = (function (_Component) {
     };
 
     this.handleClickOutside = function (e) {
-      if (_this.props.closeOnOutsideClick) {
-        var node = _reactAddons2['default'].findDOMNode(_this);
-        var target = e.target;
+      if (!_this.props.closeOnOutsideClick) {
+        return;
+      }
 
-        while (target.parentNode) {
-          if (target === node) {
-            return;
-          }
+      var node = _reactAddons2['default'].findDOMNode(_this);
+      var target = e.target;
 
-          target = target.parentNode;
+      while (target.parentNode) {
+        if (target === node) {
+          return;
         }
 
-        _this.props.close(e);
+        target = target.parentNode;
       }
+
+      _this.props.close(e);
     };
 
     this.handleKeyDown = function (e) {
@@ -139,9 +141,7 @@ var DropdownMenu = (function (_Component) {
         className: (0, _classnames2['default'])('dd-menu-items', { 'dd-items-upwards': upwards }),
         onKeyDown: this.handleKeyDown,
         transitionEnter: animate,
-        transitionLeave: animate,
-        transitionEnterTimeout: enterTimeout,
-        transitionLeaveTimeout: leaveTimeout
+        transitionLeave: animate
       };
 
       return _reactAddons2['default'].createElement(
