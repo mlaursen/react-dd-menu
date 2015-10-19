@@ -91,20 +91,22 @@ class DropdownMenu extends Component {
   }
   
   handleClickOutside = (e) => {
-    if (this.props.closeOnOutsideClick) {
-      const node = React.findDOMNode(this);
-      let target = e.target;
-  
-      while(target.parentNode) {
-        if(target === node) {
-          return;
-        }
-  
-        target = target.parentNode;
-      }
-      
-      this.props.close(e);
+    if(!this.props.closeOnOutsideClick) {
+      return;
     }
+
+    const node = React.findDOMNode(this);
+    let target = e.target;
+
+    while(target.parentNode) {
+      if(target === node) {
+        return;
+      }
+
+      target = target.parentNode;
+    }
+    
+    this.props.close(e);
   }
 
   handleKeyDown = (e) => {
@@ -142,9 +144,7 @@ class DropdownMenu extends Component {
       className: classnames('dd-menu-items', { 'dd-items-upwards': upwards }),
       onKeyDown: this.handleKeyDown,
       transitionEnter: animate,
-      transitionLeave: animate,
-      transitionEnterTimeout: enterTimeout,
-      transitionLeaveTimeout: leaveTimeout,
+      transitionLeave: animate
     };
 
     return (
