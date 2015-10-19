@@ -47,18 +47,20 @@ var DropdownMenu = (function (_Component) {
     };
 
     this.handleClickOutside = function (e) {
-      var node = _reactAddons2['default'].findDOMNode(_this);
-      var target = e.target;
+      if (_this.props.closeOnOutsideClick) {
+        var node = _reactAddons2['default'].findDOMNode(_this);
+        var target = e.target;
 
-      while (target.parentNode) {
-        if (target === node) {
-          return;
+        while (target.parentNode) {
+          if (target === node) {
+            return;
+          }
+
+          target = target.parentNode;
         }
 
-        target = target.parentNode;
+        _this.props.close(e);
       }
-
-      _this.props.close(e);
     };
 
     this.handleKeyDown = function (e) {
@@ -88,13 +90,16 @@ var DropdownMenu = (function (_Component) {
       var menuItems = _reactAddons2['default'].findDOMNode(this).querySelector('.dd-menu > .dd-menu-items');
       if (this.props.isOpen && !prevProps.isOpen) {
         this._lastWindowClickEvent = this.handleClickOutside;
-
         document.addEventListener('click', this._lastWindowClickEvent);
-        menuItems.addEventListener('click', this.props.close);
+        if (this.props.closeOnInsideClick) {
+          menuItems.addEventListener('click', this.props.close);
+        }
         menuItems.addEventListener('onkeydown', this.close);
       } else if (!this.props.isOpen && prevProps.isOpen) {
         document.removeEventListener('click', this._lastWindowClickEvent);
-        menuItems.removeEventListener('click', this.props.close);
+        if (prevProps.closeOnInsideClick) {
+          menuItems.removeEventListener('click', this.props.close);
+        }
         menuItems.removeEventListener('onkeydown', this.close);
 
         this._lastWindowClickEvent = null;
@@ -169,8 +174,8 @@ var DropdownMenu = (function (_Component) {
       size: _reactAddons.PropTypes.oneOf(MENU_SIZES),
       upwards: _reactAddons.PropTypes.bool,
       animate: _reactAddons.PropTypes.bool,
-      enterTimeout: _reactAddons.PropTypes.number,
-      leaveTimeout: _reactAddons.PropTypes.number
+      closeOnInsideClick: _reactAddons.PropTypes.bool,
+      closeOnOutsideClick: _reactAddons.PropTypes.bool
     },
     enumerable: true
   }, {
@@ -185,8 +190,8 @@ var DropdownMenu = (function (_Component) {
       size: null,
       upwards: false,
       animate: true,
-      enterTimeout: 150,
-      leaveTimeout: 150
+      closeOnInsideClick: true,
+      closeOnOutsideClick: true
     },
     enumerable: true
   }, {
