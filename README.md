@@ -3,7 +3,7 @@ A React dropdown menu
 
 Live Example: [React Dropdown Menu](http://mlaursen.github.io/react-dd-menu)
 
-> React 0.13.x will be supported on verions **1.x.x-r13**
+> React 0.13.x is supported on versions **1.x.x-r13**
 
 ### Installation
 
@@ -37,6 +37,8 @@ $ npm install -S react-dd-menu
 * `animate`   - boolean if the menu should animate on open and close. Defaults to `true`
 * `enterTimeout` - the amount of time in ms to end the CSSTransitionGroup. Defaults to `150`
 * `leaveTimeout` - the amount of time in ms to end the CSSTransitionGroup. Defaults to `150`
+* `closeOnInsideClick`  - a boolean if the menu should close when you click inside the menu. Defaults to `true`
+* `closeOnOutsideClick` - a boolean if the menu should close when you click elsewhere on the page. Defaults to `true`
 
 ##### NestedDropdownMenu
 

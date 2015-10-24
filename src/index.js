@@ -15,6 +15,7 @@ class DropdownMenu extends Component {
     super(props);
 
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    this._lastWindowClickEvent = null
   }
 
   static propTypes = {
@@ -32,6 +33,8 @@ class DropdownMenu extends Component {
     animate: PropTypes.bool,
     enterTimeout: PropTypes.number,
     leaveTimeout: PropTypes.number,
+    closeOnInsideClick: PropTypes.bool,
+    closeOnOutsideClick: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -46,6 +49,8 @@ class DropdownMenu extends Component {
     animate: true,
     enterTimeout: 150,
     leaveTimeout: 150,
+    closeOnInsideClick: true,
+    closeOnOutsideClick: true,
   }
 
   static MENU_SIZES = MENU_SIZES
@@ -59,13 +64,16 @@ class DropdownMenu extends Component {
     const menuItems = ReactDOM.findDOMNode(this).querySelector('.dd-menu > .dd-menu-items');
     if(this.props.isOpen && !prevProps.isOpen) {
       this._lastWindowClickEvent = this.handleClickOutside;
-
       document.addEventListener('click', this._lastWindowClickEvent);
-      menuItems.addEventListener('click', this.props.close);
+      if(this.props.closeOnInsideClick) {
+        menuItems.addEventListener('click', this.props.close);
+      }
       menuItems.addEventListener('onkeydown', this.close);
     } else if(!this.props.isOpen && prevProps.isOpen) {
       document.removeEventListener('click', this._lastWindowClickEvent);
-      menuItems.removeEventListener('click', this.props.close);
+      if(prevProps.closeOnInsideClick) {
+        menuItems.removeEventListener('click', this.props.close);
+      }
       menuItems.removeEventListener('onkeydown', this.close);
 
       this._lastWindowClickEvent = null;
@@ -78,8 +86,6 @@ class DropdownMenu extends Component {
     }
   }
 
-  _lastWindowClickEvent = null
-
   close = (e) => {
     const key = e.which || e.keyCode;
     if(key === SPACEBAR) {
@@ -87,8 +93,12 @@ class DropdownMenu extends Component {
       e.preventDefault();
     }
   }
-  
+
   handleClickOutside = (e) => {
+    if(!this.props.closeOnOutsideClick) {
+      return;
+    }
+
     const node = ReactDOM.findDOMNode(this);
     let target = e.target;
 
@@ -111,8 +121,8 @@ class DropdownMenu extends Component {
 
     const items = ReactDOM.findDOMNode(this).querySelectorAll('button,a');
     const id = e.shiftKey ? 1 : items.length - 1;
-    
-    if(e.target == items[id]) {
+
+    if(e.target === items[id]) {
       this.props.close(e);
     }
   }
@@ -201,7 +211,7 @@ class NestedDropdownMenu extends Component {
   close = () => {
     this._closeCallback = setTimeout(_ => {
       this.setState({ isOpen: false });
-    }.bind(this), this.props.delay);
+    }, this.props.delay);
   }
 
   componentWillUnmount() {
