@@ -29,8 +29,8 @@ class DropdownMenu extends Component {
     size: PropTypes.oneOf(MENU_SIZES),
     upwards: PropTypes.bool,
     animate: PropTypes.bool,
-    enterTimeout: PropTypes.number,
-    leaveTimeout: PropTypes.number,
+    closeOnInsideClick: PropTypes.bool,
+    closeOnOutsideClick: PropTypes.bool
   }
 
   static defaultProps = {
@@ -43,8 +43,8 @@ class DropdownMenu extends Component {
     size: null,
     upwards: false,
     animate: true,
-    enterTimeout: 150,
-    leaveTimeout: 150,
+    closeOnInsideClick: true,
+    closeOnOutsideClick: true
   }
 
   static MENU_SIZES = MENU_SIZES
@@ -58,13 +58,16 @@ class DropdownMenu extends Component {
     const menuItems = React.findDOMNode(this).querySelector('.dd-menu > .dd-menu-items');
     if(this.props.isOpen && !prevProps.isOpen) {
       this._lastWindowClickEvent = this.handleClickOutside;
-
       document.addEventListener('click', this._lastWindowClickEvent);
-      menuItems.addEventListener('click', this.props.close);
+      if (this.props.closeOnInsideClick) {
+        menuItems.addEventListener('click', this.props.close);
+      }
       menuItems.addEventListener('onkeydown', this.close);
     } else if(!this.props.isOpen && prevProps.isOpen) {
       document.removeEventListener('click', this._lastWindowClickEvent);
-      menuItems.removeEventListener('click', this.props.close);
+      if (prevProps.closeOnInsideClick) {
+        menuItems.removeEventListener('click', this.props.close);
+      }
       menuItems.removeEventListener('onkeydown', this.close);
 
       this._lastWindowClickEvent = null;
@@ -88,6 +91,10 @@ class DropdownMenu extends Component {
   }
   
   handleClickOutside = (e) => {
+    if(!this.props.closeOnOutsideClick) {
+      return;
+    }
+
     const node = React.findDOMNode(this);
     let target = e.target;
 
@@ -98,7 +105,7 @@ class DropdownMenu extends Component {
 
       target = target.parentNode;
     }
-
+    
     this.props.close(e);
   }
 
@@ -137,9 +144,7 @@ class DropdownMenu extends Component {
       className: classnames('dd-menu-items', { 'dd-items-upwards': upwards }),
       onKeyDown: this.handleKeyDown,
       transitionEnter: animate,
-      transitionLeave: animate,
-      transitionEnterTimeout: enterTimeout,
-      transitionLeaveTimeout: leaveTimeout,
+      transitionLeave: animate
     };
 
     return (
