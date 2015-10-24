@@ -45,8 +45,6 @@ var DropdownMenu = (function (_Component) {
 
     _get(Object.getPrototypeOf(DropdownMenu.prototype), 'constructor', this).call(this, props);
 
-    this._lastWindowClickEvent = null;
-
     this.close = function (e) {
       var key = e.which || e.keyCode;
       if (key === SPACEBAR) {
@@ -56,6 +54,10 @@ var DropdownMenu = (function (_Component) {
     };
 
     this.handleClickOutside = function (e) {
+      if (!_this.props.closeOnOutsideClick) {
+        return;
+      }
+
       var node = _reactDom2['default'].findDOMNode(_this);
       var target = e.target;
 
@@ -79,12 +81,13 @@ var DropdownMenu = (function (_Component) {
       var items = _reactDom2['default'].findDOMNode(_this).querySelectorAll('button,a');
       var id = e.shiftKey ? 1 : items.length - 1;
 
-      if (e.target == items[id]) {
+      if (e.target === items[id]) {
         _this.props.close(e);
       }
     };
 
     this.shouldComponentUpdate = _reactAddonsPureRenderMixin2['default'].shouldComponentUpdate.bind(this);
+    this._lastWindowClickEvent = null;
   }
 
   _createClass(DropdownMenu, [{
@@ -97,13 +100,16 @@ var DropdownMenu = (function (_Component) {
       var menuItems = _reactDom2['default'].findDOMNode(this).querySelector('.dd-menu > .dd-menu-items');
       if (this.props.isOpen && !prevProps.isOpen) {
         this._lastWindowClickEvent = this.handleClickOutside;
-
         document.addEventListener('click', this._lastWindowClickEvent);
-        menuItems.addEventListener('click', this.props.close);
+        if (this.props.closeOnInsideClick) {
+          menuItems.addEventListener('click', this.props.close);
+        }
         menuItems.addEventListener('onkeydown', this.close);
       } else if (!this.props.isOpen && prevProps.isOpen) {
         document.removeEventListener('click', this._lastWindowClickEvent);
-        menuItems.removeEventListener('click', this.props.close);
+        if (prevProps.closeOnInsideClick) {
+          menuItems.removeEventListener('click', this.props.close);
+        }
         menuItems.removeEventListener('onkeydown', this.close);
 
         this._lastWindowClickEvent = null;
@@ -179,7 +185,9 @@ var DropdownMenu = (function (_Component) {
       upwards: _react.PropTypes.bool,
       animate: _react.PropTypes.bool,
       enterTimeout: _react.PropTypes.number,
-      leaveTimeout: _react.PropTypes.number
+      leaveTimeout: _react.PropTypes.number,
+      closeOnInsideClick: _react.PropTypes.bool,
+      closeOnOutsideClick: _react.PropTypes.bool
     },
     enumerable: true
   }, {
@@ -195,7 +203,9 @@ var DropdownMenu = (function (_Component) {
       upwards: false,
       animate: true,
       enterTimeout: 150,
-      leaveTimeout: 150
+      leaveTimeout: 150,
+      closeOnInsideClick: true,
+      closeOnOutsideClick: true
     },
     enumerable: true
   }, {
@@ -234,9 +244,9 @@ var NestedDropdownMenu = (function (_Component2) {
     };
 
     this.close = function () {
-      _this2._closeCallback = setTimeout((function (_) {
+      _this2._closeCallback = setTimeout(function (_) {
         _this2.setState({ isOpen: false });
-      }).bind(_this2), _this2.props.delay);
+      }, _this2.props.delay);
     };
 
     this.shouldComponentUpdate = _reactAddonsPureRenderMixin2['default'].shouldComponentUpdate.bind(this);
