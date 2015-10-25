@@ -80,38 +80,39 @@ var DropdownMenu = (function (_Component) {
     };
 
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    this.lastWindowClickEvent = null;
   }
 
   _createClass(DropdownMenu, [{
     key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps, prevState) {
+    value: function componentDidUpdate(prevProps) {
       if (this.props.isOpen === prevProps.isOpen) {
         return;
       }
 
       var menuItems = _reactAddons2['default'].findDOMNode(this).querySelector('.dd-menu > .dd-menu-items');
       if (this.props.isOpen && !prevProps.isOpen) {
-        this._lastWindowClickEvent = this.handleClickOutside;
-        document.addEventListener('click', this._lastWindowClickEvent);
+        this.lastWindowClickEvent = this.handleClickOutside;
+        document.addEventListener('click', this.lastWindowClickEvent);
         if (this.props.closeOnInsideClick) {
           menuItems.addEventListener('click', this.props.close);
         }
         menuItems.addEventListener('onkeydown', this.close);
       } else if (!this.props.isOpen && prevProps.isOpen) {
-        document.removeEventListener('click', this._lastWindowClickEvent);
+        document.removeEventListener('click', this.lastWindowClickEvent);
         if (prevProps.closeOnInsideClick) {
           menuItems.removeEventListener('click', this.props.close);
         }
         menuItems.removeEventListener('onkeydown', this.close);
 
-        this._lastWindowClickEvent = null;
+        this.lastWindowClickEvent = null;
       }
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      if (this._lastWindowClickEvent) {
-        document.removeEventListener('click', this._lastWindowClickEvent);
+      if (this.lastWindowClickEvent) {
+        document.removeEventListener('click', this.lastWindowClickEvent);
       }
     }
   }, {
@@ -165,6 +166,7 @@ var DropdownMenu = (function (_Component) {
       isOpen: _reactAddons.PropTypes.bool.isRequired,
       close: _reactAddons.PropTypes.func.isRequired,
       toggle: _reactAddons.PropTypes.node.isRequired,
+      children: _reactAddons.PropTypes.node,
       inverse: _reactAddons.PropTypes.bool,
       align: _reactAddons.PropTypes.oneOf(ALIGNMENTS),
       animAlign: _reactAddons.PropTypes.oneOf(ALIGNMENTS),
@@ -207,7 +209,7 @@ var DropdownMenu = (function (_Component) {
   return DropdownMenu;
 })(_reactAddons.Component);
 
-module.exports = DropdownMenu;
+module.exports = DropdownMenu; // eslint-disable-line no-undef
 
 var NestedDropdownMenu = (function (_Component2) {
   _inherits(NestedDropdownMenu, _Component2);
@@ -219,30 +221,45 @@ var NestedDropdownMenu = (function (_Component2) {
 
     _get(Object.getPrototypeOf(NestedDropdownMenu.prototype), 'constructor', this).call(this, props);
 
-    this._closeCallback = null;
-
-    this.open = function () {
-      if (_this2._closeCallback) {
-        clearTimeout(_this2._closeCallback);
-        _this2._closeCallback = null;
-      }
-      _this2.setState({ isOpen: true });
+    this.handleToggleComponentClick = function (e) {
+      e.stopPropagation();
+      _this2.setState({ isClickOpen: !_this2.state.isClickOpen });
     };
 
-    this.close = function () {
-      _this2._closeCallback = setTimeout((function (_) {
-        _this2.setState({ isOpen: false });
+    this.handleMouseOver = function () {
+      if (_this2.closeCallback) {
+        clearTimeout(_this2.closeCallback);
+        _this2.closeCallback = null;
+      }
+      _this2.setState({ isHoverOpen: true });
+    };
+
+    this.handleMouseLeave = function () {
+      _this2.closeCallback = setTimeout((function () {
+        _this2.setState({ isHoverOpen: false });
       }).bind(_this2), _this2.props.delay);
     };
 
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-    this.state = { isOpen: false };
+    this.toggleComponent = null;
+    this.closeCallback = null;
+    this.state = {
+      isHoverOpen: false,
+      isClickOpen: false
+    };
   }
 
   _createClass(NestedDropdownMenu, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.toggleComponent = ReactDOM.findDOMNode(this).querySelector('*');
+      this.toggleComponent.addEventListener('click', this.handleToggleComponentClick);
+    }
+  }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      this._closeCallback && clearTimeout(this._closeCallback);
+      this.closeCallback && clearTimeout(this.closeCallback);
+      this.toggleComponent.removeEventListener('click', this.handleToggleComponentClick);
     }
   }, {
     key: 'render',
@@ -256,15 +273,16 @@ var NestedDropdownMenu = (function (_Component2) {
       var upwards = _props3.upwards;
       var enterTimeout = _props3.enterTimeout;
       var leaveTimeout = _props3.leaveTimeout;
-      var isOpen = this.state.isOpen;
+
+      var isOpen = this.state.isHoverOpen || this.state.isClickOpen;
 
       var itemProps = {
-        className: (0, _classnames2['default'])('nested-dd-menu', 'nested-' + nested),
-        onMouseOver: this.open,
-        onMouseLeave: this.close,
-        onFocus: this.open,
-        onBlur: this.close
+        className: (0, _classnames2['default'])('nested-dd-menu', 'nested-' + nested)
       };
+      if (this.props.openOnMouseover) {
+        itemProps.onMouseOver = this.handleMouseOver;
+        itemProps.onMouseLeave = this.handleMouseLeave;
+      }
 
       var prefix = upwards ? 'up-' : '';
       var transitionProps = {
@@ -295,13 +313,15 @@ var NestedDropdownMenu = (function (_Component2) {
     key: 'propTypes',
     value: {
       toggle: _reactAddons.PropTypes.node.isRequired,
+      children: _reactAddons.PropTypes.node,
       nested: _reactAddons.PropTypes.oneOf(['inherit', 'reverse', 'left', 'right']),
       animate: _reactAddons.PropTypes.bool,
       direction: _reactAddons.PropTypes.oneOf(['left', 'right']),
       upwards: _reactAddons.PropTypes.bool,
       delay: _reactAddons.PropTypes.number,
       enterTimeout: _reactAddons.PropTypes.number,
-      leaveTimeout: _reactAddons.PropTypes.number
+      leaveTimeout: _reactAddons.PropTypes.number,
+      openOnMouseover: _reactAddons.PropTypes.bool
     },
     enumerable: true
   }, {
@@ -313,7 +333,8 @@ var NestedDropdownMenu = (function (_Component2) {
       upwards: false,
       delay: 500,
       enterTimeout: 150,
-      leaveTimeout: 150
+      leaveTimeout: 150,
+      openOnMouseover: true
     },
     enumerable: true
   }]);
@@ -321,4 +342,4 @@ var NestedDropdownMenu = (function (_Component2) {
   return NestedDropdownMenu;
 })(_reactAddons.Component);
 
-module.exports.NestedDropdownMenu = NestedDropdownMenu;
+module.exports.NestedDropdownMenu = NestedDropdownMenu; // eslint-disable-line no-undef
