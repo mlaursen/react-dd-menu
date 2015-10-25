@@ -1,6 +1,6 @@
 {
   "name": "react-dd-menu",
-  "version": "1.0.4-r13",
+  "version": "1.0.5-r13",
   "description": "A react dropdown menu.",
   "main": "dist/index.js",
   "scripts": {
