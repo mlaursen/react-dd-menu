@@ -68,6 +68,8 @@ $ npm install -S react-dd-menu
 * `className` - any additional css classes to add the the dropdown menu container. (`.dd-menu`)
 * `upwards`   - boolean if the menu should go upwards. Defaults to `false`
 * `animate`   - boolean if the menu should animate on open and close. Defaults to `true`
+* `enterTimeout` - the amount of time in ms to end the CSSTransitionGroup. Defaults to `150`
+* `leaveTimeout` - the amount of time in ms to end the CSSTransitionGroup. Defaults to `150`
 * `closeOnInsideClick`  - a boolean if the menu should close when you click inside the menu. Defaults to `true`
 * `closeOnOutsideClick` - a boolean if the menu should close when you click elsewhere on the page. Defaults to `true`
 
@@ -130,25 +132,23 @@ The separator can be any element with a classname of `.separator` or any element
 
 ### Usage
 
-```javascript
-'use strict';
-
-import React from 'react'
-import DropdownMenu from 'react-dd-menu'
+```js
+import React from 'react';
+import DropdownMenu from 'react-dd-menu';
 
 class Example extends React.Component {
   constructor() {
     this.state = {
       isMenuOpen: false
-    }
+    };
   }
 
   toggle() {
-    this.setState({ isMenuOpen: !this.state.isMenuOpen })
+    this.setState({ isMenuOpen: !this.state.isMenuOpen });
   }
 
   close() {
-    this.setState({ isMenuOpen: false })
+    this.setState({ isMenuOpen: false });
   }
 
   click() {
@@ -174,7 +174,7 @@ class Example extends React.Component {
 
 or..
 
-```javascript
+```js
 var React = require('react');
 var DropdownMenu = require('react-dd-menu');
 
@@ -213,25 +213,25 @@ var Example = React.createClass({
 ```
 
 #### Nested Menu Example
-```javascript
+```js
 'use strict';
 
-import React from 'react'
-import DropdownMenu, { NestedDropdownMenu } from 'react-dd-menu'
+import React from 'react';
+import DropdownMenu, { NestedDropdownMenu } from 'react-dd-menu';
 
 class Example extends React.Component {
   constructor() {
     this.state = {
       isMenuOpen: false
-    }
+    };
   }
 
   toggle() {
-    this.setState({ isMenuOpen: !this.state.isMenuOpen })
+    this.setState({ isMenuOpen: !this.state.isMenuOpen });
   }
 
   close() {
-    this.setState({ isMenuOpen: false })
+    this.setState({ isMenuOpen: false });
   }
 
   click() {
@@ -239,17 +239,18 @@ class Example extends React.Component {
   }
 
   render() {
-    let menuOptions = {
+    const menuOptions = {
       isOpen: this.state.isOpen,
       close: this.close.bind(this),
       toggle: <button type="button" onClick={this.toggle.bind(this)}>Click me!</button>,
       align: 'right',
-    }
+    };
 
-    let nestedProps = {
+    const nestedProps = {
       toggle: <a href="#">Hover me for Nested Menu!</a>,
       animate: true,
-    }
+    };
+
     return (
       <DropdownMenu {...menuOptions}>
         <li><a href="#">Example 1</a></li>
@@ -276,7 +277,7 @@ $ ./bin/build
 ```
 
 
-### Modifying
+## Contributors
 If you are modifying the dropdown menu, the builds are based on gulp. To start the example app and watch any changes to js files, run
 
 ```bash
@@ -297,6 +298,11 @@ To clean the dist and examples folders run
 $ gulp clean
 ```
 
+### Pull Requests
+Please have pull requests with a target branch of develop (if React-0.14.x) and develop-react-13 (if React < 0.14.x).
+
+I will do the merge to master when a release has been done. Thanks! :)
+
 ### Versions
 
 - 0.0.2 - Fixed removing the click event listener
@@ -308,3 +314,4 @@ $ gulp clean
 - 1.0.2 - Added delay to nested dropdown menu closing and added github page for examples.
 - 1.0.3 - Fixed problem with multiple menus and added ability to disable animation
 - 1.0.4 - Upgraded to React 0.14.0
+- 1.0.5 - Added ability to disable onClickInside and onClickOutside close of the menus. Added Touch/click support for nested menus.
