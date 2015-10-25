@@ -16,15 +16,15 @@ export default [
     align: 'right',
     text: 'Inverse With Align Right Multi-Nested Menus',
     additionalItems: (
-      <NestedDropdownMenu toggle={<a href="#"><span className="fa fa-chevron-left" />Multi-level Menu</a>}>
+      <NestedDropdownMenu toggle={<button type="button"><span className="fa fa-chevron-left" />Multi-level Menu</button>}>
         <li><a href="#">Wee wooo</a></li>
         <li><a href="#">Wee wooo</a></li>
         <li role="separator" className="separator" />
-        <NestedDropdownMenu toggle={<a href="#"><span className="fa fa-chevron-left" />Multi-level Menu</a>}>
+        <NestedDropdownMenu nested="right" align="left" toggle={<button type="button">Multi-level Menu<span className="fa fa-chevron-right" /></button>}>
           <li><a href="#">Wee wooo 1</a></li>
           <li><a href="#">Wee wooo 2</a></li>
           <li><a href="#">Wee wooo 3</a></li>
-          <NestedDropdownMenu toggle={<a href="#"><span className="fa fa-chevron-left" />Multi-level Menu</a>}>
+          <NestedDropdownMenu toggle={<button type="button"><span className="fa fa-chevron-left" />Multi-level Menu</button>}>
             <li><a href="#">I Think You Got It</a></li>
           </NestedDropdownMenu>
         </NestedDropdownMenu>
@@ -36,15 +36,15 @@ export default [
     align: 'right',
     text: 'Inverse With Align Right Animated Multi-Nested Menus',
     additionalItems: (
-      <NestedDropdownMenu animate={true} toggle={<a href="#"><span className="fa fa-chevron-left" />Multi-level Menu</a>}>
+      <NestedDropdownMenu animate={true} toggle={<button type="button"><span className="fa fa-chevron-left" />Multi-level Menu</button>}>
         <li><a href="#">Wee wooo</a></li>
         <li><a href="#">Wee wooo</a></li>
         <li role="separator" className="separator" />
-        <NestedDropdownMenu animate={true} toggle={<a href="#"><span className="fa fa-chevron-left" />Multi-level Menu</a>}>
+        <NestedDropdownMenu animate={true} toggle={<button type="button"><span className="fa fa-chevron-left" />Multi-level Menu</button>}>
           <li><a href="#">Wee wooo 1</a></li>
           <li><a href="#">Wee wooo 2</a></li>
           <li><a href="#">Wee wooo 3</a></li>
-          <NestedDropdownMenu animate={true} toggle={<a href="#"><span className="fa fa-chevron-left" />Multi-level Menu</a>}>
+          <NestedDropdownMenu animate={true} toggle={<button type="button"><span className="fa fa-chevron-left" />Multi-level Menu</button>}>
             <li><a href="#">I Think You Got It</a></li>
           </NestedDropdownMenu>
         </NestedDropdownMenu>

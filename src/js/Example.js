@@ -70,11 +70,11 @@ class Menu extends Component {
 
       const icon = <span className={`fa fa-chevron-${nested}`} />
       toggle = (
-        <a href="#">
+        <button type="button">
           {nested === 'left' && icon}
           Hover for Nested menu
           {nested === 'right' && icon}
-        </a>
+        </button>
       );
     }
     return (

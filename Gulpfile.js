@@ -2,7 +2,7 @@ var gulp = require('gulp'),
     browserify = require('browserify'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
-    sass = require('gulp-ruby-sass'),
+    sass = require('gulp-sass'),
     autoprefixer = require('autoprefixer-core'),
     postcss = require('gulp-postcss'),
     rename = require('gulp-rename'),
@@ -27,12 +27,12 @@ const MAIN = IS_EXAMPLES ? 'js/main.js' : 'index.js'
 const LIBS = IS_EXAMPLES ? 'js/libs.js' : 'libs.js'
 
 const PROD_CONFIG = {
-  sass: { style: 'compressed' },
+  sass: { outputStyle: 'compressed' },
   browserify: {}
 };
 
 const DEV_CONFIG = {
-  sass: { style: 'expanded', sourcemap: true },
+  sass: { outputStyle: 'expanded', sourceMap: true },
   browserify: { debug: true },
 };
 
@@ -57,7 +57,8 @@ gulp.task('clean', function() {
 
   /* Compile the scss files, copy to dist folder, and if not production, auto inject css instead of reload */
 gulp.task('styles', function() {
-  return sass(SRC + SCSS, CONFIG.sass)
+  gulp.src(SRC + SCSS+'/*.scss')
+    .pipe(sass(CONFIG.sass))
     .pipe(postcss([
       autoprefixer({
         browsers: ['last 2 version']

@@ -1,6 +1,6 @@
 {
   "name": "react-dd-menu",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "A react dropdown menu.",
   "main": "dist/index.js",
   "scripts": {
@@ -44,9 +44,13 @@
     "gulp-postcss": "^5.1.10",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
-    "gulp-ruby-sass": "^1.1.0",
+    "gulp-sass": "^2.0.4",
     "gulp-uglify": "^1.2.0",
     "postcss": "^4.1.16",
+    "react": "^0.14.0",
+    "react-addons-css-transition-group": "^0.14.0",
+    "react-addons-pure-render-mixin": "^0.14.0",
+    "react-dom": "^0.14.0",
     "uglify": "^0.1.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
