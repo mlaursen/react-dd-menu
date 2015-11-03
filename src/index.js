@@ -7,7 +7,7 @@ import classnames from 'classnames';
 
 const TAB = 9;
 const SPACEBAR = 32;
-const ALIGNMENTS = ['center', 'right', 'left'];
+const ALIGNMENTS = ['center', 'right', 'left', 'top'];
 const MENU_SIZES = ['sm', 'md', 'lg', 'xl'];
 
 class DropdownMenu extends Component {
