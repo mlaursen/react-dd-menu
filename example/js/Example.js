@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import classnames from 'classnames'
+import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 
-import Options from './Options'
-import DropdownMenu, { NestedDropdownMenu } from '../index'
+import Options from './Options';
+import DropdownMenu, { NestedDropdownMenu } from '../../src/js/index';
 
 class Example extends Component {
   render() {
@@ -11,7 +11,7 @@ class Example extends Component {
         <header><h1>React Dropdown Menu Example</h1></header>
         <main>
           {Options.map(opts => {
-            return <Menu {...opts} key={opts.text} />
+            return <Menu {...opts} key={opts.text} />;
           })}
         </main>
         <footer>
@@ -40,6 +40,12 @@ class Menu extends Component {
     this.setState({ isOpen: false });
   }
 
+  static propTypes = {
+    text: PropTypes.string,
+    additionalItems: PropTypes.array,
+    nestedProps: PropTypes.object,
+  }
+
   render() {
     const { isOpen } = this.state;
     const { text, additionalItems, nestedProps, ...props } = this.props;
@@ -50,7 +56,7 @@ class Menu extends Component {
         <div className={classnames('tab', { 'active': isOpen })}>
           <button type="button" onClick={this.toggleMenu}>{text}</button>
         </div>
-      )
+      ),
     };
 
     let toggle = null;
@@ -65,10 +71,10 @@ class Menu extends Component {
           nested = props.align;
           break;
         default:
-          nested = props.align == 'left' ? 'right' : 'left';
+          nested = props.align === 'left' ? 'right' : 'left';
       }
 
-      const icon = <span className={`fa fa-chevron-${nested}`} />
+      const icon = <span className={`fa fa-chevron-${nested}`} />;
       toggle = (
         <button type="button">
           {nested === 'left' && icon}

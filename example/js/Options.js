@@ -1,5 +1,5 @@
-import React from 'react'
-import { NestedDropdownMenu } from '../index'
+import React from 'react';
+import { NestedDropdownMenu } from '../../src/js/index';
 
 export default [
   {
@@ -64,7 +64,7 @@ export default [
       <li key="fred"><a href="#">Fred Flinstone</a></li>,
       <li key="guac"><a href="#">Guacamole</a></li>,
       <li key="sep3" role="separator" className="separator" />,
-      <li key="some"><a href="#">Something</a></li>
+      <li key="some"><a href="#">Something</a></li>,
     ],
   },
   {
@@ -79,7 +79,7 @@ export default [
       <li key="fred"><a href="#">Fred Flinstone</a></li>,
       <li key="guac"><a href="#">Guacamole</a></li>,
       <li key="sep3" role="separator" className="separator" />,
-      <li key="some"><a href="#">Something</a></li>
+      <li key="some"><a href="#">Something</a></li>,
     ],
   },
   {
@@ -97,7 +97,7 @@ export default [
     animate: false,
     nestedProps: {
       animate: false,
-    }
+    },
   },
   {
     inverse: true,
@@ -107,6 +107,6 @@ export default [
     nestedProps: {
       animate: true,
       upwards: true,
-    }
+    },
   },
-]
+];
