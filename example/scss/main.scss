@@ -1,6 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto);
 @import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
 @import "../../src/scss/react-dd-menu";
+@import "../../node_modules/react-buttons/src/scss/react-buttons";
 
 $dull-black: #4A4A4A !default;
 $black-base: #000000 !default;
@@ -94,50 +95,18 @@ footer {
   }
 }
 
-.clear-btn {
-  border: none;
-  background-color: transparent;
-}
-
 h1 {
   margin: 0;
 }
 
-.tab {
-
-  > button {
-    position: relative;
-    width: 100%;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.2em;
-    color: $white-base;
-    padding: 1em 1.5em;
-    background-color: $turquise;
-    border: 0;
-    border-bottom: 2px solid $green-sea;
-    box-shadow: inset 0 -2px $green-sea;
-    
-    &:focus {
-      box-shadow: inset 0 -2px $green-sea, inset 0 0 3px $wet-asphalt;
-    }
-  }
-  
-  &:active,
-  &.active {
-    > button {
-      top: 1px;
-      outline: none;
-      box-shadow: none;
-    }
-  }
-}
-
-.nested-dd-menu a, .nested-dd-menu button {
-  .fa + span, span + .fa {
-    padding-left: .5em;
-  }
+.fa + span, span + .fa {
+  padding-left: .5em;
 }
 
 button, [role="button"] {
   cursor: pointer;
+}
+
+.flat-btn {
+  width: 100%;
 }

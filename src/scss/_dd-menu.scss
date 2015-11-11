@@ -1,4 +1,3 @@
-
 .dd-menu {
   display: inline-block;
   position: relative;
@@ -8,114 +7,211 @@
     transform: translateX(-50%);
   }
   
-  @include dd-position(left);
-  @include dd-position(right);
-  @include dd-sizes();
-
-  .dd-menu-items {
-    position: absolute;
-    z-index: $dd-menu-z-index;
-    margin: $dd-menu-margin;
-
-    &.dd-items-upwards {
-      bottom: 100%;
-      margin: $dd-menu-upwards-margin;
-    }
-
-    ul, ol {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      color: $dd-text-color;
-      background-color: $dd-list-color;
-
-      box-shadow: $dd-menu-box-shadow;
-
-      &.dd-items-right li > * {
-        text-align: right;
-      }
-
-      &.dd-items-left li > * {
-        text-align: left;
-      }
-
-      &.dd-items-center li > * {
-        text-align: center;
-      }
-
-      li {
-        
-        &:hover:not([role="separator"]):not(.separator),
-        > *:focus {
-          color: $dd-list-hover-text-color;
-          background-color: $dd-list-hover-color;
-          outline: none;
-        }
-
-        > *:not(.dd-item-ignore) {
-          display: block;
-          width: auto;
-          min-width: 100%;
-          padding: $dd-menu-item-padding;
-
-          font-family: $dd-font;
-          white-space: pre;
-          color: inherit;
-          text-decoration: none;
-          font-size: inherit;
-        }
-
-        > button {
-          border: none;
-          background: transparent;
-        }
-      }
-    }
-  }
+  //@include dd-position(left);
+  //@include dd-position(right);
 
   &.dd-menu-inverse {
-    .dd-menu-items {
-      ul, ol {
-        color: $dd-inverse-text-color;
-        background-color: $dd-inverse-list-color;
-
-        li {
-
-          &:hover:not([role="separator"]):not(.separator),
-          > *:focus {
-            color: $dd-inverse-list-hover-text-color;
-            background-color: $dd-inverse-list-hover-color;
-          }
-        }
-      }
+    [class^="dd-menu-items"] {
+      color: $dd-inverse-text-color;
+      background-color: $dd-inverse-list-color;
     }
 
-    [role="separator"], .separator {
+    .dd-menu-item:hover,
+    .dd-menu-item:focus, {
+      color: $dd-inverse-list-hover-text-color;
+      background-color: $dd-inverse-list-hover-color;
+    }
+
+    .dd-menu-item-separator {
       background-color: $dd-inverse-separator-color;
     }
   }
 
-  [role="separator"], .separator {
-    content: '';
-    display: block;
-    height: $dd-separator-height;
-    background-color: $dd-separator-color;
-    margin: $dd-separator-margin-top $dd-separator-margin-right $dd-separator-margin-bottom $dd-separator-margin-left;
-  }
-
-  .dd-items-upwards {
-    li.nested-dd-menu > span {
-      bottom: 0;
-      top: initial;
-    }
-  }
-
-  li.nested-dd-menu {
-    position: relative;
-
-    > span {
-      position: absolute;
-      top: 0;
-    }
+  li[role="separator"] {
+    padding: $dd-separator-padding;
   }
 }
+
+[class^="dd-menu-items"] {
+  position: absolute;
+  left: 0;
+  z-index: $dd-menu-z-index;
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  color: $dd-text-color;
+  background-color: $dd-list-color;
+  width: auto;
+  min-width: 100%;
+
+  box-shadow: $dd-menu-box-shadow;
+
+  &:not(.dd-items-upwards) {
+    top: 100%;
+  }
+
+  &.dd-items-upwards {
+    bottom: 100%;
+  }
+}
+
+.dd-menu-items-right .dd-menu-item {
+  text-align: right;
+}
+
+.dd-menu-items-left .dd-menu-item {
+  text-align: left;
+}
+
+.dd-menu-items-center .dd-menu-item {
+  text-align: center;
+}
+
+.dd-menu-item {
+  border: none;
+  background: transparent;
+  padding: $dd-menu-item-padding;
+  display: block;
+  width: auto;
+  min-width: 100%;
+  font-family: $dd-font;
+  white-space: pre;
+  color: inherit;
+  text-decoration: none;
+  font-size: inherit;
+
+  &:hover:not(.dd-menu-item-separator),
+  &:focus {
+    color: $dd-list-hover-text-color;
+    background-color: $dd-list-hover-color;
+    outline: none;
+  }
+}
+
+.dd-menu-item-separator {
+  content: '';
+  display: block;
+  height: $dd-separator-height;
+  background-color: $dd-separator-color;
+}
+
+//.dd-menu {
+//  display: inline-block;
+//  position: relative;
+//
+//  &.dd-menu-center .dd-menu-items {
+//    left: 50%;
+//    transform: translateX(-50%);
+//  }
+//  
+//  @include dd-position(left);
+//  @include dd-position(right);
+//  @include dd-sizes();
+//
+//  .dd-menu-items {
+//    position: absolute;
+//    z-index: $dd-menu-z-index;
+//    margin: $dd-menu-margin;
+//
+//    &.dd-items-upwards {
+//      bottom: 100%;
+//      margin: $dd-menu-upwards-margin;
+//    }
+//
+//    ul, ol {
+//      list-style: none;
+//      padding: 0;
+//      margin: 0;
+//      color: $dd-text-color;
+//      background-color: $dd-list-color;
+//
+//      box-shadow: $dd-menu-box-shadow;
+//
+//      &.dd-items-right li > * {
+//        text-align: right;
+//      }
+//
+//      &.dd-items-left li > * {
+//        text-align: left;
+//      }
+//
+//      &.dd-items-center li > * {
+//        text-align: center;
+//      }
+//
+//      li {
+//        
+//        &:hover:not([role="separator"]):not(.separator),
+//        > *:focus {
+//          color: $dd-list-hover-text-color;
+//          background-color: $dd-list-hover-color;
+//          outline: none;
+//        }
+//
+//        > *:not(.dd-item-ignore) {
+//          display: block;
+//          width: auto;
+//          min-width: 100%;
+//          padding: $dd-menu-item-padding;
+//
+//          font-family: $dd-font;
+//          white-space: pre;
+//          color: inherit;
+//          text-decoration: none;
+//          font-size: inherit;
+//        }
+//
+//        > button {
+//          border: none;
+//          background: transparent;
+//        }
+//      }
+//    }
+//  }
+//
+//  &.dd-menu-inverse {
+//    .dd-menu-items {
+//      ul, ol {
+//        color: $dd-inverse-text-color;
+//        background-color: $dd-inverse-list-color;
+//
+//        li {
+//
+//          &:hover:not([role="separator"]):not(.separator),
+//          > *:focus {
+//            color: $dd-inverse-list-hover-text-color;
+//            background-color: $dd-inverse-list-hover-color;
+//          }
+//        }
+//      }
+//    }
+//
+//    [role="separator"], .separator {
+//      background-color: $dd-inverse-separator-color;
+//    }
+//  }
+//
+//  [role="separator"], .separator {
+//    content: '';
+//    display: block;
+//    height: $dd-separator-height;
+//    background-color: $dd-separator-color;
+//    margin: $dd-separator-margin-top $dd-separator-margin-right $dd-separator-margin-bottom $dd-separator-margin-left;
+//  }
+//
+//  .dd-items-upwards {
+//    li.nested-dd-menu > span {
+//      bottom: 0;
+//      top: initial;
+//    }
+//  }
+//
+//  li.nested-dd-menu {
+//    position: relative;
+//
+//    > span {
+//      position: absolute;
+//      top: 0;
+//    }
+//  }
+//}
