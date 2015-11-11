@@ -54,29 +54,20 @@ export default class DropdownMenu extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { isOpen, closeOnInsideClick, closeOnOutsideClick } = this.props;
+    const { isOpen, closeOnOutsideClick } = this.props;
     if(isOpen === prevProps.isOpen) {
       return;
     }
 
-    const menuItems = ReactDOM.findDOMNode(this.refs.menuItems);
     if(isOpen && !prevProps.isOpen) {
       if(closeOnOutsideClick) {
         this.lastWindowClickEvent = this.handleClickOutside;
         document.addEventListener('click', this.lastWindowClickEvent);
       }
-
-      if(closeOnInsideClick) {
-        menuItems.addEventListener('click', this.handleClickInside);
-      }
     } else if(!isOpen && prevProps.isOpen) {
       if(closeOnOutsideClick) {
         document.removeEventListener('click', this.lastWindowClickEvent);
         this.lastWindowClickEvent = null;
-      }
-
-      if(closeOnInsideClick) {
-        menuItems.removeEventListener('click', this.handleClickInside);
       }
     }
   }
@@ -98,12 +89,6 @@ export default class DropdownMenu extends Component {
     }
 
     this.props.closeMenu();
-  }
-
-  handleClickInside = (e) => {
-    if(e.target.getAttribute('role') !== 'separator' && e.target.classList.contains('dd-menu-item-separator')) {
-      this.props.closeMenu();
-    }
   }
 
   handleKeyDown = (e) => {
@@ -138,7 +123,6 @@ export default class DropdownMenu extends Component {
     const listClassName= classnames(`dd-menu-items-${textAlign || align}`, { 'dd-items-upwards': upwards });
 
     const transitionProps = {
-      ref: 'menuItems',
       transitionName: `grow-from-${upwards ? 'up-' : ''}${animAlign || align}`,
       onKeyDown: this.handleKeyDown,
       transitionEnter: animate,

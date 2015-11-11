@@ -71,12 +71,6 @@ var DropdownMenu = (function (_Component) {
       _this.props.closeMenu();
     };
 
-    this.handleClickInside = function (e) {
-      if (e.target.getAttribute('role') !== 'separator' && e.target.classList.contains('dd-menu-item-separator')) {
-        _this.props.closeMenu();
-      }
-    };
-
     this.handleKeyDown = function (e) {
       if (!_this.props.closeOnInsideClick) {
         return;
@@ -104,31 +98,21 @@ var DropdownMenu = (function (_Component) {
     value: function componentDidUpdate(prevProps) {
       var _props = this.props;
       var isOpen = _props.isOpen;
-      var closeOnInsideClick = _props.closeOnInsideClick;
       var closeOnOutsideClick = _props.closeOnOutsideClick;
 
       if (isOpen === prevProps.isOpen) {
         return;
       }
 
-      var menuItems = _reactDom2['default'].findDOMNode(this.refs.menuItems);
       if (isOpen && !prevProps.isOpen) {
         if (closeOnOutsideClick) {
           this.lastWindowClickEvent = this.handleClickOutside;
           document.addEventListener('click', this.lastWindowClickEvent);
         }
-
-        if (closeOnInsideClick) {
-          menuItems.addEventListener('click', this.handleClickInside);
-        }
       } else if (!isOpen && prevProps.isOpen) {
         if (closeOnOutsideClick) {
           document.removeEventListener('click', this.lastWindowClickEvent);
           this.lastWindowClickEvent = null;
-        }
-
-        if (closeOnInsideClick) {
-          menuItems.removeEventListener('click', this.handleClickInside);
         }
       }
     }
@@ -167,7 +151,6 @@ var DropdownMenu = (function (_Component) {
       var listClassName = (0, _classnames3['default'])('dd-menu-items-' + (textAlign || align), { 'dd-items-upwards': upwards });
 
       var transitionProps = {
-        ref: 'menuItems',
         transitionName: 'grow-from-' + (upwards ? 'up-' : '') + (animAlign || align),
         onKeyDown: this.handleKeyDown,
         transitionEnter: animate,
