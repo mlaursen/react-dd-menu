@@ -78,7 +78,7 @@ main {
   flex-direction: row;
   flex-wrap: wrap;
   
-  .dd-menu {
+  > .dd-menu {
     flex-basis: 330px;
     margin: 2em 1.5em;
   }

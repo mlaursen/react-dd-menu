@@ -26,103 +26,77 @@ var _reactAddonsPureRenderMixin = require('react-addons-pure-render-mixin');
 
 var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
 
-var _classnames = require('classnames');
+var _DropdownMenuItem = require('./DropdownMenuItem');
 
-var _classnames2 = _interopRequireDefault(_classnames);
+var _DropdownMenuItem2 = _interopRequireDefault(_DropdownMenuItem);
 
-var _NestedDropdownMenu = require('./NestedDropdownMenu');
+var DropdownMenuItems = (function (_Component) {
+  _inherits(DropdownMenuItems, _Component);
 
-var _NestedDropdownMenu2 = _interopRequireDefault(_NestedDropdownMenu);
-
-var DropdownMenuItem = (function (_Component) {
-  _inherits(DropdownMenuItem, _Component);
-
-  function DropdownMenuItem(props) {
+  function DropdownMenuItems(props) {
     var _this = this;
 
-    _classCallCheck(this, DropdownMenuItem);
+    _classCallCheck(this, DropdownMenuItems);
 
-    _get(Object.getPrototypeOf(DropdownMenuItem.prototype), 'constructor', this).call(this, props);
+    _get(Object.getPrototypeOf(DropdownMenuItems.prototype), 'constructor', this).call(this, props);
 
-    this.handleClick = function (e) {
-      var _props = _this.props;
-      var onClick = _props.onClick;
-      var leaveTimeout = _props.leaveTimeout;
-      var unrenders = _props.unrenders;
+    this.getItemProps = function (item) {
+      var onClick = item.onClick;
 
-      if (unrenders) {
-        setTimeout(function () {
+      var props = _objectWithoutProperties(item, ['onClick']);
+
+      var handleClick = onClick;
+      if (_this.props.closeOnInsideClick && !item.items) {
+        handleClick = function (e) {
+          _this.props.closeMenu();
           onClick(e);
-        }, leaveTimeout);
-      } else {
-        onClick(e);
+        };
       }
+
+      return _extends({}, props, {
+        onClick: handleClick,
+        enterTimeout: _this.props.enterTimeout,
+        leaveTimeout: _this.props.leaveTimeout,
+        closeMenu: _this.props.closeMenu,
+        closeOnInsideClick: _this.props.closeOnInsideClick
+      });
     };
 
     this.shouldComponentUpdate = _reactAddonsPureRenderMixin2['default'].shouldComponentUpdate.bind(this);
   }
 
-  _createClass(DropdownMenuItem, [{
+  _createClass(DropdownMenuItems, [{
     key: 'render',
     value: function render() {
-      var _props2 = this.props;
-      var children = _props2.children;
-      var className = _props2.className;
-      var isSeparator = _props2.isSeparator;
-      var items = _props2.items;
+      var _this2 = this;
 
-      var props = _objectWithoutProperties(_props2, ['children', 'className', 'isSeparator', 'items']);
+      var _props = this.props;
+      var className = _props.className;
+      var items = _props.items;
 
-      if (isSeparator) {
-        return _react2['default'].createElement(
-          'li',
-          { role: 'separator' },
-          _react2['default'].createElement('span', { className: 'dd-menu-item-separator' })
-        );
-      } else if (items) {
-        return _react2['default'].createElement(_NestedDropdownMenu2['default'], _extends({}, props, { items: items, children: children, className: className }));
-      } else {
-        return _react2['default'].createElement(
-          'li',
-          null,
-          _react2['default'].createElement(
-            'button',
-            _extends({}, props, { className: (0, _classnames2['default'])('dd-menu-item', className), onClick: this.handleClick }),
-            children
-          )
-        );
-      }
+      return _react2['default'].createElement(
+        'ul',
+        { className: className },
+        items.map(function (item, i) {
+          return _react2['default'].createElement(_DropdownMenuItem2['default'], _extends({ key: i }, _this2.getItemProps(item)));
+        })
+      );
     }
   }], [{
     key: 'propTypes',
     value: {
-      children: _react.PropTypes.node,
+      className: _react.PropTypes.string,
+      items: _react.PropTypes.array,
       enterTimeout: _react.PropTypes.number.isRequired,
       leaveTimeout: _react.PropTypes.number.isRequired,
-      onClick: _react.PropTypes.func,
-      unrenders: _react.PropTypes.bool,
-      className: _react.PropTypes.string,
-      isSeparator: _react.PropTypes.bool,
-      items: _react.PropTypes.arrayOf(_react.PropTypes.shape({
-        children: _react.PropTypes.node,
-        onClick: _react.PropTypes.func,
-        unrenders: _react.PropTypes.bool,
-        className: _react.PropTypes.string,
-        isSeparator: _react.PropTypes.bool
-      }))
-    },
-    enumerable: true
-  }, {
-    key: 'defaultProps',
-    value: {
-      unrender: false,
-      isSeparator: false
+      closeOnInsideClick: _react.PropTypes.bool.isRequired,
+      closeMenu: _react.PropTypes.func.isRequired
     },
     enumerable: true
   }]);
 
-  return DropdownMenuItem;
+  return DropdownMenuItems;
 })(_react.Component);
 
-exports['default'] = DropdownMenuItem;
+exports['default'] = DropdownMenuItems;
 module.exports = exports['default'];

@@ -4,7 +4,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
 
-import DropdownMenuItem from './DropdownMenuItem';
+import DropdownMenuItems from './DropdownMenuItems';
 
 const TAB = 9;
 
@@ -19,7 +19,6 @@ export default class DropdownMenu extends Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     closeMenu: PropTypes.func.isRequired,
-    toggleMenu: PropTypes.func.isRequired,
     toggleComponent: PropTypes.node.isRequired,
     inverse: PropTypes.bool,
     align: PropTypes.string,
@@ -120,10 +119,10 @@ export default class DropdownMenu extends Component {
     });
 
     const { textAlign, upwards, animAlign, animate, enterTimeout, leaveTimeout } = this.props;
-    const listClassName= classnames(`dd-menu-items-${textAlign || align}`, { 'dd-items-upwards': upwards });
 
     const transitionProps = {
       transitionName: `grow-from-${upwards ? 'up-' : ''}${animAlign || align}`,
+      className: 'dd-menu-items',
       onKeyDown: this.handleKeyDown,
       transitionEnter: animate,
       transitionLeave: animate,
@@ -131,25 +130,20 @@ export default class DropdownMenu extends Component {
       transitionLeaveTimeout: leaveTimeout,
     };
 
+    const menuItemProps = {
+      key: 'dropdownItems',
+      className: classnames(`dd-menu-items-${textAlign || align}`, { 'dd-items-upwards': upwards }),
+      items: items,
+      enterTimeout: enterTimeout,
+      leaveTimeout: leaveTimeout,
+      closeOnInsideClick: this.props.closeOnInsideClick,
+      closeMenu: this.props.closeMenu,
+    };
     return (
       <div className={menuClassName}>
         {toggleComponent}
         <CSSTransitionGroup {...transitionProps}>
-          {isOpen &&
-            <ul key="dropdown-items" className={listClassName}>
-              {items.map((itemProps, i) => {
-                const { onClick, ...props } = itemProps;
-                let handleClick = onClick;
-                if(this.props.closeOnInsideClick) {
-                  handleClick = (e) => {
-                    this.props.closeMenu();
-                    onClick(e);
-                  };
-                }
-                return <DropdownMenuItem key={i} {...props} onClick={handleClick} leaveTimeout={leaveTimeout} />;
-              })}
-            </ul>
-          }
+          {isOpen && <DropdownMenuItems {...menuItemProps} />}
         </CSSTransitionGroup>
       </div>
     );
