@@ -15,6 +15,23 @@
   transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
 }
 
+.grow-from-up-top-enter,
+.grow-from-up-top-leave.grow-from-up-top-leave-active {
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0);
+  -webkit-transform-origin: 0 100%;
+          transform-origin: 0 100%;
+}
+
+.grow-from-up-top-enter.grow-from-up-top-enter-active,
+.grow-from-up-top-leave {
+  -webkit-transform: scaleY(1);
+          transform: scaleY(1);
+  transition: -webkit-transform 0.15s ease-out;
+  transition: transform 0.15s ease-out;
+  transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
+}
+
 .grow-from-left-enter,
 .grow-from-left-leave.grow-from-left-leave-active {
   -webkit-transform: scale(0);
@@ -124,7 +141,7 @@
 
 .dd-menu.dd-menu-center .dd-menu-items {
   left: 50%;
-  position: absolute;
+  top: 100%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
 }
@@ -156,12 +173,21 @@
   padding: 0;
 }
 
-[class^="dd-menu-items"]:not(.dd-items-upwards) {
-  top: 100%;
+.dd-menu-items-upwards {
+  top: 0;
+}
+
+.dd-menu-items-upwards > [class^="dd-menu-items"] {
+  bottom: 100%;
+  margin: 0 0 0.5em;
 }
 
 .dd-items-upwards {
   bottom: 0;
+}
+
+.dd-menu-items > [class^="dd-menu-items"] {
+  margin: 0.5em 0 0;
 }
 
 .dd-menu-items-right,
@@ -171,6 +197,7 @@
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.29);
 }
 
+.dd-menu-center .dd-menu-items,
 .dd-menu-items-right,
 .dd-menu-items-left {
   position: absolute;
@@ -257,4 +284,29 @@
 
 .nested-dd-menu .dd-menu-item {
   white-space: pre;
+}
+
+.select-dropdown-toggle {
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: transparent;
+  border: 0;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.55);
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: "Roboto", sans-serif;
+  font-size: inherit;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 1em 1.5em;
+  text-align: left;
+}
+
+.select-dropdown [class^="dd-menu-items"] {
+  margin-top: 0;
+  max-height: 250px;
+  overflow-y: auto;
 }

@@ -109,20 +109,20 @@ export default class DropdownMenu extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { isOpen, menuAlign, align, inverse, className, toggleComponent, items } = this.props;
 
-    const menuClassName = classnames({
+    const menuClassName = classnames(className, {
       'dd-menu': true,
       [`dd-menu-${menuAlign || align}`]: true,
       'dd-menu-inverse': inverse,
-      className,
     });
 
     const { textAlign, upwards, animAlign, animate, enterTimeout, leaveTimeout } = this.props;
 
     const transitionProps = {
       transitionName: `grow-from-${upwards ? 'up-' : ''}${animAlign || align}`,
-      className: 'dd-menu-items',
+      className: `dd-menu-items${upwards ? '-upwards' : ''}`,
       onKeyDown: this.handleKeyDown,
       transitionEnter: animate,
       transitionLeave: animate,
@@ -132,7 +132,7 @@ export default class DropdownMenu extends Component {
 
     const menuItemProps = {
       key: 'dropdownItems',
-      className: classnames(`dd-menu-items-${textAlign || align}`, { 'dd-items-upwards': upwards }),
+      className: `dd-menu-items-${textAlign || align}`,
       items: items,
       enterTimeout: enterTimeout,
       leaveTimeout: leaveTimeout,

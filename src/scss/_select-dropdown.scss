@@ -1,0 +1,20 @@
+.select-dropdown-toggle {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  box-shadow: $select-dropdown-toggle-shadow;
+  display: flex;
+  font-family: $dd-font;
+  font-size: inherit;
+  justify-content: space-between;
+  padding: $select-dropdown-toggle-padding;
+  text-align: left;
+}
+
+.select-dropdown {
+  [class^="dd-menu-items"] {
+    margin-top: 0;
+    max-height: $select-dropdown-menu-height;
+    overflow-y: auto;
+  }
+}

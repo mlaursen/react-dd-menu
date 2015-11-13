@@ -44,7 +44,7 @@ export default class NestedDropdownMenu extends Component {
     direction: 'right',
     upwards: false,
     delay: 500,
-    openOnMouseOver: false,
+    openOnMouseOver: true,
   }
 
   componentWillUnmount() {

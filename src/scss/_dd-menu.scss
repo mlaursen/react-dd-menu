@@ -4,7 +4,7 @@
 
   &.dd-menu-center .dd-menu-items {
     left: 50%;
-    position: absolute;
+    top: 100%;
     transform: translateX(-50%);
   }
 
@@ -38,15 +38,25 @@
   list-style: none;
   margin: 0;
   padding: 0;
+}
 
-  &:not(.dd-items-upwards) {
-    top: 100%;
+.dd-menu-items-upwards {
+  top: 0;
+
+  > [class^="dd-menu-items"] {
+    bottom: 100%;
+    margin: $dd-menu-items-upwards-margin;
   }
-
 }
 
 .dd-items-upwards {
   bottom: 0;
+}
+
+.dd-menu-items {
+  > [class^="dd-menu-items"] {
+    margin: $dd-menu-items-margin;
+  }
 }
 
 .dd-menu-items-right,
@@ -56,6 +66,7 @@
   box-shadow: $dd-menu-box-shadow;
 }
 
+.dd-menu-center .dd-menu-items, 
 .dd-menu-items-right,
 .dd-menu-items-left {
   position: absolute;

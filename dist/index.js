@@ -13,20 +13,8 @@ var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 exports['default'] = _DropdownMenu2['default'];
 exports.DropdownMenu = _DropdownMenu2['default'];
 
-var _NestedDropdownMenu2 = require('./NestedDropdownMenu');
+var _SelectDropdown2 = require('./SelectDropdown');
 
-var _NestedDropdownMenu3 = _interopRequireDefault(_NestedDropdownMenu2);
+var _SelectDropdown3 = _interopRequireDefault(_SelectDropdown2);
 
-exports.NestedDropdownMenu = _NestedDropdownMenu3['default'];
-
-var _DropdownMenuItems2 = require('./DropdownMenuItems');
-
-var _DropdownMenuItems3 = _interopRequireDefault(_DropdownMenuItems2);
-
-exports.DropdownMenuItems = _DropdownMenuItems3['default'];
-
-var _DropdownMenuItem2 = require('./DropdownMenuItem');
-
-var _DropdownMenuItem3 = _interopRequireDefault(_DropdownMenuItem2);
-
-exports.DropdownMenuItem = _DropdownMenuItem3['default'];
+exports.SelectDropdown = _SelectDropdown3['default'];

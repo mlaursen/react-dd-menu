@@ -176,7 +176,7 @@ var NestedDropdownMenu = (function (_Component) {
       direction: 'right',
       upwards: false,
       delay: 500,
-      openOnMouseOver: false
+      openOnMouseOver: true
     },
     enumerable: true
   }]);
