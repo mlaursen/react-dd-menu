@@ -6,7 +6,7 @@ const defaultItems = [{
 }, {
   onClick: (e) => { console.log('Clicked', e.target); },
   children: 'That\'s the Sound',
-}, {
+}, { isSeparator: true }, {
   onClick: (e) => { console.log('Clicked', e.target); },
   children: 'Of the Police',
 }];
@@ -39,9 +39,8 @@ export const options = [{
   }]),
 }, {
   toggleText: 'Left Aligned Upwards Menu',
-  textAlign: 'left',
   animAlign: 'center',
-  menuAlign: 'right',
+  menuAlign: 'left',
   upwards: true,
   items: defaultItems,
 }];

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
-import { SelectDropdown } from '../../src/js/index';
 import ExampleMenu from './ExampleMenu';
 import { options } from './ExampleOptions';
 
@@ -45,9 +44,6 @@ export default class App extends Component {
           {options.map((menuProps, i) => {
             return <ExampleMenu key={'dd-menu' + i} {...menuProps} />;
           })}
-          <SelectDropdown items={this.createItemsProp()}>
-            {this.state.dropdownValue}
-          </SelectDropdown>
         </main>
         <footer>
           <a href="http://github.com/mlaursen/react-dd-menu">

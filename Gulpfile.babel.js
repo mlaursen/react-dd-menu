@@ -50,7 +50,6 @@ function styles(source, dist, isProd, isServer) {
     .pipe(isServer ? sourcemaps.init({ loadMaps: true }) : gutil.noop())
     .pipe(isServer ? sourcemaps.write('./') : gutil.noop())
     .pipe(gulp.dest(dist))
-    .pipe(isServer ? browserSync.stream() : gutil.noop());
 }
 
 function lint(src, isProd) {
@@ -121,7 +120,7 @@ gulp.task('statics:example', () => {
 });
 
 gulp.task('styles:example', () => {
-  return styles(`${EXAMPLE_SRC}${SCSS}/main.scss`, EXAMPLE_DIST, false, true);
+  return styles(`${EXAMPLE_SRC}${SCSS}/main.scss`, EXAMPLE_DIST, false, true).pipe(browserSync.stream());
 });
 gulp.task('styles-watch:example', ['styles:example']);
 
@@ -142,6 +141,6 @@ gulp.task('serve', ['dist:example'], () => {
     },
   });
 
-  gulp.watch(['./src/**/*.js', './example/**/*.js'], ['scripts-watch:example']);
-  gulp.watch(['./src/**/*.scss', './example/**/*.scss'], ['styles-watch:example']);
+  gulp.watch('./+(src|example)/**/*.+(js|jsx)', ['scripts-watch:example']);
+  gulp.watch('./+(src|example)/**/*.scss', ['styles-watch:example']);
 });

@@ -1,15 +1,14 @@
+%full-width {
+  min-width: 100%;
+  width: auto;
+}
+
 .dd-menu {
   display: inline-block;
   position: relative;
 
-  &.dd-menu-center .dd-menu-items {
-    left: 50%;
-    top: 100%;
-    transform: translateX(-50%);
-  }
-
   &.dd-menu-inverse {
-    [class^="dd-menu-items"] {
+    .dd-items {
       background-color: $dd-inverse-list-color;
       color: $dd-inverse-text-color;
     }
@@ -20,103 +19,78 @@
       color: $dd-inverse-list-hover-text-color;
     }
 
-    .dd-menu-item-separator {
+    .dd-item-separator {
       background-color: $dd-inverse-separator-color;
     }
   }
-
-  // scss-lint:disable QualifyingElement
-  li[role="separator"] {
-    padding: $dd-separator-padding;
-  }
 }
 
-
-[class^="dd-menu-items"] {
-  background-color: $dd-list-color;
-  color: $dd-text-color;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.dd-menu-items-upwards {
-  top: 0;
-
-  > [class^="dd-menu-items"] {
-    bottom: 100%;
-    margin: $dd-menu-items-upwards-margin;
-  }
-}
-
-.dd-items-upwards {
-  bottom: 0;
-}
-
-.dd-menu-items {
-  > [class^="dd-menu-items"] {
-    margin: $dd-menu-items-margin;
-  }
-}
-
-.dd-menu-items-right,
-.dd-menu-items-left,
-.dd-menu-items-center,
-.nested-dd-menu .dd-menu-items {
-  box-shadow: $dd-menu-box-shadow;
-}
-
-.dd-menu-center .dd-menu-items, 
-.dd-menu-items-right,
-.dd-menu-items-left {
+.dd-items-container {
   position: absolute;
   z-index: $dd-menu-z-index;
-}
 
-.dd-menu-items-right {
-  right: 0;
-  
-  .dd-menu-item {
-    text-align: right;
-  }
-
-  .nested-reverse > .dd-item-ignore {
-    padding-right: .5em;
-    right: 100%;
+  &:not(.dd-items-upwards) {
+    top: 100%;
   }
 }
 
-.dd-menu-items-left {
+.dd-items-left {
   left: 0;
 
   .dd-menu-item {
     text-align: left;
   }
-
-  .nested-reverse > .dd-item-ignore {
-    left: 100%;
-    padding-left: .5em;
-  }
 }
 
-.dd-menu-items-center {
+.dd-items-right {
+  right: 0;
+  text-align: right;
+}
+
+.dd-items-center {
+  @include center();
 
   .dd-menu-item {
     text-align: center;
   }
 }
 
+.dd-items-upwards {
+  bottom: 100%;
+
+  .dd-items {
+    margin: $dd-menu-items-upwards-margin;
+  }
+}
+
+.dd-items {
+  background-color: $dd-list-color;
+  box-shadow: $dd-menu-box-shadow;
+  color: $dd-text-color;
+  list-style: none;
+  margin: $dd-menu-items-margin;
+  padding: 0;
+}
+
+.dd-item-separator {
+  background-color: $dd-separator-color;
+  content: '';
+  display: block;
+  height: $dd-separator-height;
+  margin: $dd-separator-margin;
+}
+
 .dd-menu-item {
+  @extend %full-width;
+
   background: transparent;
   border: 0;
   color: inherit;
   display: block;
   font-family: $dd-font;
   font-size: inherit;
-  min-width: 100%;
   padding: $dd-menu-item-padding;
   text-decoration: none;
-  width: auto;
 
   &:hover:not(.dd-menu-item-separator),
   &:focus {
@@ -125,40 +99,172 @@
     outline: none;
   }
 }
-
-.dd-menu-item-separator {
-  background-color: $dd-separator-color;
-  content: '';
-  display: block;
-  height: $dd-separator-height;
-}
-
-.nested-dd-menu {
-  position: relative;
-
-  &.nested-right {
-    > .dd-item-ignore {
-      left: 100%;
-      padding-left: .5em;
-    }
-  }
-
-  &.nested-left {
-    > .dd-item-ignore {
-      padding-right: .5em;
-      right: 100%;
-    }
-  }
-
-  .dd-item-ignore {
-    position: absolute;
-
-    &:not(.dd-items-upwards) {
-      top: 0;
-    }
-  }
-
-  .dd-menu-item {
-    white-space: pre;
-  }
-}
+//.dd-menu {
+//  display: inline-block;
+//  position: relative;
+//
+//  &.dd-menu-center .dd-menu-items {
+//    left: 50%;
+//    top: 100%;
+//    transform: translateX(-50%);
+//  }
+//
+//  &.dd-menu-inverse {
+//    [class^="dd-menu-items"] {
+//      background-color: $dd-inverse-list-color;
+//      color: $dd-inverse-text-color;
+//    }
+//
+//    .dd-menu-item:hover,
+//    .dd-menu-item:focus, {
+//      background-color: $dd-inverse-list-hover-color;
+//      color: $dd-inverse-list-hover-text-color;
+//    }
+//
+//    .dd-menu-item-separator {
+//      background-color: $dd-inverse-separator-color;
+//    }
+//  }
+//
+//  // scss-lint:disable QualifyingElement
+//  li[role="separator"] {
+//    padding: $dd-separator-padding;
+//  }
+//}
+//
+//
+//[class^="dd-menu-items"] {
+//  background-color: $dd-list-color;
+//  color: $dd-text-color;
+//  list-style: none;
+//  margin: 0;
+//  padding: 0;
+//}
+//
+//.dd-menu-items-upwards {
+//  top: 0;
+//
+//  > [class^="dd-menu-items"] {
+//    bottom: 100%;
+//    margin: $dd-menu-items-upwards-margin;
+//  }
+//}
+//
+//.dd-items-upwards {
+//  bottom: 0;
+//}
+//
+//.dd-menu-items {
+//  > [class^="dd-menu-items"] {
+//    margin: $dd-menu-items-margin;
+//  }
+//}
+//
+//.dd-menu-items-right,
+//.dd-menu-items-left,
+//.dd-menu-items-center,
+//.nested-dd-menu .dd-menu-items {
+//  box-shadow: $dd-menu-box-shadow;
+//}
+//
+//.dd-menu-center .dd-menu-items, 
+//.dd-menu-items-right,
+//.dd-menu-items-left {
+//  position: absolute;
+//  z-index: $dd-menu-z-index;
+//}
+//
+//.dd-menu-items-right {
+//  right: 0;
+//  
+//  .dd-menu-item {
+//    text-align: right;
+//  }
+//
+//  .nested-reverse > .dd-item-ignore {
+//    padding-right: .5em;
+//    right: 100%;
+//  }
+//}
+//
+//.dd-menu-items-left {
+//  left: 0;
+//
+//  .dd-menu-item {
+//    text-align: left;
+//  }
+//
+//  .nested-reverse > .dd-item-ignore {
+//    left: 100%;
+//    padding-left: .5em;
+//  }
+//}
+//
+//.dd-menu-items-center {
+//
+//  .dd-menu-item {
+//    text-align: center;
+//  }
+//}
+//
+//.dd-menu-item {
+//  background: transparent;
+//  border: 0;
+//  color: inherit;
+//  display: block;
+//  font-family: $dd-font;
+//  font-size: inherit;
+//  min-width: 100%;
+//  padding: $dd-menu-item-padding;
+//  text-decoration: none;
+//  width: auto;
+//
+//  &:hover:not(.dd-menu-item-separator),
+//  &:focus {
+//    background-color: $dd-list-hover-color;
+//    color: $dd-list-hover-text-color;
+//    outline: none;
+//  }
+//}
+//
+//.dd-menu-item-separator {
+//  background-color: $dd-separator-color;
+//  content: '';
+//  display: block;
+//  height: $dd-separator-height;
+//}
+//
+//.nested-dd-menu {
+//  position: relative;
+//
+//  &.nested-right {
+//    > .dd-item-ignore {
+//      left: 100%;
+//      padding-left: .5em;
+//    }
+//  }
+//
+//  &.nested-left {
+//    > .dd-item-ignore {
+//      padding-right: .5em;
+//      right: 100%;
+//    }
+//  }
+//
+//  .dd-item-ignore {
+//    position: absolute;
+//
+//    &:not(.dd-items-upwards) {
+//      top: 0;
+//    }
+//  }
+//
+//  .dd-menu-item {
+//    white-space: pre;
+//  }
+//}
+//
+//
+//
+//
+//

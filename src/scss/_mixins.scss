@@ -11,3 +11,16 @@
     transition: transform $dd-transition-time $dd-transition-out;
   }
 }
+
+@mixin center($horizontally: true, $veritically: false) {
+  $translate-x: 0;
+  $translate-y: 0;
+  @if $horizontally {
+    left: 50%;
+    $translate-x: -50%;
+  } @else if $veritically {
+    top: 50%;
+    $translate-y: -50%;
+  }
+  transform: tranlsate3d($translate-x, $translate-y, 0);
+}

@@ -1,7 +1,4 @@
-import DropdownMenu from './DropdownMenu';
-
+import DropdownMenu from './DropdownMenu.jsx';
 export default DropdownMenu;
 
 export { DropdownMenu };
-
-export SelectDropdown from './SelectDropdown';
