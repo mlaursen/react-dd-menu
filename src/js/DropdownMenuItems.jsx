@@ -56,12 +56,20 @@ export default class DropdownMenuItems extends Component {
   }
 
   renderMenuItems = () => {
-    const { items, children, closeMenu, leaveTimeout } = this.props;
+    const { items, children, ...props } = this.props;
     return items.map((itemProps, i) => {
       if(itemProps.isSeparator) {
         return <li key={`separator-${i}`} role="separator" className="dd-item-separator" />;
       } else {
-        return <DropdownMenuItem key={`menu-item-${i}`} {...itemProps} closeMenu={closeMenu} leaveTimeout={leaveTimeout} />;
+        let onClick = itemProps.onClick;
+        if(props.closeOnInsideClick && !itemProps.items) {
+          onClick = (e) => {
+            console.log('ITEM', props.closeMenu);
+            props.closeMenu();
+            itemProps.onClick && itemProps.onClick(e);
+          };
+        }
+        return <DropdownMenuItem key={`menu-item-${i}`} {...itemProps} {...props} onClick={onClick} />;
       }
     }).concat(children);
   }
