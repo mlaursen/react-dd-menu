@@ -6,6 +6,7 @@
           transform-origin: 0 0;
   transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
 }
 
 .grow-from-left-enter.grow-from-left-enter-active {
@@ -20,6 +21,7 @@
           transform-origin: 0 0;
   transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
+  transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
 }
 
 .grow-from-left-leave.grow-from-left-leave-active {
@@ -34,6 +36,7 @@
           transform-origin: 100% 0;
   transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
 }
 
 .grow-from-right-enter.grow-from-right-enter-active {
@@ -48,6 +51,7 @@
           transform-origin: 100% 0;
   transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
+  transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
 }
 
 .grow-from-right-leave.grow-from-right-leave-active {
@@ -62,6 +66,7 @@
           transform-origin: 50% 0;
   transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
 }
 
 .grow-from-center-enter.grow-from-center-enter-active {
@@ -76,6 +81,7 @@
           transform-origin: 50% 0;
   transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
+  transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
 }
 
 .grow-from-center-leave.grow-from-center-leave-active {
@@ -90,6 +96,7 @@
           transform-origin: 0 100%;
   transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
 }
 
 .grow-from-up-left-enter.grow-from-up-left-enter-active {
@@ -104,6 +111,7 @@
           transform-origin: 0 100%;
   transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
+  transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
 }
 
 .grow-from-up-left-leave.grow-from-up-left-leave-active {
@@ -118,6 +126,7 @@
           transform-origin: 50% 100%;
   transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
 }
 
 .grow-from-up-center-enter.grow-from-up-center-enter-active {
@@ -132,6 +141,7 @@
           transform-origin: 50% 100%;
   transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
+  transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
 }
 
 .grow-from-up-center-leave.grow-from-up-center-leave-active {
@@ -146,6 +156,7 @@
           transform-origin: 100% 100%;
   transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
 }
 
 .grow-from-up-right-enter.grow-from-up-right-enter-active {
@@ -160,6 +171,7 @@
           transform-origin: 100% 100%;
   transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
+  transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
 }
 
 .grow-from-up-right-leave.grow-from-up-right-leave-active {
