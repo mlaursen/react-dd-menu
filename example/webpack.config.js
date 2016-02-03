@@ -8,7 +8,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const NODE_ENV = process.env.NODE_ENV;
-const buildFolder = path.resolve(__dirname, 'src/www');
+const buildFolder = path.resolve(__dirname, 'www');
 const js = path.resolve(__dirname, '../src/js');
 
 const env = {
