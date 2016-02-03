@@ -7,7 +7,8 @@
     "scripts": "babel ./src/js --out-dir ./dist",
     "styles": "sass --style expanded --line ./src/scss/react-dd-menu.scss ./dist/react-dd-menu.css && sass --style compressed ./src/scss/react-dd-menu.scss ./dist/react-dd-menu.min.css",
     "prebuild": "rimraf dist",
-    "build": "npm run scripts && npm run styles"
+    "build": "npm run scripts && npm run styles",
+    "postbuild": "postcss --use autoprefixer ./dist/*.css -d ./dist"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
     "eslint": "^1.10.3",
     "eslint-loader": "^1.2.1",
     "eslint-plugin-react": "^3.16.1",
+    "postcss-cli": "^2.5.0",
     "react": "^0.14.7",
     "react-addons-css-transition-group": "^0.14.7",
     "react-addons-pure-render-mixin": "^0.14.7",

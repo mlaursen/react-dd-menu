@@ -1,134 +1,206 @@
 /* Not really sure why, but the inverse version has a bigger gap */
 /* line 42, ../src/scss/_mixins.scss */
 .grow-from-left-enter {
-  transform: scale(0);
-  transform-origin: 0 0;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
 }
 /* line 47, ../src/scss/_mixins.scss */
 .grow-from-left-enter.grow-from-left-enter-active {
-  transform: scale(1);
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 /* line 52, ../src/scss/_mixins.scss */
 .grow-from-left-leave {
-  transform: scale(1);
-  transform-origin: 0 0;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-transition: -webkit-transform 0.15s ease-out;
+  transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
+  transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
 }
 /* line 57, ../src/scss/_mixins.scss */
 .grow-from-left-leave.grow-from-left-leave-active {
-  transform: scale(0);
+  -webkit-transform: scale(0);
+          transform: scale(0);
 }
 
 /* line 42, ../src/scss/_mixins.scss */
 .grow-from-right-enter {
-  transform: scale(0);
-  transform-origin: 100% 0;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: 100% 0;
+          transform-origin: 100% 0;
+  -webkit-transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
 }
 /* line 47, ../src/scss/_mixins.scss */
 .grow-from-right-enter.grow-from-right-enter-active {
-  transform: scale(1);
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 /* line 52, ../src/scss/_mixins.scss */
 .grow-from-right-leave {
-  transform: scale(1);
-  transform-origin: 100% 0;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: 100% 0;
+          transform-origin: 100% 0;
+  -webkit-transition: -webkit-transform 0.15s ease-out;
+  transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
+  transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
 }
 /* line 57, ../src/scss/_mixins.scss */
 .grow-from-right-leave.grow-from-right-leave-active {
-  transform: scale(0);
+  -webkit-transform: scale(0);
+          transform: scale(0);
 }
 
 /* line 42, ../src/scss/_mixins.scss */
 .grow-from-center-enter {
-  transform: scale(0);
-  transform-origin: 50% 0;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: 50% 0;
+          transform-origin: 50% 0;
+  -webkit-transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
 }
 /* line 47, ../src/scss/_mixins.scss */
 .grow-from-center-enter.grow-from-center-enter-active {
-  transform: scale(1);
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 /* line 52, ../src/scss/_mixins.scss */
 .grow-from-center-leave {
-  transform: scale(1);
-  transform-origin: 50% 0;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: 50% 0;
+          transform-origin: 50% 0;
+  -webkit-transition: -webkit-transform 0.15s ease-out;
+  transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
+  transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
 }
 /* line 57, ../src/scss/_mixins.scss */
 .grow-from-center-leave.grow-from-center-leave-active {
-  transform: scale(0);
+  -webkit-transform: scale(0);
+          transform: scale(0);
 }
 
 /* line 42, ../src/scss/_mixins.scss */
 .grow-from-up-left-enter {
-  transform: scale(0);
-  transform-origin: 0 100%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: 0 100%;
+          transform-origin: 0 100%;
+  -webkit-transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
 }
 /* line 47, ../src/scss/_mixins.scss */
 .grow-from-up-left-enter.grow-from-up-left-enter-active {
-  transform: scale(1);
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 /* line 52, ../src/scss/_mixins.scss */
 .grow-from-up-left-leave {
-  transform: scale(1);
-  transform-origin: 0 100%;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: 0 100%;
+          transform-origin: 0 100%;
+  -webkit-transition: -webkit-transform 0.15s ease-out;
+  transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
+  transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
 }
 /* line 57, ../src/scss/_mixins.scss */
 .grow-from-up-left-leave.grow-from-up-left-leave-active {
-  transform: scale(0);
+  -webkit-transform: scale(0);
+          transform: scale(0);
 }
 
 /* line 42, ../src/scss/_mixins.scss */
 .grow-from-up-center-enter {
-  transform: scale(0);
-  transform-origin: 50% 100%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+  -webkit-transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
 }
 /* line 47, ../src/scss/_mixins.scss */
 .grow-from-up-center-enter.grow-from-up-center-enter-active {
-  transform: scale(1);
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 /* line 52, ../src/scss/_mixins.scss */
 .grow-from-up-center-leave {
-  transform: scale(1);
-  transform-origin: 50% 100%;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+  -webkit-transition: -webkit-transform 0.15s ease-out;
+  transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
+  transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
 }
 /* line 57, ../src/scss/_mixins.scss */
 .grow-from-up-center-leave.grow-from-up-center-leave-active {
-  transform: scale(0);
+  -webkit-transform: scale(0);
+          transform: scale(0);
 }
 
 /* line 42, ../src/scss/_mixins.scss */
 .grow-from-up-right-enter {
-  transform: scale(0);
-  transform-origin: 100% 100%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transform-origin: 100% 100%;
+          transform-origin: 100% 100%;
+  -webkit-transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
+  transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
 }
 /* line 47, ../src/scss/_mixins.scss */
 .grow-from-up-right-enter.grow-from-up-right-enter-active {
-  transform: scale(1);
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 /* line 52, ../src/scss/_mixins.scss */
 .grow-from-up-right-leave {
-  transform: scale(1);
-  transform-origin: 100% 100%;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transform-origin: 100% 100%;
+          transform-origin: 100% 100%;
+  -webkit-transition: -webkit-transform 0.15s ease-out;
+  transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
+  transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
 }
 /* line 57, ../src/scss/_mixins.scss */
 .grow-from-up-right-leave.grow-from-up-right-leave-active {
-  transform: scale(0);
+  -webkit-transform: scale(0);
+          transform: scale(0);
 }
 
 /* line 2, ../src/scss/_dd-menu.scss */
@@ -139,7 +211,8 @@
 /* line 6, ../src/scss/_dd-menu.scss */
 .dd-menu.dd-menu-center .dd-menu-items {
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 /* line 18, ../src/scss/_mixins.scss */
 .dd-menu.dd-menu-left .dd-menu-items {
