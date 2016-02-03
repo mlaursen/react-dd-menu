@@ -1,3 +1,0 @@
-#!/bin/bash
-
-gulp clean; gulp dist; gulp dist --production; gulp dist --examples

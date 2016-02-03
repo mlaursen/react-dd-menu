@@ -27,4 +27,5 @@ build/Release
 node_modules
 .sass-cache
 
-examples
+example/www
+!example/www/indexTemplate.html

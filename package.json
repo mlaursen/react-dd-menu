@@ -1,10 +1,14 @@
 {
   "name": "react-dd-menu",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A react dropdown menu.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "bin/build"
+    "scripts": "babel ./src/js --out-dir ./dist",
+    "styles": "sass --style expanded --line ./src/scss/react-dd-menu.scss ./dist/react-dd-menu.css && sass --style compressed ./src/scss/react-dd-menu.scss ./dist/react-dd-menu.min.css",
+    "prebuild": "rimraf dist",
+    "build": "npm run scripts && npm run styles",
+    "postbuild": "postcss --use autoprefixer ./dist/*.css -d ./dist"
   },
   "repository": {
     "type": "git",
@@ -33,30 +37,24 @@
     "react-addons-pure-render-mixin": "^0.14.x"
   },
   "devDependencies": {
-    "autoprefixer-core": "^5.2.1",
-    "babelify": "^6.1.3",
-    "browser-sync": "^2.8.2",
-    "browserify": "^11.0.1",
-    "del": "^1.2.1",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^5.2.0",
-    "gulp-if": "^1.2.5",
-    "gulp-postcss": "^5.1.10",
-    "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.5.4",
-    "gulp-sass": "^2.0.4",
-    "gulp-uglify": "^1.2.0",
-    "postcss": "^4.1.16",
-    "react": "^0.14.0",
-    "react-addons-css-transition-group": "^0.14.0",
-    "react-addons-pure-render-mixin": "^0.14.0",
-    "react-dom": "^0.14.0",
-    "uglify": "^0.1.5",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "yargs": "^3.19.0"
-  },
-  "babel": {
-    "stage": 0
+    "autoprefixer": "^6.0.3",
+    "babel-core": "^6.4.5",
+    "babel-eslint": "^4.1.8",
+    "babel-loader": "^6.2.1",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "eslint": "^1.10.3",
+    "eslint-loader": "^1.2.1",
+    "eslint-plugin-react": "^3.16.1",
+    "postcss-cli": "^2.5.0",
+    "react": "^0.14.7",
+    "react-addons-css-transition-group": "^0.14.7",
+    "react-addons-pure-render-mixin": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-hot-loader": "^1.3.0",
+    "rimraf": "^2.5.1",
+    "webpack": "^1.12.12"
   }
 }

@@ -3,12 +3,17 @@ A React dropdown menu
 
 Live Example: [React Dropdown Menu](http://mlaursen.github.io/react-dd-menu)
 
-> React 0.13.x is supported on versions **1.x.x-r13**
+> React 0.13.x is supported on versions **1.x.x-r13** up to version 1.0.5
 
 ### Installation
 
 ```bash
-$ npm install -S react-dd-menu
+$ npm install -S react-dd-menu \
+                 # If you haven't installed already
+                 react \
+                 react-dom \
+                 react-addons-css-transition-group \
+                 react-addons-pure-render-mixin
 ```
 
 #### Props
@@ -143,17 +148,17 @@ class Example extends React.Component {
     };
   }
 
-  toggle() {
+  toggle = () => {
     this.setState({ isMenuOpen: !this.state.isMenuOpen });
-  }
+  };
 
-  close() {
+  close = () => {
     this.setState({ isMenuOpen: false });
-  }
+  };
 
-  click() {
+  click = () => {
     console.log('You clicked an item');
-  }
+  };
 
   render() {
     let menuOptions = {
@@ -226,17 +231,17 @@ class Example extends React.Component {
     };
   }
 
-  toggle() {
+  toggle = () => {
     this.setState({ isMenuOpen: !this.state.isMenuOpen });
   }
 
-  close() {
+  close = () => {
     this.setState({ isMenuOpen: false });
-  }
+  };
 
-  click() {
+  click = () => {
     console.log('You clicked an item');
-  }
+  };
 
   render() {
     const menuOptions = {
@@ -265,41 +270,18 @@ class Example extends React.Component {
 }
 ```
 
-### Building
+### Contributors/Local Changes
+
+To rebuild the source:
+
 ```bash
 $ npm run build
 ```
 
-or
-
-```bash
-$ ./bin/build
-```
-
-
-## Contributors
-If you are modifying the dropdown menu, the builds are based on gulp. To start the example app and watch any changes to js files, run
-
-```bash
-$ gulp serve --examples
-```
-
-To test this in a _production_ state (minified), run
-
-```bash
-$ gulp serve --examples --production
-```
-
-When adding new options or additions, make sure to update `src/js/Options.js` with a new example using your options.
-
-To clean the dist and examples folders run
-
-```bash
-$ gulp clean
-```
+This will output all the css and js files into `./dist`;
 
 ### Pull Requests
-Please have pull requests with a target branch of develop (if React-0.14.x) and develop-react-13 (if React < 0.14.x).
+Please have pull requests with a target branch of develop.
 
 I will do the merge to master when a release has been done. Thanks! :)
 
@@ -315,3 +297,4 @@ I will do the merge to master when a release has been done. Thanks! :)
 - 1.0.3 - Fixed problem with multiple menus and added ability to disable animation
 - 1.0.4 - Upgraded to React 0.14.0
 - 1.0.5 - Added ability to disable onClickInside and onClickOutside close of the menus. Added Touch/click support for nested menus.
+- 1.0.6 - No new features. Upgraded dev stuff to babel 6 and separated example
