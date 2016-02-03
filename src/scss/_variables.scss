@@ -21,7 +21,6 @@ $dd-transition-in: cubic-bezier(.5, 1.8, .9, .8) !default;
 $dd-transition-out: ease-out !default;
 $dd-transitions: (
   ('top' '0 0' 'scaleY')
-  ('up-top' '0 100%' 'scaleY')
   ('left' '0 0' 'scale')
   ('right' '100% 0' 'scale')
   ('center' '50% 0' 'scale')
@@ -34,11 +33,3 @@ $dd-separator-height: 1px !default;
 $dd-separator-color: lighten(#000, 88%) !default;
 $dd-inverse-separator-color: darken(#fff, 88%) !default;
 $dd-separator-padding: .5em 0 !default;
-
-$dd-menu-items-margin: .5em 0 0 !default;
-$dd-menu-items-upwards-margin: 0 0 .5em !default;
-
-
-$select-dropdown-toggle-padding: 1em 1.5em !default;
-$select-dropdown-toggle-shadow: 0 0 4px rgba(0, 0, 0, .55) !default;
-$select-dropdown-menu-height: 250px !default;

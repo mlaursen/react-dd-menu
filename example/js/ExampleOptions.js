@@ -24,24 +24,17 @@ export const options = [{
   toggleText: 'Align Right with Nested Menu',
   align: 'right',
   items: defaultItems.concat([{
-    children: <span><i className="fa fa-chevron-left" />Hover or Click for Reverse Nested Menu</span>,
+    children: <span><i className="fa fa-chevron-left" />Hover for Reverse Nested Menu</span>,
+    openOnMouseOver: true,
     items: defaultItems.concat([{
-      children: <span>Click only for Right Nested Menu<i className="fa fa-chevron-right" /></span>,
+      children: <span>Click for Right Nested Menu<i className="fa fa-chevron-right" /></span>,
       nested: 'right',
-      openOnMouseOver: false,
       items: defaultItems.concat([{
-        children: <span><i className="fa fa-chevron-left" />Hover or Click for Left Nested Upwards Menu</span>,
+        children: <span><i className="fa fa-chevron-left" />Click for Left Nested Upwards Menu</span>,
         nested: 'left',
         upwards: true,
         items: defaultItems,
       }]),
     }]),
   }]),
-}, {
-  toggleText: 'Left Aligned Upwards Menu',
-  textAlign: 'left',
-  animAlign: 'center',
-  menuAlign: 'right',
-  upwards: true,
-  items: defaultItems,
 }];

@@ -122,7 +122,6 @@ var DropdownMenu = (function (_Component) {
     value: function render() {
       var _classnames;
 
-      console.log(this.props);
       var _props2 = this.props;
       var isOpen = _props2.isOpen;
       var menuAlign = _props2.menuAlign;
@@ -132,9 +131,9 @@ var DropdownMenu = (function (_Component) {
       var toggleComponent = _props2.toggleComponent;
       var items = _props2.items;
 
-      var menuClassName = (0, _classnames3['default'])(className, (_classnames = {
+      var menuClassName = (0, _classnames3['default'])((_classnames = {
         'dd-menu': true
-      }, _defineProperty(_classnames, 'dd-menu-' + (menuAlign || align), true), _defineProperty(_classnames, 'dd-menu-inverse', inverse), _classnames));
+      }, _defineProperty(_classnames, 'dd-menu-' + (menuAlign || align), true), _defineProperty(_classnames, 'dd-menu-inverse', inverse), _defineProperty(_classnames, 'className', className), _classnames));
 
       var _props3 = this.props;
       var textAlign = _props3.textAlign;
@@ -146,7 +145,7 @@ var DropdownMenu = (function (_Component) {
 
       var transitionProps = {
         transitionName: 'grow-from-' + (upwards ? 'up-' : '') + (animAlign || align),
-        className: 'dd-menu-items' + (upwards ? '-upwards' : ''),
+        className: 'dd-menu-items',
         onKeyDown: this.handleKeyDown,
         transitionEnter: animate,
         transitionLeave: animate,
@@ -156,7 +155,7 @@ var DropdownMenu = (function (_Component) {
 
       var menuItemProps = {
         key: 'dropdownItems',
-        className: 'dd-menu-items-' + (textAlign || align),
+        className: (0, _classnames3['default'])('dd-menu-items-' + (textAlign || align), { 'dd-items-upwards': upwards }),
         items: items,
         enterTimeout: enterTimeout,
         leaveTimeout: leaveTimeout,
