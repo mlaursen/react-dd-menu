@@ -16,8 +16,8 @@ $dd-inverse-list-hover-color: #34495e !default; // wet-asphalt
 
 $dd-menu-box-shadow: 0 0 4px rgba(0, 0, 0, .15), 0 2px 4px rgba(0, 0, 0, .29) !default;
 
-$dd-transition-time: .15s !default;
-$dd-transition-in: cubic-bezier(.5, 1.8, .9, .8) !default;
+$dd-transition-time: 0.15s !default;
+$dd-transition-in: cubic-bezier(0.5, 1.8, 0.9, 0.8) !default;
 $dd-transition-out: ease-out !default;
 $dd-transitions: (
   ('top' '0 0' 'scaleY')
@@ -33,3 +33,7 @@ $dd-separator-height: 1px !default;
 $dd-separator-color: lighten(#000, 88%) !default;
 $dd-inverse-separator-color: darken(#fff, 88%) !default;
 $dd-separator-padding: .5em 0 !default;
+
+// Not really sure why, but the inverse version has a bigger gap
+$nested-dd-padding: .5em !default;
+$nested-dd-inverse-padding: .3em !default;

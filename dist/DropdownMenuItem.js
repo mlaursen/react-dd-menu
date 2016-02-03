@@ -30,10 +30,6 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _NestedDropdownMenu = require('./NestedDropdownMenu');
-
-var _NestedDropdownMenu2 = _interopRequireDefault(_NestedDropdownMenu);
-
 var DropdownMenuItem = (function (_Component) {
   _inherits(DropdownMenuItem, _Component);
 
@@ -69,9 +65,8 @@ var DropdownMenuItem = (function (_Component) {
       var children = _props2.children;
       var className = _props2.className;
       var isSeparator = _props2.isSeparator;
-      var items = _props2.items;
 
-      var props = _objectWithoutProperties(_props2, ['children', 'className', 'isSeparator', 'items']);
+      var props = _objectWithoutProperties(_props2, ['children', 'className', 'isSeparator']);
 
       if (isSeparator) {
         return _react2['default'].createElement(
@@ -79,8 +74,6 @@ var DropdownMenuItem = (function (_Component) {
           { role: 'separator' },
           _react2['default'].createElement('span', { className: 'dd-menu-item-separator' })
         );
-      } else if (items) {
-        return _react2['default'].createElement(_NestedDropdownMenu2['default'], _extends({}, props, { items: items, children: children, className: className }));
       } else {
         return _react2['default'].createElement(
           'li',
@@ -97,19 +90,11 @@ var DropdownMenuItem = (function (_Component) {
     key: 'propTypes',
     value: {
       children: _react.PropTypes.node,
-      enterTimeout: _react.PropTypes.number.isRequired,
       leaveTimeout: _react.PropTypes.number.isRequired,
       onClick: _react.PropTypes.func,
       unrenders: _react.PropTypes.bool,
       className: _react.PropTypes.string,
-      isSeparator: _react.PropTypes.bool,
-      items: _react.PropTypes.arrayOf(_react.PropTypes.shape({
-        children: _react.PropTypes.node,
-        onClick: _react.PropTypes.func,
-        unrenders: _react.PropTypes.bool,
-        className: _react.PropTypes.string,
-        isSeparator: _react.PropTypes.bool
-      }))
+      isSeparator: _react.PropTypes.bool
     },
     enumerable: true
   }, {

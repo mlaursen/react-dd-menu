@@ -2,8 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import classnames from 'classnames';
 
-import NestedDropdownMenu from './NestedDropdownMenu';
-
 export default class DropdownMenuItem extends Component {
   constructor(props) {
     super(props);
@@ -13,19 +11,11 @@ export default class DropdownMenuItem extends Component {
 
   static propTypes = {
     children: PropTypes.node,
-    enterTimeout: PropTypes.number.isRequired,
     leaveTimeout: PropTypes.number.isRequired,
     onClick: PropTypes.func,
     unrenders: PropTypes.bool,
     className: PropTypes.string,
     isSeparator: PropTypes.bool,
-    items: PropTypes.arrayOf(PropTypes.shape({
-      children: PropTypes.node,
-      onClick: PropTypes.func,
-      unrenders: PropTypes.bool,
-      className: PropTypes.string,
-      isSeparator: PropTypes.bool,
-    })),
   }
 
   static defaultProps = {
@@ -45,12 +35,10 @@ export default class DropdownMenuItem extends Component {
   }
 
   render() {
-    const { children, className, isSeparator, items, ...props } = this.props;
+    const { children, className, isSeparator, ...props } = this.props;
 
     if(isSeparator) {
       return <li role="separator"><span className="dd-menu-item-separator" /></li>;
-    } else if(items) {
-      return <NestedDropdownMenu {...props} items={items} children={children} className={className} />;
     } else {
       return (
         <li>
