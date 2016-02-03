@@ -4,9 +4,9 @@
   "description": "A react dropdown menu.",
   "main": "dist/index.js",
   "scripts": {
-    "prebuild": "rimraf dist",
     "scripts": "babel ./src/js --out-dir ./dist",
-    "styles": "sass --style expanded --line ./src/scss/react-dd-menu.scss ./dist/react-dd-menu.css && sass --style compact ./src/scss/react-dd-menu.scss ./dist/react-dd-menu.min.css",
+    "styles": "sass --style expanded --line ./src/scss/react-dd-menu.scss ./dist/react-dd-menu.css && sass --style compressed ./src/scss/react-dd-menu.scss ./dist/react-dd-menu.min.css",
+    "prebuild": "rimraf dist",
     "build": "npm run scripts && npm run styles"
   },
   "repository": {
