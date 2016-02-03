@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 
 import Options from './Options';
-import DropdownMenu, { NestedDropdownMenu } from '../../src/js/index';
+import DropdownMenu, { NestedDropdownMenu } from 'react-dd-menu';
 
 class Example extends Component {
   render() {
@@ -34,17 +34,17 @@ class Menu extends Component {
 
   toggleMenu = () => {
     this.setState({ isOpen: !this.state.isOpen });
-  }
+  };
 
   closeMenu = () => {
     this.setState({ isOpen: false });
-  }
+  };
 
   static propTypes = {
     text: PropTypes.string,
     additionalItems: PropTypes.array,
     nestedProps: PropTypes.object,
-  }
+  };
 
   render() {
     const { isOpen } = this.state;

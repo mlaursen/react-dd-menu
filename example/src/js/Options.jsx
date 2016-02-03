@@ -1,5 +1,5 @@
 import React from 'react';
-import { NestedDropdownMenu } from '../../src/js/index';
+import { NestedDropdownMenu } from 'react-dd-menu';
 
 export default [
   {
