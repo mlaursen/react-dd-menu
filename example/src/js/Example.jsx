@@ -42,7 +42,7 @@ class Menu extends Component {
 
   static propTypes = {
     text: PropTypes.string,
-    additionalItems: PropTypes.array,
+    additionalItems: PropTypes.node,
     nestedProps: PropTypes.object,
   };
 
