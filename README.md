@@ -298,3 +298,4 @@ I will do the merge to master when a release has been done. Thanks! :)
 - 1.0.4 - Upgraded to React 0.14.0
 - 1.0.5 - Added ability to disable onClickInside and onClickOutside close of the menus. Added Touch/click support for nested menus.
 - 1.0.6 - No new features. Upgraded dev stuff to babel 6 and separated example
+- 1.0.6 - Updated to support React 15 as peer dependencies. No real changes needed
