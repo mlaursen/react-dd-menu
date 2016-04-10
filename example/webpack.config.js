@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const NODE_ENV = process.env.NODE_ENV;
 const buildFolder = path.resolve(__dirname, 'www');
 const js = path.resolve(__dirname, '../src/js');
+const nodeModules = path.resolve(__dirname, 'node_modules');
 
 const env = {
   development: NODE_ENV === 'development' || typeof NODE_ENV === 'undefined',
@@ -51,6 +52,12 @@ let config = {
       'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
       'react-dd-menu': js,
     },
+
+    fallback: nodeModules,
+  },
+
+  resolveLoader: {
+    fallback: nodeModules,
   },
 
   output: {
