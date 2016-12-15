@@ -3,7 +3,9 @@ A React dropdown menu
 
 Live Example: [React Dropdown Menu](http://mlaursen.github.io/react-dd-menu)
 
-> React 0.13.x is supported on versions **1.x.x-r13** up to version 1.0.5
+> NOTE: I am no longer actively developing this project as I think it has met most
+of my initial goals. I am more than happy to keep reviewing/accepting pull requests
+though.
 
 ### Installation
 
@@ -279,11 +281,6 @@ $ npm run build
 ```
 
 This will output all the css and js files into `./dist`;
-
-### Pull Requests
-Please have pull requests with a target branch of develop.
-
-I will do the merge to master when a release has been done. Thanks! :)
 
 ### Versions
 
