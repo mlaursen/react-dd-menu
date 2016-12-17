@@ -14,10 +14,6 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactAddonsPureRenderMixin = require('react-addons-pure-render-mixin');
-
-var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
-
 var _reactAddonsCssTransitionGroup = require('react-addons-css-transition-group');
 
 var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
@@ -39,23 +35,27 @@ var SPACEBAR = 32;
 var ALIGNMENTS = ['center', 'right', 'left'];
 var MENU_SIZES = ['sm', 'md', 'lg', 'xl'];
 
-var DropdownMenu = function (_Component) {
-  _inherits(DropdownMenu, _Component);
+var DropdownMenu = function (_PureComponent) {
+  _inherits(DropdownMenu, _PureComponent);
 
-  function DropdownMenu(props) {
+  function DropdownMenu() {
+    var _Object$getPrototypeO;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, DropdownMenu);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DropdownMenu).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.close = function (e) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(DropdownMenu)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.close = function (e) {
       var key = e.which || e.keyCode;
       if (key === SPACEBAR) {
         _this.props.close();
         e.preventDefault();
       }
-    };
-
-    _this.handleClickOutside = function (e) {
+    }, _this.handleClickOutside = function (e) {
       if (!_this.props.closeOnOutsideClick) {
         return;
       }
@@ -72,9 +72,7 @@ var DropdownMenu = function (_Component) {
       }
 
       _this.props.close(e);
-    };
-
-    _this.handleKeyDown = function (e) {
+    }, _this.handleKeyDown = function (e) {
       var key = e.which || e.keyCode;
       if (key !== TAB) {
         return;
@@ -86,10 +84,7 @@ var DropdownMenu = function (_Component) {
       if (e.target === items[id]) {
         _this.props.close(e);
       }
-    };
-
-    _this.shouldComponentUpdate = _reactAddonsPureRenderMixin2.default.shouldComponentUpdate.bind(_this);
-    return _this;
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(DropdownMenu, [{
@@ -176,7 +171,7 @@ var DropdownMenu = function (_Component) {
   }]);
 
   return DropdownMenu;
-}(_react.Component);
+}(_react.PureComponent);
 
 DropdownMenu.propTypes = {
   isOpen: _react.PropTypes.bool.isRequired,

@@ -14,8 +14,7 @@ $ npm install -S react-dd-menu \
                  # If you haven't installed already
                  react \
                  react-dom \
-                 react-addons-css-transition-group \
-                 react-addons-pure-render-mixin
+                 react-addons-css-transition-group
 ```
 
 #### Props
@@ -296,3 +295,4 @@ This will output all the css and js files into `./dist`;
 - 1.0.5 - Added ability to disable onClickInside and onClickOutside close of the menus. Added Touch/click support for nested menus.
 - 1.0.6 - No new features. Upgraded dev stuff to babel 6 and separated example
 - 1.0.7 - Updated to support React 15 as peer dependencies. No real changes needed
+- 2.0.0 - Removed PureRenderMixin peerDependecy and switched to PureComponent instead.

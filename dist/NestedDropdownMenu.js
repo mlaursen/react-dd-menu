@@ -14,10 +14,6 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactAddonsPureRenderMixin = require('react-addons-pure-render-mixin');
-
-var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRenderMixin);
-
 var _reactAddonsCssTransitionGroup = require('react-addons-css-transition-group');
 
 var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
@@ -34,8 +30,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var NestedDropdownMenu = function (_Component) {
-  _inherits(NestedDropdownMenu, _Component);
+var NestedDropdownMenu = function (_PureComponent) {
+  _inherits(NestedDropdownMenu, _PureComponent);
 
   function NestedDropdownMenu(props) {
     _classCallCheck(this, NestedDropdownMenu);
@@ -61,7 +57,6 @@ var NestedDropdownMenu = function (_Component) {
       }, _this.props.delay);
     };
 
-    _this.shouldComponentUpdate = _reactAddonsPureRenderMixin2.default.shouldComponentUpdate.bind(_this);
     _this.toggleComponent = null;
     _this.closeCallback = null;
     _this.state = {
@@ -134,7 +129,7 @@ var NestedDropdownMenu = function (_Component) {
   }]);
 
   return NestedDropdownMenu;
-}(_react.Component);
+}(_react.PureComponent);
 
 NestedDropdownMenu.propTypes = {
   toggle: _react.PropTypes.node.isRequired,

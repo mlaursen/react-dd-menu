@@ -1,6 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 import classnames from 'classnames';
 
@@ -10,13 +9,7 @@ const ALIGNMENTS = ['center', 'right', 'left'];
 const MENU_SIZES = ['sm', 'md', 'lg', 'xl'];
 
 
-export default class DropdownMenu extends Component {
-  constructor(props) {
-    super(props);
-
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
-
+export default class DropdownMenu extends PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     close: PropTypes.func.isRequired,
