@@ -165,7 +165,7 @@ class Example extends React.Component {
     let menuOptions = {
       isOpen: this.state.isOpen,
       close: this.close.bind(this),
-      toggle: <button type="button" onClick={this.toggle.bind(this)}Click me!</button>,
+      toggle: <button type="button" onClick={this.toggle.bind(this)}>Click me!</button>,
       align: 'right',
     };
     return (
