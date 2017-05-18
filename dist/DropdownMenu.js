@@ -10,13 +10,17 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactAddonsCssTransitionGroup = require('react-addons-css-transition-group');
+var _CSSTransitionGroup = require('react-transition-group/CSSTransitionGroup');
 
-var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
+var _CSSTransitionGroup2 = _interopRequireDefault(_CSSTransitionGroup);
 
 var _classnames = require('classnames');
 
@@ -39,7 +43,7 @@ var DropdownMenu = function (_PureComponent) {
   _inherits(DropdownMenu, _PureComponent);
 
   function DropdownMenu() {
-    var _Object$getPrototypeO;
+    var _ref;
 
     var _temp, _this, _ret;
 
@@ -49,7 +53,7 @@ var DropdownMenu = function (_PureComponent) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(DropdownMenu)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.close = function (e) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DropdownMenu.__proto__ || Object.getPrototypeOf(DropdownMenu)).call.apply(_ref, [this].concat(args))), _this), _this.close = function (e) {
       var key = e.which || e.keyCode;
       if (key === SPACEBAR) {
         _this.props.close();
@@ -122,23 +126,23 @@ var DropdownMenu = function (_PureComponent) {
   }, {
     key: 'render',
     value: function render() {
-      var _props = this.props;
-      var menuAlign = _props.menuAlign;
-      var align = _props.align;
-      var inverse = _props.inverse;
-      var size = _props.size;
-      var className = _props.className;
+      var _props = this.props,
+          menuAlign = _props.menuAlign,
+          align = _props.align,
+          inverse = _props.inverse,
+          size = _props.size,
+          className = _props.className;
 
 
       var menuClassName = (0, _classnames2.default)('dd-menu', 'dd-menu-' + (menuAlign || align), { 'dd-menu-inverse': inverse }, className, size ? 'dd-menu-' + size : null);
 
-      var _props2 = this.props;
-      var textAlign = _props2.textAlign;
-      var upwards = _props2.upwards;
-      var animAlign = _props2.animAlign;
-      var animate = _props2.animate;
-      var enterTimeout = _props2.enterTimeout;
-      var leaveTimeout = _props2.leaveTimeout;
+      var _props2 = this.props,
+          textAlign = _props2.textAlign,
+          upwards = _props2.upwards,
+          animAlign = _props2.animAlign,
+          animate = _props2.animate,
+          enterTimeout = _props2.enterTimeout,
+          leaveTimeout = _props2.leaveTimeout;
 
 
       var listClassName = 'dd-items-' + (textAlign || align);
@@ -158,7 +162,7 @@ var DropdownMenu = function (_PureComponent) {
         { className: menuClassName },
         this.props.toggle,
         _react2.default.createElement(
-          _reactAddonsCssTransitionGroup2.default,
+          _CSSTransitionGroup2.default,
           transitionProps,
           this.props.isOpen && _react2.default.createElement(
             'ul',
@@ -174,23 +178,23 @@ var DropdownMenu = function (_PureComponent) {
 }(_react.PureComponent);
 
 DropdownMenu.propTypes = {
-  isOpen: _react.PropTypes.bool.isRequired,
-  close: _react.PropTypes.func.isRequired,
-  toggle: _react.PropTypes.node.isRequired,
-  children: _react.PropTypes.node,
-  inverse: _react.PropTypes.bool,
-  align: _react.PropTypes.oneOf(ALIGNMENTS),
-  animAlign: _react.PropTypes.oneOf(ALIGNMENTS),
-  textAlign: _react.PropTypes.oneOf(ALIGNMENTS),
-  menuAlign: _react.PropTypes.oneOf(ALIGNMENTS),
-  className: _react.PropTypes.string,
-  size: _react.PropTypes.oneOf(MENU_SIZES),
-  upwards: _react.PropTypes.bool,
-  animate: _react.PropTypes.bool,
-  enterTimeout: _react.PropTypes.number,
-  leaveTimeout: _react.PropTypes.number,
-  closeOnInsideClick: _react.PropTypes.bool,
-  closeOnOutsideClick: _react.PropTypes.bool
+  isOpen: _propTypes2.default.bool.isRequired,
+  close: _propTypes2.default.func.isRequired,
+  toggle: _propTypes2.default.node.isRequired,
+  children: _propTypes2.default.node,
+  inverse: _propTypes2.default.bool,
+  align: _propTypes2.default.oneOf(ALIGNMENTS),
+  animAlign: _propTypes2.default.oneOf(ALIGNMENTS),
+  textAlign: _propTypes2.default.oneOf(ALIGNMENTS),
+  menuAlign: _propTypes2.default.oneOf(ALIGNMENTS),
+  className: _propTypes2.default.string,
+  size: _propTypes2.default.oneOf(MENU_SIZES),
+  upwards: _propTypes2.default.bool,
+  animate: _propTypes2.default.bool,
+  enterTimeout: _propTypes2.default.number,
+  leaveTimeout: _propTypes2.default.number,
+  closeOnInsideClick: _propTypes2.default.bool,
+  closeOnOutsideClick: _propTypes2.default.bool
 };
 DropdownMenu.defaultProps = {
   inverse: false,
