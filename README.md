@@ -14,7 +14,7 @@ $ npm install -S react-dd-menu \
                  # If you haven't installed already
                  react \
                  react-dom \
-                 react-addons-css-transition-group
+                 react-transition-group
 ```
 
 #### Props
