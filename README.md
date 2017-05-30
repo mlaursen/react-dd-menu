@@ -14,7 +14,7 @@ $ npm install -S react-dd-menu \
                  # If you haven't installed already
                  react \
                  react-dom \
-                 react-addons-css-transition-group
+                 react-transition-group
 ```
 
 #### Props
@@ -296,3 +296,4 @@ This will output all the css and js files into `./dist`;
 - 1.0.6 - No new features. Upgraded dev stuff to babel 6 and separated example
 - 1.0.7 - Updated to support React 15 as peer dependencies. No real changes needed
 - 2.0.0 - Removed PureRenderMixin peerDependecy and switched to PureComponent instead.
+- 2.0.1 - Updated for React 15.5
