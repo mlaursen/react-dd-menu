@@ -3,9 +3,9 @@ A React dropdown menu
 
 Live Example: [React Dropdown Menu](http://mlaursen.github.io/react-dd-menu)
 
-> NOTE: I am no longer actively developing this project as I think it has met most
-of my initial goals. I am more than happy to keep reviewing/accepting pull requests
-though.
+> NOTE: I am no longer actively developing this project since it has met most of the initial goals
+and I will be spending most of my time developing the bigger project [react-md](https://github.com/mlaursen/react-md).
+I am more than happy to keep review/accepting pull requests with new features/bugfixes though.
 
 ### Installation
 
@@ -143,42 +143,42 @@ import React from 'react';
 import DropdownMenu from 'react-dd-menu';
 
 export default class Example extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            isMenuOpen: false
-        };
-        this.click = this.click.bind(this);
-        this.toggle = this.toggle.bind(this);
-        this.close = this.close.bind(this);
-    }
+  constructor() {
+    super();
+    this.state = {
+        isMenuOpen: false
+    };
+    this.click = this.click.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.close = this.close.bind(this);
+  }
 
-    toggle() {
-        this.setState({ isMenuOpen: !this.state.isMenuOpen });
-    }
+  toggle() {
+    this.setState({ isMenuOpen: !this.state.isMenuOpen });
+  }
 
-    close() {
-        this.setState({ isMenuOpen: false });
-    }
+  close() {
+    this.setState({ isMenuOpen: false });
+  }
 
-    click() {
-        console.log('You clicked an item');
-    }
+  click() {
+    console.log('You clicked an item');
+  }
 
-    render() {
-        const menuOptions = {
-            isOpen: this.state.isMenuOpen,
-            close: this.close,
-            toggle: <button type="button" onClick={() => this.toggle()}>Click me!</button>,
-            align: 'right'
-        };
-        return (
-          <DropdownMenu {...menuOptions}>
-            <li><a href="#">Example 1</a></li>
-            <li><button type="button" onClick={() => this.click()}>Example 2</button></li>
-          </DropdownMenu>
-        );
-    }
+  render() {
+    const menuOptions = {
+      isOpen: this.state.isMenuOpen,
+      close: this.close,
+      toggle: <button type="button" onClick={this.toggle}>Click me!</button>,
+      align: 'right'
+    };
+    return (
+      <DropdownMenu {...menuOptions}>
+        <li><a href="#">Example 1</a></li>
+        <li><button type="button" onClick={this.click}>Example 2</button></li>
+      </DropdownMenu>
+    );
+  }
 }
 ```
 
@@ -230,11 +230,7 @@ import React from 'react';
 import DropdownMenu, { NestedDropdownMenu } from 'react-dd-menu';
 
 class Example extends React.Component {
-  constructor() {
-    this.state = {
-      isMenuOpen: false
-    };
-  }
+  state = { isMenuOpen: false };
 
   toggle = () => {
     this.setState({ isMenuOpen: !this.state.isMenuOpen });
@@ -251,8 +247,8 @@ class Example extends React.Component {
   render() {
     const menuOptions = {
       isOpen: this.state.isOpen,
-      close: this.close.bind(this),
-      toggle: <button type="button" onClick={this.toggle.bind(this)}>Click me!</button>,
+      close: this.close,
+      toggle: <button type="button" onClick={this.toggle}>Click me!</button>,
       align: 'right',
     };
 
@@ -264,7 +260,7 @@ class Example extends React.Component {
     return (
       <DropdownMenu {...menuOptions}>
         <li><a href="#">Example 1</a></li>
-        <li><button type="button" onClick={this.click.bind(this)}>Example 2</button></li>
+        <li><button type="button" onClick={this.click}>Example 2</button></li>
         <li role="separator" className="separator" />
         <NestedDropdownMenu {...nestedProps}>
           <li><a href="#">I am in a Nested Menu!</a></li>
