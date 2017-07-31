@@ -142,39 +142,43 @@ The separator can be any element with a classname of `.separator` or any element
 import React from 'react';
 import DropdownMenu from 'react-dd-menu';
 
-class Example extends React.Component {
-  constructor() {
-    this.state = {
-      isMenuOpen: false
-    };
-  }
+export default class Example extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            isMenuOpen: false
+        };
+        this.click = this.click.bind(this);
+        this.toggle = this.toggle.bind(this);
+        this.close = this.close.bind(this);
+    }
 
-  toggle = () => {
-    this.setState({ isMenuOpen: !this.state.isMenuOpen });
-  };
+    toggle() {
+        this.setState({ isMenuOpen: !this.state.isMenuOpen });
+    }
 
-  close = () => {
-    this.setState({ isMenuOpen: false });
-  };
+    close() {
+        this.setState({ isMenuOpen: false });
+    }
 
-  click = () => {
-    console.log('You clicked an item');
-  };
+    click() {
+        console.log('You clicked an item');
+    }
 
-  render() {
-    let menuOptions = {
-      isOpen: this.state.isMenuOpen,
-      close: this.close.bind(this),
-      toggle: <button type="button" onClick={this.toggle.bind(this)}>Click me!</button>,
-      align: 'right',
-    };
-    return (
-      <DropdownMenu {...menuOptions}>
-        <li><a href="#">Example 1</a></li>
-        <li><button type="button" onClick={this.click.bind(this)}>Example 2</button></li>
-      </DropdownMenu>
-    );
-  }
+    render() {
+        const menuOptions = {
+            isOpen: this.state.isMenuOpen,
+            close: this.close,
+            toggle: <button type="button" onClick={() => this.toggle()}>Click me!</button>,
+            align: 'right'
+        };
+        return (
+          <DropdownMenu {...menuOptions}>
+            <li><a href="#">Example 1</a></li>
+            <li><button type="button" onClick={() => this.click()}>Example 2</button></li>
+          </DropdownMenu>
+        );
+    }
 }
 ```
 
