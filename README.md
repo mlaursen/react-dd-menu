@@ -207,7 +207,7 @@ var Example = React.createClass({
 
   render: function() {
     var menuOptions = {
-      isOpen: this.state.isOpen,
+      isOpen: this.state.isMenuOpen,
       close: this.close,
       toggle: <button type="button" onClick={this.toggle}>Click me!</button>,
       align: 'right'
@@ -246,7 +246,7 @@ class Example extends React.Component {
 
   render() {
     const menuOptions = {
-      isOpen: this.state.isOpen,
+      isOpen: this.state.isMenuOpen,
       close: this.close,
       toggle: <button type="button" onClick={this.toggle}>Click me!</button>,
       align: 'right',
