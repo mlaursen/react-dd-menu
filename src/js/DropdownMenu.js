@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
-import CSSTransitionGroup from 'react-addons-css-transition-group';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import classnames from 'classnames';
 
 const TAB = 9;
@@ -10,13 +10,7 @@ const ALIGNMENTS = ['center', 'right', 'left'];
 const MENU_SIZES = ['sm', 'md', 'lg', 'xl'];
 
 
-export default class DropdownMenu extends Component {
-  constructor(props) {
-    super(props);
-
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
-
+export default class DropdownMenu extends PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     close: PropTypes.func.isRequired,
@@ -66,15 +60,15 @@ export default class DropdownMenu extends Component {
       this.lastWindowClickEvent = this.handleClickOutside;
       document.addEventListener('click', this.lastWindowClickEvent);
       if(this.props.closeOnInsideClick) {
-        menuItems.addEventListener('click', this.props.close);
+        menuItems.addEventListener('click', this.close);
       }
-      menuItems.addEventListener('onkeydown', this.close);
+      menuItems.addEventListener('onkeydown', this.handleMenuItemKeyDown);
     } else if(!this.props.isOpen && prevProps.isOpen) {
       document.removeEventListener('click', this.lastWindowClickEvent);
       if(prevProps.closeOnInsideClick) {
-        menuItems.removeEventListener('click', this.props.close);
+        menuItems.removeEventListener('click', this.close);
       }
-      menuItems.removeEventListener('onkeydown', this.close);
+      menuItems.removeEventListener('onkeydown', this.handleMenuItemKeyDown);
 
       this.lastWindowClickEvent = null;
     }
@@ -87,9 +81,14 @@ export default class DropdownMenu extends Component {
   }
 
   close = (e) => {
+    // ensure eventual event handlers registered by consumers via React props are evaluated first
+    setTimeout(() => this.props.close(e))
+  }
+
+  handleMenuItemKeyDown = (e) => {
     const key = e.which || e.keyCode;
     if(key === SPACEBAR) {
-      this.props.close();
+      this.close(e)
       e.preventDefault();
     }
   };
@@ -110,7 +109,7 @@ export default class DropdownMenu extends Component {
       target = target.parentNode;
     }
 
-    this.props.close(e);
+    this.close(e)
   };
 
   handleKeyDown = (e) => {
@@ -123,7 +122,7 @@ export default class DropdownMenu extends Component {
     const id = e.shiftKey ? 1 : items.length - 1;
 
     if(e.target === items[id]) {
-      this.props.close(e);
+      this.close(e)
     }
   };
 

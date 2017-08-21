@@ -5,7 +5,6 @@
           transform: scale(0);
   -webkit-transform-origin: 0 0;
           transform-origin: 0 0;
-  -webkit-transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
@@ -22,7 +21,6 @@
           transform: scale(1);
   -webkit-transform-origin: 0 0;
           transform-origin: 0 0;
-  -webkit-transition: -webkit-transform 0.15s ease-out;
   transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
   transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
@@ -39,7 +37,6 @@
           transform: scale(0);
   -webkit-transform-origin: 100% 0;
           transform-origin: 100% 0;
-  -webkit-transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
@@ -56,7 +53,6 @@
           transform: scale(1);
   -webkit-transform-origin: 100% 0;
           transform-origin: 100% 0;
-  -webkit-transition: -webkit-transform 0.15s ease-out;
   transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
   transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
@@ -73,7 +69,6 @@
           transform: scale(0);
   -webkit-transform-origin: 50% 0;
           transform-origin: 50% 0;
-  -webkit-transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
@@ -90,7 +85,6 @@
           transform: scale(1);
   -webkit-transform-origin: 50% 0;
           transform-origin: 50% 0;
-  -webkit-transition: -webkit-transform 0.15s ease-out;
   transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
   transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
@@ -107,7 +101,6 @@
           transform: scale(0);
   -webkit-transform-origin: 0 100%;
           transform-origin: 0 100%;
-  -webkit-transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
@@ -124,7 +117,6 @@
           transform: scale(1);
   -webkit-transform-origin: 0 100%;
           transform-origin: 0 100%;
-  -webkit-transition: -webkit-transform 0.15s ease-out;
   transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
   transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
@@ -141,7 +133,6 @@
           transform: scale(0);
   -webkit-transform-origin: 50% 100%;
           transform-origin: 50% 100%;
-  -webkit-transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
@@ -158,7 +149,6 @@
           transform: scale(1);
   -webkit-transform-origin: 50% 100%;
           transform-origin: 50% 100%;
-  -webkit-transition: -webkit-transform 0.15s ease-out;
   transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
   transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
@@ -175,7 +165,6 @@
           transform: scale(0);
   -webkit-transform-origin: 100% 100%;
           transform-origin: 100% 100%;
-  -webkit-transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
   transition: transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8), -webkit-transform 0.15s cubic-bezier(0.5, 1.8, 0.9, 0.8);
@@ -192,7 +181,6 @@
           transform: scale(1);
   -webkit-transform-origin: 100% 100%;
           transform-origin: 100% 100%;
-  -webkit-transition: -webkit-transform 0.15s ease-out;
   transition: -webkit-transform 0.15s ease-out;
   transition: transform 0.15s ease-out;
   transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;

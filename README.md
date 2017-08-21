@@ -3,7 +3,9 @@ A React dropdown menu
 
 Live Example: [React Dropdown Menu](http://mlaursen.github.io/react-dd-menu)
 
-> React 0.13.x is supported on versions **1.x.x-r13** up to version 1.0.5
+> NOTE: I am no longer actively developing this project since it has met most of the initial goals
+and I will be spending most of my time developing the bigger project [react-md](https://github.com/mlaursen/react-md).
+I am more than happy to keep review/accepting pull requests with new features/bugfixes though.
 
 ### Installation
 
@@ -12,8 +14,7 @@ $ npm install -S react-dd-menu \
                  # If you haven't installed already
                  react \
                  react-dom \
-                 react-addons-css-transition-group \
-                 react-addons-pure-render-mixin
+                 react-transition-group
 ```
 
 #### Props
@@ -141,36 +142,40 @@ The separator can be any element with a classname of `.separator` or any element
 import React from 'react';
 import DropdownMenu from 'react-dd-menu';
 
-class Example extends React.Component {
+export default class Example extends React.Component {
   constructor() {
+    super();
     this.state = {
-      isMenuOpen: false
+        isMenuOpen: false
     };
+    this.click = this.click.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.close = this.close.bind(this);
   }
 
-  toggle = () => {
+  toggle() {
     this.setState({ isMenuOpen: !this.state.isMenuOpen });
-  };
+  }
 
-  close = () => {
+  close() {
     this.setState({ isMenuOpen: false });
-  };
+  }
 
-  click = () => {
+  click() {
     console.log('You clicked an item');
-  };
+  }
 
   render() {
-    let menuOptions = {
-      isOpen: this.state.isOpen,
-      close: this.close.bind(this),
-      toggle: <button type="button" onClick={this.toggle.bind(this)}Click me!</button>,
-      align: 'right',
+    const menuOptions = {
+      isOpen: this.state.isMenuOpen,
+      close: this.close,
+      toggle: <button type="button" onClick={this.toggle}>Click me!</button>,
+      align: 'right'
     };
     return (
       <DropdownMenu {...menuOptions}>
         <li><a href="#">Example 1</a></li>
-        <li><button type="button" onClick={this.click.bind(this)}>Example 2</button></li>
+        <li><button type="button" onClick={this.click}>Example 2</button></li>
       </DropdownMenu>
     );
   }
@@ -202,7 +207,7 @@ var Example = React.createClass({
 
   render: function() {
     var menuOptions = {
-      isOpen: this.state.isOpen,
+      isOpen: this.state.isMenuOpen,
       close: this.close,
       toggle: <button type="button" onClick={this.toggle}>Click me!</button>,
       align: 'right'
@@ -225,11 +230,7 @@ import React from 'react';
 import DropdownMenu, { NestedDropdownMenu } from 'react-dd-menu';
 
 class Example extends React.Component {
-  constructor() {
-    this.state = {
-      isMenuOpen: false
-    };
-  }
+  state = { isMenuOpen: false };
 
   toggle = () => {
     this.setState({ isMenuOpen: !this.state.isMenuOpen });
@@ -245,9 +246,9 @@ class Example extends React.Component {
 
   render() {
     const menuOptions = {
-      isOpen: this.state.isOpen,
-      close: this.close.bind(this),
-      toggle: <button type="button" onClick={this.toggle.bind(this)}>Click me!</button>,
+      isOpen: this.state.isMenuOpen,
+      close: this.close,
+      toggle: <button type="button" onClick={this.toggle}>Click me!</button>,
       align: 'right',
     };
 
@@ -259,7 +260,7 @@ class Example extends React.Component {
     return (
       <DropdownMenu {...menuOptions}>
         <li><a href="#">Example 1</a></li>
-        <li><button type="button" onClick={this.click.bind(this)}>Example 2</button></li>
+        <li><button type="button" onClick={this.click}>Example 2</button></li>
         <li role="separator" className="separator" />
         <NestedDropdownMenu {...nestedProps}>
           <li><a href="#">I am in a Nested Menu!</a></li>
@@ -280,11 +281,6 @@ $ npm run build
 
 This will output all the css and js files into `./dist`;
 
-### Pull Requests
-Please have pull requests with a target branch of develop.
-
-I will do the merge to master when a release has been done. Thanks! :)
-
 ### Versions
 
 - 0.0.2 - Fixed removing the click event listener
@@ -299,3 +295,5 @@ I will do the merge to master when a release has been done. Thanks! :)
 - 1.0.5 - Added ability to disable onClickInside and onClickOutside close of the menus. Added Touch/click support for nested menus.
 - 1.0.6 - No new features. Upgraded dev stuff to babel 6 and separated example
 - 1.0.7 - Updated to support React 15 as peer dependencies. No real changes needed
+- 2.0.0 - Removed PureRenderMixin peerDependecy and switched to PureComponent instead.
+- 2.0.1 - Updated for React 15.5
