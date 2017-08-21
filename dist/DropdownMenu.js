@@ -54,9 +54,14 @@ var DropdownMenu = function (_PureComponent) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DropdownMenu.__proto__ || Object.getPrototypeOf(DropdownMenu)).call.apply(_ref, [this].concat(args))), _this), _this.close = function (e) {
+      // ensure eventual event handlers registered by consumers via React props are evaluated first
+      setTimeout(function () {
+        return _this.props.close(e);
+      });
+    }, _this.handleMenuItemKeyDown = function (e) {
       var key = e.which || e.keyCode;
       if (key === SPACEBAR) {
-        _this.props.close();
+        _this.close(e);
         e.preventDefault();
       }
     }, _this.handleClickOutside = function (e) {
@@ -75,7 +80,7 @@ var DropdownMenu = function (_PureComponent) {
         target = target.parentNode;
       }
 
-      _this.props.close(e);
+      _this.close(e);
     }, _this.handleKeyDown = function (e) {
       var key = e.which || e.keyCode;
       if (key !== TAB) {
@@ -86,7 +91,7 @@ var DropdownMenu = function (_PureComponent) {
       var id = e.shiftKey ? 1 : items.length - 1;
 
       if (e.target === items[id]) {
-        _this.props.close(e);
+        _this.close(e);
       }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -103,15 +108,15 @@ var DropdownMenu = function (_PureComponent) {
         this.lastWindowClickEvent = this.handleClickOutside;
         document.addEventListener('click', this.lastWindowClickEvent);
         if (this.props.closeOnInsideClick) {
-          menuItems.addEventListener('click', this.props.close);
+          menuItems.addEventListener('click', this.close);
         }
-        menuItems.addEventListener('onkeydown', this.close);
+        menuItems.addEventListener('onkeydown', this.handleMenuItemKeyDown);
       } else if (!this.props.isOpen && prevProps.isOpen) {
         document.removeEventListener('click', this.lastWindowClickEvent);
         if (prevProps.closeOnInsideClick) {
-          menuItems.removeEventListener('click', this.props.close);
+          menuItems.removeEventListener('click', this.close);
         }
-        menuItems.removeEventListener('onkeydown', this.close);
+        menuItems.removeEventListener('onkeydown', this.handleMenuItemKeyDown);
 
         this.lastWindowClickEvent = null;
       }
